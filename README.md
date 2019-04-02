@@ -1,52 +1,24 @@
-MijdasRoadApp
-==============
+# Project Base for Vaadin Flow and Spring Boot
 
-Template for a simple Vaadin application that only requires a Servlet 3.0 container to run.
+This project can be used as a starting point to create your own Vaadin Flow application with Spring Boot.
+It contains all the necessary configuration and some placeholder files to get you started.
+
+The best way to use it by via [vaadin.com/start](https://vaadin.com/start) - you can get only the necessary parts and choose the package naming you want to use.
+
+Import the project to the IDE of your choosing as a Maven project. 
+
+Run application using `mvn spring-boot:run` or directly running Application class from your IDE.
+
+Open http://localhost:8080/ in browser
 
 
-Workflow
-========
+For documentation on using Vaadin Flow and Spring, visit [vaadin.com/docs](https://vaadin.com/docs/v10/flow/spring/tutorial-spring-basic.html)
 
-To compile the entire project, run "mvn install".
+For more information on Vaadin Flow, visit https://vaadin.com/flow.
 
-To run the application, run "mvn jetty:run" and open http://localhost:8080/ .
-
-To produce a deployable production mode WAR:
-- change productionMode to true in the servlet class configuration (nested in the UI class)
-- run "mvn clean package"
-- test the war file with "mvn jetty:run-war"
-
-Client-Side compilation
--------------------------
-
-The generated maven project is using an automatically generated widgetset by default. 
-When you add a dependency that needs client-side compilation, the maven plugin will 
-automatically generate it for you. Your own client-side customizations can be added into
-package "client".
-
-Debugging client side code
-  - run "mvn vaadin:run-codeserver" on a separate console while the application is running
-  - activate Super Dev Mode in the debug window of the application
-
-Developing a theme using the runtime compiler
--------------------------
-
-When developing the theme, Vaadin can be configured to compile the SASS based
-theme at runtime in the server. This way you can just modify the scss files in
-your IDE and reload the browser to see changes.
-
-To use the runtime compilation, open pom.xml and comment out the compile-theme 
-goal from vaadin-maven-plugin configuration. To remove a possibly existing 
-pre-compiled theme, run "mvn clean package" once.
-
-When using the runtime compiler, running the application in the "run" mode 
-(rather than in "debug" mode) can speed up consecutive theme compilations
-significantly.
-
-It is highly recommended to disable runtime compilation for production WAR files.
-
-Using Vaadin pre-releases
--------------------------
-
-If Vaadin pre-releases are not enabled by default, use the Maven parameter
-"-P vaadin-prerelease" or change the activation default value of the profile in pom.xml .
+Branching information:
+* `master` the latest version of the starter, using the latest platform snapshot
+* `v10` the version for Vaadin 10
+* `v11` the version for Vaadin 11
+* `v12` the version for Vaadin 12
+* `v13` the version for Vaadin 13
