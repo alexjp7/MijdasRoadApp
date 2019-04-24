@@ -1,0 +1,22 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 25/04/2019, 1:56:50 AM
+    Author     : Alex
+*/
+
+#appTitle
+{
+    align-content:center;
+    color:hsl(214, 90%, 52%);
+    font-size:3.00rem;
+}
+
+#main-layout
+{
+    text-align: center;
+    background-color:hsl(199, 4%, 30%);
+}
