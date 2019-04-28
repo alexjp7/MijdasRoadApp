@@ -1,6 +1,7 @@
 
 package Mijdas.RoadApp.spring.Controllers;
 
+import Mijdas.RoadApp.spring.Views.Login.LoginView;
 import Mijdas.RoadApp.spring.Views.MainLayout;
 
 public class LoginController 
@@ -24,12 +25,10 @@ public class LoginController
         }
     }
     
-    
+    //flags whether a login session has started
     private  boolean isLogin;
     
-    private LoginController(){}
-   
-    
+    private LoginController(){}//Private constructor to stop instantiation
     //returns current instance of nav controller
     public static LoginController getInstance()
     {
@@ -53,6 +52,13 @@ public class LoginController
         return false;
     }
     
+    public void logOut()
+    {
+         isLogin = false;
+         LoginView.refreshLogin();
+         MainLayout.reload();
+ 
+    }
 
     //returns login status of the session 
     public boolean isLogin()

@@ -7,13 +7,13 @@ import Mijdas.RoadApp.spring.Controllers.NavigationController;
 //Vaadin Imports
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.server.PWA;
 
 
 
 @StyleSheet("frontend://styles/common-styles.css")
-
 @PWA(name = "Project Base for Vaadin Flow with Spring", shortName = "Project Base")
 public class MainLayout extends Div implements RouterLayout
 {
@@ -31,13 +31,15 @@ public class MainLayout extends Div implements RouterLayout
         setId("main-layout"); //Common layout themes
              
         //Navigation Bar 
-        navigation = new Navbar(NavigationController.getInstance().getLinks());
+        navigation = new Navbar();
 
         header.add(navigation);
         add(header);
     }
+    
     public static void reload()
     {
+        //resets navigation for when necessary
         navigation.setNavigation();
     }
     

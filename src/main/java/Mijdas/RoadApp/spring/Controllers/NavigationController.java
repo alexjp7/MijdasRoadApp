@@ -26,6 +26,7 @@ public class NavigationController
                 //Home, Login and Registration views are pre-loaded into navbar
                 NavigationController navController = new  NavigationController();
                 navController.links   = new ArrayList<>();
+
                 return navController;
             }
            return INSTANCE;
@@ -62,7 +63,6 @@ public class NavigationController
         {
             //Login links (my profile, check balance, subscription, make a service request etc.
             links.add(new RouterLink(null,HomeView.class));
-            links.add(new RouterLink(null,LoginView.class));
         }
         
         return links;
