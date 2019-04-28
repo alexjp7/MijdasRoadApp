@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Mijdas.RoadApp.spring.Views.Login;
 
 //Local Imports
@@ -36,7 +32,7 @@ public class LoginView extends Div
     
     public void handleLogin(LoginEvent  e)
     {
-        if(!LoginController.checkLogin(e.getUsername(),e.getPassword()))
+        if(!LoginController.getInstance().checkLogin(e.getUsername(),e.getPassword()))
         {
             System.out.println("Incorrect");
         }

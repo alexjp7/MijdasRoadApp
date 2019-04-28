@@ -7,8 +7,6 @@ import Mijdas.RoadApp.spring.Controllers.NavigationController;
 //Vaadin Imports
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.server.PWA;
 
@@ -24,6 +22,7 @@ public class MainLayout extends Div implements RouterLayout
      * 
      *****************************************/
     private Div header = new Div();
+    private static Navbar navigation;
     
     public MainLayout()
     {
@@ -32,10 +31,14 @@ public class MainLayout extends Div implements RouterLayout
         setId("main-layout"); //Common layout themes
              
         //Navigation Bar 
-        Navbar navigation = new Navbar(NavigationController.getInstance().getLinks());
+        navigation = new Navbar(NavigationController.getInstance().getLinks());
 
         header.add(navigation);
         add(header);
+    }
+    public static void reload()
+    {
+        navigation.setNavigation();
     }
     
 }

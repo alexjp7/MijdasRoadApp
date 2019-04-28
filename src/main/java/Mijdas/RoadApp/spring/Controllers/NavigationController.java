@@ -25,12 +25,7 @@ public class NavigationController
             {   
                 //Home, Login and Registration views are pre-loaded into navbar
                 NavigationController navController = new  NavigationController();
-                navController.links = new ArrayList<>();
-                //Navigation Links
-                navController.links.add(new RouterLink(null,HomeView.class)); //HOME
-                navController.links.add(new RouterLink(null,LoginView.class));//LOGIN
-                navController.links.add(new RouterLink(null,RegisterView.class));// REGISTER
-                
+                navController.links   = new ArrayList<>();
                 return navController;
             }
            return INSTANCE;
@@ -39,31 +34,48 @@ public class NavigationController
     }
     
     private  ArrayList<RouterLink> links;
-    private boolean isLogin;
+   
     
-    
+    private NavigationController(){} //Private constructor to stop instantiation
     //returns current instance of nav controller
     public static NavigationController getInstance()
     {
         return ControllerInstance.INSTANCE;
     }
     
-  
+    private ArrayList<RouterLink> getNavigationList()
+    {
+        if(!links.isEmpty())
+        {     
+             links.removeAll(links);
+        }
+       
+        
+        //Check to see if logincontroller has set login value
+        if(!LoginController.getInstance().isLogin())
+        {
+           links.add(new RouterLink(null,HomeView.class));
+           links.add(new RouterLink(null,LoginView.class));
+           links.add(new RouterLink(null,RegisterView.class)); 
+        }
+        else
+        {
+            //Login links (my profile, check balance, subscription, make a service request etc.
+            links.add(new RouterLink(null,HomeView.class));
+            links.add(new RouterLink(null,LoginView.class));
+        }
+        
+        return links;
+    }
+            
     
 
      //Returns current list of navigation links
     public ArrayList<RouterLink> getLinks()
     {
+        links = getNavigationList();
         return links;
     }
-  
-    public void setLoginNavigation(boolean isLogin)
-    {
-        this.isLogin = isLogin;
-    }
-    
-    public boolean isLogin()
-    {
-        return isLogin;
-    }
+ 
+
 }
