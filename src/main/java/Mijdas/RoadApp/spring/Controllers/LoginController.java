@@ -42,8 +42,11 @@ public class LoginController
      * ***************************************/
     public boolean checkLogin(String username, String password)
     {
-        if(username.equals("alexjp7") && password.equals("z5z3z2zz"))
+        if(username.equals("test") && password.equals("1234"))
         {
+            /*
+                TO-DO: Implement datbase checking 
+            */
             isLogin = true;
             MainLayout.reload();
             return true;

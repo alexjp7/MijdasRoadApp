@@ -51,7 +51,11 @@ public class NavigationController
              links.removeAll(links);
         }
        
+        /***********************************************
+        TODO:  
+        * Have navigation bars for different user types
         
+        ************************************************/
         //Check to see if logincontroller has set login value
         if(!LoginController.getInstance().isLogin())
         {
