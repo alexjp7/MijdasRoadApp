@@ -2,7 +2,7 @@
 package Mijdas.RoadApp.spring.Views.Login;
 
 //Local Imports
-import Mijdas.RoadApp.spring.Controllers.LoginController;
+import Mijdas.RoadApp.spring.Controllers.SessionController;
 import Mijdas.RoadApp.spring.Views.MainLayout;
 
 
@@ -25,22 +25,19 @@ public class LoginView extends Div
     public LoginView()
     {
         form = new LoginForm();
-        form.addLoginListener(e -> {
-            try {
-                handleLogin(e);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(LoginView.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
+        form.addLoginListener(e ->handleLogin(e));
         
         Div formLayout = new Div(form);
         formLayout.setId("loginForm");
         add(formLayout);
     }
     
-    public void handleLogin(LoginEvent  e) throws InterruptedException
+    /**************************************
+     * Handles when user attempts to login
+     **************************************/
+    public void handleLogin(LoginEvent  e) 
     {
-        if(!LoginController.getInstance().checkLogin(e.getUsername(),e.getPassword()))
+        if(!SessionController.getInstance().checkLogin(e.getUsername(),e.getPassword()))
         {
             /*****************************
             TODO:

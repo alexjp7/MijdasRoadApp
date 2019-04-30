@@ -1,7 +1,7 @@
 
 package Mijdas.RoadApp.spring.Views;
 
-import Mijdas.RoadApp.spring.Controllers.LoginController;
+import Mijdas.RoadApp.spring.Controllers.SessionController;
 import Mijdas.RoadApp.spring.Controllers.NavigationController;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
@@ -14,7 +14,11 @@ import java.util.ArrayList;
 
 
 
-
+/*******************************************************************
+ * 
+ * Renders navigation elements and their links 
+   to the view
+ *******************************************************************/
 @StyleSheet("frontend://styles/navbar.css")
 public class Navbar extends Div
 {
@@ -44,7 +48,7 @@ public class Navbar extends Div
         clearAndReset();
         //Home page
         links.get(0).add(new Icon(VaadinIcon.CAR), new Text("Home"));
-        if(!LoginController.getInstance().isLogin())
+        if(!SessionController.getInstance().isLogin())
         {
             //Login Page
             links.get(1).add(new Icon(VaadinIcon.USER), new Text("Login"));   
@@ -61,7 +65,10 @@ public class Navbar extends Div
             add(logOut);
         }    
     }
-    
+    /*****************************************************
+     * Clears components and allows them to be reset 
+     * for when changes to navigation are required
+     **********************************/
     private void clearAndReset()
     {
         removeAll(); // Clear components to be set  
@@ -79,11 +86,14 @@ public class Navbar extends Div
         }
     }
     
+    /***********************************************************************
+     *notifies controller of when user has clicked the logout button
+     *******************************************************************/
     private void handleLogout()
     {
-        if(LoginController.getInstance().isLogin())
+        if(SessionController.getInstance().isLogin())
         {
-            LoginController.getInstance().logOut();
+            SessionController.getInstance().logOut();
         }
     }
 }

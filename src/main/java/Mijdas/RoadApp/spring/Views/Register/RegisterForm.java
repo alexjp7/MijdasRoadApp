@@ -1,6 +1,7 @@
 
 package Mijdas.RoadApp.spring.Views.Register;
 
+import Mijdas.RoadApp.spring.Controllers.DBQueryProcessor;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -38,13 +39,12 @@ class RegisterForm extends FormLayout
        
         buttonGroup.setJustifyContentMode(FlexComponent.JustifyContentMode.START);
         buttonGroup.setWidthFull();
-  
-  
-   
+        
         //Component ordering
         formLayout.add(nameGroup,email,passwordGroup,buttonGroup);
         add(formLayout);
      
 
     }
+
 }

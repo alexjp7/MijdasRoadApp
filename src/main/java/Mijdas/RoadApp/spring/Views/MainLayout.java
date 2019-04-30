@@ -11,16 +11,18 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.server.PWA;
 
-
-
+/*********************************************
+ * PWA: Progressive Web Applications
+ * https://vaadin.com/pwa
+ *******************************************/
 @StyleSheet("frontend://styles/common-styles.css")
 @PWA(name = "Project Base for Vaadin Flow with Spring", shortName = "Project Base")
 public class MainLayout extends Div implements RouterLayout
 {
-    /*****************************************
-     * This class is used for 
-     * 
-     *****************************************/
+    /******************************************************************
+     * Main layout class used for header template for subsequent views
+ 
+     ************************(********************************************/
     private Div header = new Div();
     private static Navbar navigation;
     
@@ -39,7 +41,7 @@ public class MainLayout extends Div implements RouterLayout
     
     public static void reload()
     {
-        //resets navigation for when necessary
+        //resets navigation for when relevant site navigations are made (login,logout etc).
         navigation.setNavigation();
     }
     

@@ -8,9 +8,11 @@ import Mijdas.RoadApp.spring.Views.Register.RegisterView;
 import com.vaadin.flow.router.RouterLink;
 import java.util.ArrayList;
 
-
-
-//Provides the sites navigation 
+/********************************
+ * 
+ *  Provides the sites Navigation links 
+ *  to the views of the system
+ */
 public class NavigationController
 {
    //Singleton controller 
@@ -44,6 +46,11 @@ public class NavigationController
         return ControllerInstance.INSTANCE;
     }
     
+    /***************
+     * 
+     * @return  the up-to date navigation links 
+       based on login-in status
+     */
     private ArrayList<RouterLink> getNavigationList()
     {
         if(!links.isEmpty())
@@ -57,7 +64,7 @@ public class NavigationController
         
         ************************************************/
         //Check to see if logincontroller has set login value
-        if(!LoginController.getInstance().isLogin())
+        if(!SessionController.getInstance().isLogin())
         {
            links.add(new RouterLink(null,HomeView.class));
            links.add(new RouterLink(null,LoginView.class));

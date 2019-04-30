@@ -6,7 +6,6 @@ import com.vaadin.flow.component.dependency.StyleSheet;
 
 //Vaadin Imports
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
@@ -29,9 +28,6 @@ public class HomeView extends Div
         
         
     }
-    public static void  showWelcomeMessage()
-    {
-          Notification.show("Login Succesful!").setPosition(Notification.Position.TOP_START);
-    }
+
     
 }
