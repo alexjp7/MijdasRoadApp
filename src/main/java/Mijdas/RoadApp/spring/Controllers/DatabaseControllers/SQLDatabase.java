@@ -31,7 +31,7 @@ public class SQLDatabase
     public boolean open() throws SQLException
     {
         connection = DriverManager.getConnection(host,username,password);
-        return connection.isClosed();
+        return !connection.isClosed();
     }
     
     public void close() throws SQLException

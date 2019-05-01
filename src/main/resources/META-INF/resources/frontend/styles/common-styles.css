@@ -20,6 +20,12 @@ and open the template in the editor.
     text-align: center;
    
 }
+
+v-Notification
+{
+    color:red !important;
+    background-color: black;
+}
  /*
     background-color:hsl(199, 4%, 30%);
  */

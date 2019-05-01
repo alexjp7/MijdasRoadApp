@@ -38,6 +38,8 @@ public class DBQueryProcessor
                 int PORT       = 3306;
                 //Create new instance of SQLDatabase.
                 queryProcessor.database = new SQLDatabase(HOST,PORT,DB_NAME,USER,PASSWD); 
+                
+                return queryProcessor;
             }
             
             return INSTANCE;
@@ -67,10 +69,10 @@ public class DBQueryProcessor
     public String [] makeLoginRequest(String username, String password)
     {
     
-        ResultSet rs;
+        ResultSet rs ;
         String [] loginInfo = new String[2];
         
-        String whereClause = "username = 'username' AND password = 'password'";
+        String whereClause = "username = "+username+" AND password = '"+password+"';";
         try
         {
             if(!database.open())
@@ -81,7 +83,7 @@ public class DBQueryProcessor
             else
             {
                 //
-                rs =  database.readData(MijdasTables.TEST, whereClause , "username","password");
+                rs =  database.readData(MijdasTables.USERS, whereClause , "username","password");
                 while(rs.next()) //Get information from result set
                 {
                     loginInfo[0] = rs.getString(1); // Username

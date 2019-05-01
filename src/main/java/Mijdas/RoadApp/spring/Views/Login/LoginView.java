@@ -10,22 +10,24 @@ import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.login.AbstractLogin.LoginEvent;
 import com.vaadin.flow.component.login.LoginForm;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.router.PageTitle;
 
 import com.vaadin.flow.router.Route;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @Route(value="login", layout=MainLayout.class)
 @StyleSheet("frontend://styles/loginForm.css")
 @PageTitle("Login")
 public class LoginView extends Div  
 {
+
+    
     private static LoginForm form; 
     public LoginView()
     {
         form = new LoginForm();
         form.addLoginListener(e ->handleLogin(e));
+       
         
         Div formLayout = new Div(form);
         formLayout.setId("loginForm");
@@ -39,11 +41,9 @@ public class LoginView extends Div
     {
         if(!SessionController.getInstance().checkLogin(e.getUsername(),e.getPassword()))
         {
-            /*****************************
-            TODO:
-             * add error 
-            * checking/login attempts 
-            *****************************/ 
+            refreshLogin();
+         
+            //Notification.show("Incorrect Username or Password",3000,Notification.Position.TOP_CENTER);
         }
         else
         {   //Re-direct user to home page
@@ -54,6 +54,9 @@ public class LoginView extends Div
     {
         form.setEnabled(true);
     }
+    
+
+    
 
    
 }

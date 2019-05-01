@@ -3,6 +3,7 @@ package Mijdas.RoadApp.spring.Controllers;
 //Local Imports
 import Mijdas.RoadApp.spring.Views.Login.LoginView;
 import Mijdas.RoadApp.spring.Views.MainLayout;
+import com.sun.prism.paint.Color;
 
 /**********************************
  * 
@@ -54,18 +55,21 @@ public class SessionController
     public boolean checkLogin(String username, String password)
     {
         //Request username and password from Database
-        String checkUsername = DBQueryProcessor.getInstance().makeLoginRequest(username, password)[0];
-        String checkPassword = DBQueryProcessor.getInstance().makeLoginRequest(username, password)[1];
-        
+        String[] loginInfo   = DBQueryProcessor.getInstance().makeLoginRequest(username, password);
+        System.out.println("username "+ loginInfo[0] + " password "+ loginInfo[1]);
         //Check entered values against database values
-        if(username.equals(checkUsername) && password.equals(checkPassword))
+        if(username.equals(loginInfo[0]) && password.equals(loginInfo[1]))
         {       
             isLogin = true;
             //TO-DO: request user info to store in User object.
             MainLayout.reload();//set navigation bar to login view
+            //TO-DO: get this prompt to show (might need to stop-and-wait/thread sleep. 
+             MainLayout.displayInformationPrompt("Login Succesful!");
             return true;
-        }
-                
+        } 
+        
+
+        MainLayout.displayInformationPrompt("Invalid User name or Password!");
         return false;
     }
     
