@@ -69,27 +69,24 @@ public class DBQueryProcessor
     public String [] makeLoginRequest(String username, String password)
     {
     
-        ResultSet rs ;
+        ResultSet rs = null;
         String [] loginInfo = new String[2];
         
-        String whereClause = "username = "+username+" AND password = '"+password+"';";
+        String whereClause = "username = '"+username+"' AND password = '"+password+"';";
         try
         {
             if(!database.open())
             {   //Unsuccesful connection has occured-
-                throw new SQLException("Connection Aborted - See system logs "
-                                                      + "for more information");
+                throw new SQLException("Connection To SQL instance Aborted");
             }
             else
             {
-                //
                 rs =  database.readData(MijdasTables.USERS, whereClause , "username","password");
                 while(rs.next()) //Get information from result set
                 {
                     loginInfo[0] = rs.getString(1); // Username
                     loginInfo[1] = rs.getString(2); // Password
                 }
-            
             }
             database.close();
         }
@@ -97,6 +94,36 @@ public class DBQueryProcessor
        
         return loginInfo;
     }
+    
+ 
+    
+    public String queryUsername(String username)
+    {
+        ResultSet rs = null;
+        String queryReturn = null;
+        String whereClase = "username = '" + username +"';";
+        
+        try
+        {
+            if(!database.open())
+            {
+                 throw new SQLException("Connection To SQL instance Aborted");
+            }
+            else
+            {
+                rs = database.readData(MijdasTables.USERS, whereClase,"username");
+                if(rs.next() != false)
+                {
+                    queryReturn = rs.getString(1);
+                }
+               
+            }
+        }
+        catch(SQLException e){e.printStackTrace();}
+        
+        return queryReturn;
+    }
+    
     
     public void makeRegistration()
     {

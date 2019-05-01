@@ -80,7 +80,9 @@ public class SQLDatabase
         
         return rs;  
     }
-    
+    /*********************************************************
+     * TO-DO: Implement writing to database (INSERT/UPDATE)
+    **********************************************************/
     public void writeToStorage(MijdasTables table)
     {
         
@@ -88,14 +90,6 @@ public class SQLDatabase
     }
 
 
-    
-//         Statement smt = con.createStatement();
-//            
-//            ResultSet rs = smt.executeQuery("select*from test");
-//            while(rs.next())
-//            {
-//            System.out.println(rs.getString(1)+rs.getString(2));
-//            }
     public boolean hasData() 
     {
         return false;

@@ -3,7 +3,6 @@ package Mijdas.RoadApp.spring.Controllers;
 //Local Imports
 import Mijdas.RoadApp.spring.Views.Login.LoginView;
 import Mijdas.RoadApp.spring.Views.MainLayout;
-import com.sun.prism.paint.Color;
 
 /**********************************
  * 

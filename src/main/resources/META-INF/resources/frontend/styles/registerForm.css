@@ -14,9 +14,16 @@ and open the template in the editor.
    display:-webkit-inline-box;
 }
 
-#formButton
+
+#passwordMatch
 {
-    //color:white !important;
-   // background-color: hsla(211, 100%, 50%, 0.86) !important;
+    
 }
 
+.v-textfield 
+{ 
+
+border: dashed green;
+ border:     thin dashed;
+
+}

@@ -1,6 +1,7 @@
 
 package Mijdas.RoadApp.spring.Views.Register;
 
+import Mijdas.RoadApp.spring.Controllers.RegistrationProcessor;
 import Mijdas.RoadApp.spring.Views.MainLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
@@ -15,7 +16,13 @@ import com.vaadin.flow.component.textfield.TextField;
 @StyleSheet("frontend://styles/registerForm.css")
 class RegisterForm extends FormLayout 
 {
-    private Select<String> userType   = new Select<>("Motorist","Mechanic");
+    //Controller
+    private  RegistrationProcessor regProcessor;
+    //Flags
+    private boolean isValidUsername;
+    private boolean isValidPassword;
+    //Componenets
+    private Select<String> userType = new Select<>("Motorist","Mechanic");
     private TextField firstName     = new TextField("First Name");
     private TextField lastName      = new TextField("Last Name");
     private TextField username      = new TextField("Username");
@@ -27,16 +34,20 @@ class RegisterForm extends FormLayout
     
     public RegisterForm()
     {
-        //Component Styling
-        email.setSizeFull();
-        register.setId("formButton");
-        clear.setId("formButton");
-        
-        userType.setPlaceholder("I am a..");
-        userType.setLabel("Pick one");
-        
-        //Form Layout
+        regProcessor = new RegistrationProcessor();
+        //Assume invalid inputs on page construction
+        isValidUsername = false;
+        isValidPassword = false;
+       
+        setFieldProperties();
+        setEventListeners();
+        setFormLayout();
 
+    }
+    
+    private void setFormLayout()
+    {
+        //Form Layout
         VerticalLayout formLayout = new VerticalLayout();
         HorizontalLayout topLayer = new HorizontalLayout(username,userType);
         HorizontalLayout nameGroup = new HorizontalLayout(firstName,lastName);
@@ -46,30 +57,72 @@ class RegisterForm extends FormLayout
         buttonGroup.setJustifyContentMode(FlexComponent.JustifyContentMode.START);
         buttonGroup.setWidthFull();
         
+        //Component ordering
+        formLayout.add(topLayer,nameGroup,email,passwordGroup,buttonGroup);
+        add(formLayout);
+        
+    }
+    
+    private void setFieldProperties()
+    {
+        //Component Styling
+        email.setSizeFull();
+        register.setId("formButton");
+        clear.setId("formButton");
+        userType.setPlaceholder("I am a..");
+        userType.setLabel("Pick one");
+         
+        //Mark fields as requried
+        username.setRequired(true);
+        firstName.setRequired(true);
+        lastName.setRequired(true);
+        email.setRequired(true);
+        password.setRequired(true);
+        password2.setRequired(true);
+        
+    }
+    
+    private void setEventListeners()
+    {
+        //Makes a call to db to check for a unique username
         username.addBlurListener(e->validateUsername());
         //Listeners to check when user focuses off password fields.
         password.addBlurListener(e->validatePassword());
         password2.addBlurListener(e->validatePassword());
         
-       
         //Form submission and clearing
         register.addClickListener(e->submitForm());
         clear.addClickListener(e->clearForm());
         register.setEnabled(false);
         
-        
-        //Component ordering
-        formLayout.add(topLayer,nameGroup,email,passwordGroup,buttonGroup);
-        add(formLayout);
-     
-
     }
     
-    public void validateUsername()
+    
+    /*************************************************
+     * checks if username is already taken.
+     **************************************************/
+    private void validateUsername()
     {
-        //TO-DO: Make call to databse to check if username is unique
+        if(!username.getValue().trim().equals(""))
+        {
+            if(!regProcessor.isUsernameValid(username.getValue()))
+            {
+                isValidUsername = false;
+                MainLayout.displayInformationPrompt("The nane "+username.getValue()+" is already taken!");
+            }
+            else
+            {
+                isValidUsername = true;
+            }            
+        }
+        setRegisterEnabled();
     }
-    public void validatePassword()
+    
+    
+    /*************************************************
+     * checks if password fields are the same values.
+    **************************************************/
+    private void validatePassword()
     {
         if(!password.isEmpty())
         {
@@ -78,16 +131,29 @@ class RegisterForm extends FormLayout
                 if(!password.getValue().equals(password2.getValue()))
                 {
                     MainLayout.displayInformationPrompt("Passwords do not match!");
-                    register.setEnabled(false);
+                    isValidPassword = false;  
                 }
                 else
                 {
-                    register.setEnabled(true);
+                    isValidPassword = true;
                 }
+                
+                setRegisterEnabled();
             }
-           
         }
-     
+    }
+    
+    private void setRegisterEnabled()
+    {
+        if(isValidUsername && isValidPassword)
+        {
+            register.setEnabled(true);
+        }
+        else
+        {
+           register.setEnabled(false);
+        }
+    
     }
     
     public void submitForm()
