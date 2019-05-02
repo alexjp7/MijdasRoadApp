@@ -124,10 +124,41 @@ public class DBQueryProcessor
         return queryReturn;
     }
     
-    
-    public void makeRegistration()
+    /**************************************************************
+     * 
+     * @param formData - variadic string parameter representing the 
+     *  values enetered from login form
+     * 
+     * TODO- check user type for insert into 
+                           mechanic OR motorists
+     ***************************************************************/
+    public boolean writeRegistration(String...formData)
     {
+      
+        try
+        {
+            if(!database.open()){return false;}
+            else
+            {
+                database.writeToStorage(MijdasTables.USERS,formData[0],formData[5],formData[2],formData[3],formData[4]);
+                /*
+                TO-DO: Implement method to allow for paramterised inserts for motorists/mechanic
+                    if(formData[1].equals("Motorist"))
+                    {
+                         database.writeToStorage(MijdasTables.MOTORISTS,formData[0]);
+                    }
+                    else if(formData[1].equals("Mechanic"))
+                    {
+                        database.writeToStorage(MijdasTables.MECHANICS,formData[0]);
+                    }
+                */
+             
+                return true; 
+            }
+        }
+        catch(SQLException e){e.printStackTrace();}
         
+        return false;
     }
     
     

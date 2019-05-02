@@ -8,8 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /***********************************************************************
- * 
-    SQLDatabase is a wrapper for the java database-connector methods/
+ * SQLDatabase is a wrapper for the java database-connector methods.
  * As such, the methods contained will interface with the selected MySQL DB.
  *************************************************************************/
 public class SQLDatabase 
@@ -38,35 +37,24 @@ public class SQLDatabase
     {
         connection.close();
     }
-/********************************************************************
- * 
- * @param table - Enumerator values for the existing tables
- * @param whereClause - optional, to allow for additional where clauses
- *              should be set to null if not necessary.
- * @param values - the fields to be requested from SQL table.
- * @return - returns the appropriate result set
- * @throws SQLException 
- * 
- * TO-DO add JOIN/UNION capabilites (probably best overloaded)
- ********************************************************************/
+    /********************************************************************
+     * 
+     * @param table - Enumerated values for the existing tables
+     * @param whereClause - optional, to allow for additional where clauses
+     *              should be set to null if not necessary.            
+     * @param values - the fields to be requested from SQL table.
+     * @return - returns the appropriate result set
+     * @throws SQLException 
+     * 
+     * TO-DO add JOIN/UNION capabilites (probably best overloaded)
+     ********************************************************************/
     public ResultSet readData(MijdasTables table, String whereClause, String...values) throws SQLException 
     {
         
         ResultSet rs;
-        String fields="";
+        String fields = SQLStringBuilder(values);
         stmt = connection.createStatement();
-        
-        //Concat SQL fields 
-        for (int i = 0; i < values.length; i++) 
-        {
-            fields  += values[i];
-            //Only append , to intermediary fields.
-            if(i < values.length - 1)
-            {
-                fields +=",";
-            }
-        }
-       
+
         //if no where clause is present
         if(whereClause == null)
         {
@@ -82,18 +70,70 @@ public class SQLDatabase
     }
     /*********************************************************
      * TO-DO: Implement writing to database (INSERT/UPDATE)
+     * @param table - Enumerated values for the existing tables
+     * @param values - the values to be inserted into the table
     **********************************************************/
-    public void writeToStorage(MijdasTables table)
+    public void writeToStorage(MijdasTables table, String...values) throws SQLException
     {
-        
-        
+        String fields = SQLStringBuilder(values);
+        stmt = connection.createStatement();
+        stmt.executeUpdate("INSERT INTO "+ table.getTableName() + " VALUES ("+fields+")");
+    }  
+    
+    /**********************************************************
+     * Overload for writeToStorage 
+     * @param params - additional SQL inert parameters
+     * must be split by comma (,) AND ordered the same as values.
+     **********************************************************/
+/*
+    public void writeToStorage(MijdasTables table, String params, String...values) throws SQLException
+    {
+        String fields = SQLStringBuilder(values);
+        stmt = connection.createStatement();
+        stmt.executeUpdate("INSERT INTO "+ table.getTableName()+" ("+ params + ") VALUES ("+fields+")");
+    }  
+*/
+
+    private String SQLStringBuilder(String...fields)
+    {
+        String s="";
+
+        //Concat SQL fields 
+        for (int i = 0; i < fields.length; i++) 
+        {
+            s += fields[i];
+            //Only append , to intermediary fields.
+            if(i < fields.length - 1)
+            {
+                s +=",";
+            }
+        }
+        return s;
     }
-
-
-    public boolean hasData() 
-    {
+    
+    /************************************************
+     * 
+     * @param table - table to be checked to have data
+     * @return - represents if table has data
+     *************************************************/
+    public boolean hasData(MijdasTables table)
+    { 
+        try
+        {
+            open();
+            ResultSet rs = readData(table,null,"*");
+            
+            if(!rs.next())
+            {
+                return true;
+            }    
+        }
+        catch(SQLException e){e.printStackTrace();}
+   
         return false;
     }
     
     
 }
+
+

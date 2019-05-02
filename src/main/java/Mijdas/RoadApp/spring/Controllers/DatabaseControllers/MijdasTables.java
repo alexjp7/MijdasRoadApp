@@ -17,7 +17,6 @@ public enum MijdasTables
     TEST("TEST");
     
     private final String name;
-    
     private MijdasTables(String name)
     {
         this.name = name;

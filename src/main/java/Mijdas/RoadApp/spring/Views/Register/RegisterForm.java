@@ -108,7 +108,8 @@ class RegisterForm extends FormLayout
             if(!regProcessor.isUsernameValid(username.getValue()))
             {
                 isValidUsername = false;
-                MainLayout.displayInformationPrompt("The nane "+username.getValue()+" is already taken!");
+                MainLayout.displayInformationPrompt("The name "+username.getValue()+" is already taken!");
+                username.focus();
             }
             else
             {
@@ -158,6 +159,25 @@ class RegisterForm extends FormLayout
     
     public void submitForm()
     {
+        String user = "'"+username.getValue()+"'";
+        String fName = "'"+firstName.getValue()+"'";
+        String lName = "'"+lastName.getValue()+"'";
+        String mail = "'"+email.getValue()+"'";
+        String pword = "'"+password.getValue()+"'";
+        
+
+        
+        //Submit form
+        if(regProcessor.submitRegistration(user, userType.getValue(),
+                                           fName, lName, mail, pword))
+        {
+            getUI().ifPresent(ui-> ui.getPage().executeJavaScript("window.location.href = '' "));
+        }
+        else
+        {
+            //dispaly prompt
+        }
+        
         
     }
     
