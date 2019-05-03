@@ -1,7 +1,8 @@
 
 package Mijdas.RoadApp.spring.Controllers;
 
-import Mijdas.RoadApp.spring.Controllers.DatabaseControllers.MijdasTables;
+import Mijdas.RoadApp.spring.Controllers.DatabaseControllers.Insertable;
+import Mijdas.RoadApp.spring.Controllers.DatabaseControllers.MijdasDB;
 import Mijdas.RoadApp.spring.Controllers.DatabaseControllers.SQLDatabase;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -81,7 +82,7 @@ public class DBQueryProcessor
             }
             else
             {
-                rs =  database.readData(MijdasTables.USERS, whereClause , "username","password");
+                rs =  database.readData(MijdasDB.Tables.USER, whereClause , "username","password");
                 while(rs.next()) //Get information from result set
                 {
                     loginInfo[0] = rs.getString(1); // Username
@@ -111,13 +112,14 @@ public class DBQueryProcessor
             }
             else
             {
-                rs = database.readData(MijdasTables.USERS, whereClase,"username");
+                rs = database.readData(MijdasDB.Tables.USER, whereClase,"username");
                 if(rs.next() != false)
                 {
                     queryReturn = rs.getString(1);
                 }
                
             }
+            database.close();
         }
         catch(SQLException e){e.printStackTrace();}
         
@@ -125,39 +127,48 @@ public class DBQueryProcessor
     }
     
     /**************************************************************
-     * 
+     * Writes the registration form details to persistent storage.
+     * -----------------------------------------------------------
      * @param formData - variadic string parameter representing the 
-     *  values enetered from login form
-     * 
-     * TODO- check user type for insert into 
-                           mechanic OR motorists
+     *                   values entered from login.
+     * @return - whether a successful write to storage has occurred
      ***************************************************************/
     public boolean writeRegistration(String...formData)
-    {
-      
+    {   //Insertable interface to enable a polymorphic behaviour for the table enums
+        Insertable[] params; //params - to go between INSERT INTO(params) VALUES(formData);
         try
         {
             if(!database.open()){return false;}
             else
             {
-                database.writeToStorage(MijdasTables.USERS,formData[0],formData[5],formData[2],formData[3],formData[4]);
-                /*
-                TO-DO: Implement method to allow for paramterised inserts for motorists/mechanic
+                //Write User information to User SQL table.
+                database.writeToStorage(MijdasDB.Tables.USER ,formData[0],formData[5],
+                                        formData[2],formData[3],formData[4]);
                     if(formData[1].equals("Motorist"))
-                    {
-                         database.writeToStorage(MijdasTables.MOTORISTS,formData[0]);
+                    {   
+                        //SQL insert parameters - upon account creation, username and membership values are inserted.
+                        params = new  MijdasDB.Motorist[]{MijdasDB.Motorist.USERNAME,  MijdasDB.Motorist.HASMEMBERSHIP};
+                        
+                        /*******************************************************************************
+                         * writeToStorage(TableName, insert parameters, fields)
+                         * NOTE: ordering of params and fields (String...fields) must be ordered the same
+                         * formData[0] - username
+                         * Boolean.false.toString() - assumes no membership for members upon user creation.
+                        ********************************************************************************/
+                        database.writeToStorage(MijdasDB.Tables.MOTORISTS,params,
+                                               formData[0], Boolean.FALSE.toString());
                     }
                     else if(formData[1].equals("Mechanic"))
                     {
-                        database.writeToStorage(MijdasTables.MECHANICS,formData[0]);
+                        params = new MijdasDB.Mechanic[]{MijdasDB.Mechanic.USERNAME};
+                        database.writeToStorage(MijdasDB.Tables.MECHANICS,params,formData[0]);
                     }
-                */
-             
-                return true; 
+                    //Close database session
+                    database.close();
+                    return true; 
             }
         }
         catch(SQLException e){e.printStackTrace();}
-        
         return false;
     }
     

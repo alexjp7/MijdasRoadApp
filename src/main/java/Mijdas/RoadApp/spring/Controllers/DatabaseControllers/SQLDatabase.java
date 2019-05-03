@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 /***********************************************************************
  * SQLDatabase is a wrapper for the java database-connector methods.
- * As such, the methods contained will interface with the selected MySQL DB.
+ * As such, the methods contained will interface with the selected MySQL MijdasDB.
  *************************************************************************/
 public class SQLDatabase 
 {   
@@ -48,11 +48,11 @@ public class SQLDatabase
      * 
      * TO-DO add JOIN/UNION capabilites (probably best overloaded)
      ********************************************************************/
-    public ResultSet readData(MijdasTables table, String whereClause, String...values) throws SQLException 
+    public ResultSet readData(MijdasDB.Tables table, String whereClause, String...values) throws SQLException 
     {
         
         ResultSet rs;
-        String fields = SQLStringBuilder(values);
+        String fields = SQLFieldsToString(values);
         stmt = connection.createStatement();
 
         //if no where clause is present
@@ -73,9 +73,10 @@ public class SQLDatabase
      * @param table - Enumerated values for the existing tables
      * @param values - the values to be inserted into the table
     **********************************************************/
-    public void writeToStorage(MijdasTables table, String...values) throws SQLException
+    
+    public void writeToStorage(MijdasDB.Tables table, String...values) throws SQLException
     {
-        String fields = SQLStringBuilder(values);
+        String fields = SQLFieldsToString(values);
         stmt = connection.createStatement();
         stmt.executeUpdate("INSERT INTO "+ table.getTableName() + " VALUES ("+fields+")");
     }  
@@ -85,16 +86,24 @@ public class SQLDatabase
      * @param params - additional SQL inert parameters
      * must be split by comma (,) AND ordered the same as values.
      **********************************************************/
-/*
-    public void writeToStorage(MijdasTables table, String params, String...values) throws SQLException
+    public void writeToStorage(MijdasDB.Tables table, Insertable[] params, String...values) throws SQLException
     {
-        String fields = SQLStringBuilder(values);
+        String sqlString = null;
+        String sqlValues = SQLFieldsToString(values);
+        String sqlParams = SQLParamToString(params);
+        
+        //Build String
+        sqlString = "INSERT INTO ";
+        sqlString += table.getTableName();
+        sqlString +="("+sqlParams+") ";
+        sqlString +="VALUES (" + sqlValues +")";
+        
         stmt = connection.createStatement();
-        stmt.executeUpdate("INSERT INTO "+ table.getTableName()+" ("+ params + ") VALUES ("+fields+")");
+        stmt.executeUpdate(sqlString);
     }  
-*/
 
-    private String SQLStringBuilder(String...fields)
+
+    private String SQLFieldsToString(String...fields)
     {
         String s="";
 
@@ -111,12 +120,28 @@ public class SQLDatabase
         return s;
     }
     
+    private String SQLParamToString(Insertable[] params)
+    {
+        String s ="";
+        
+       for(int i = 0; i < params.length ; i++)
+       {
+           s += params[i].getValue();
+            //Only append , to intermediary fields.
+           if(i != params.length -1)
+           {
+               s += ",";
+           }
+       }
+        return s;
+    }
+
     /************************************************
      * 
      * @param table - table to be checked to have data
      * @return - represents if table has data
      *************************************************/
-    public boolean hasData(MijdasTables table)
+    public boolean hasData(MijdasDB.Tables table)
     { 
         try
         {
@@ -127,6 +152,7 @@ public class SQLDatabase
             {
                 return true;
             }    
+            close();
         }
         catch(SQLException e){e.printStackTrace();}
    

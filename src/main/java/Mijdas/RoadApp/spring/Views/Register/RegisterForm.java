@@ -171,7 +171,7 @@ class RegisterForm extends FormLayout
         if(regProcessor.submitRegistration(user, userType.getValue(),
                                            fName, lName, mail, pword))
         {
-            getUI().ifPresent(ui-> ui.getPage().executeJavaScript("window.location.href = '' "));
+            getUI().ifPresent(ui-> ui.getPage().executeJavaScript("window.location.href = 'login' "));
         }
         else
         {
