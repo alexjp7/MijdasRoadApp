@@ -9,4 +9,7 @@ INSERT INTO MECHANIC(username) VALUES("alex");
 INSERT INTO USER VALUES ('test11','12345','test','lel','tl@gmail.com');
 
 select*from mechanic;
-INSERT INTO mechanic(username)  SELECT USERNAME FROM USER WHERE USERNAME="alex";
+
+
+
+

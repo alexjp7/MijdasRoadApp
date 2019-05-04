@@ -80,9 +80,16 @@ public class DBQueryProcessor
             {   //Unsuccesful connection has occured-
                 throw new SQLException("Connection To SQL instance Aborted");
             }
-            else
-            {
-                rs =  database.readData(MijdasDB.Tables.USER, whereClause , "username","password");
+            else    
+            { 
+                /*******************************************************************
+                 * MijdasDB.Tables.User - Table to be read from
+                 * whereClause - pre-built where clause to read a specific row
+                 * MijdasDB.User.Username - a value to be read from table
+                 * MijdasDB.User.Password -   a value to be read from table
+                     NOTE: after whereClause; parameter length is of a variadic length.
+                 *****************************************************************/
+                rs =  database.readData(MijdasDB.Tables.USER, whereClause, MijdasDB.User.USERNAME, MijdasDB.User.PASSWORD);
                 while(rs.next()) //Get information from result set
                 {
                     loginInfo[0] = rs.getString(1); // Username
@@ -101,7 +108,7 @@ public class DBQueryProcessor
     public String queryUsername(String username)
     {
         ResultSet rs = null;
-        String queryReturn = null;
+        String queryReturn = null; 
         String whereClase = "username = '" + username +"';";
         
         try
@@ -112,7 +119,7 @@ public class DBQueryProcessor
             }
             else
             {
-                rs = database.readData(MijdasDB.Tables.USER, whereClase,"username");
+                rs = database.readData(MijdasDB.Tables.USER, whereClase, MijdasDB.User.USERNAME);
                 if(rs.next() != false)
                 {
                     queryReturn = rs.getString(1);
@@ -135,37 +142,40 @@ public class DBQueryProcessor
      ***************************************************************/
     public boolean writeRegistration(String...formData)
     {   //Insertable interface to enable a polymorphic behaviour for the table enums
-        Insertable[] params; //params - to go between INSERT INTO(params) VALUES(formData);
+        Insertable[] fields; //fields- to go between INSERT INTO(fields) VALUES(formData);
         try
         {
             if(!database.open()){return false;}
             else
             {
+                /******************************COMMON USER INFORMATION********************************/
                 //Write User information to User SQL table.
                 database.writeToStorage(MijdasDB.Tables.USER ,formData[0],formData[5],
                                         formData[2],formData[3],formData[4]);
-                    if(formData[1].equals("Motorist"))
-                    {   
-                        //SQL insert parameters - upon account creation, username and membership values are inserted.
-                        params = new  MijdasDB.Motorist[]{MijdasDB.Motorist.USERNAME,  MijdasDB.Motorist.HASMEMBERSHIP};
-                        
-                        /*******************************************************************************
-                         * writeToStorage(TableName, insert parameters, fields)
-                         * NOTE: ordering of params and fields (String...fields) must be ordered the same
-                         * formData[0] - username
-                         * Boolean.false.toString() - assumes no membership for members upon user creation.
-                        ********************************************************************************/
-                        database.writeToStorage(MijdasDB.Tables.MOTORISTS,params,
-                                               formData[0], Boolean.FALSE.toString());
-                    }
-                    else if(formData[1].equals("Mechanic"))
-                    {
-                        params = new MijdasDB.Mechanic[]{MijdasDB.Mechanic.USERNAME};
-                        database.writeToStorage(MijdasDB.Tables.MECHANICS,params,formData[0]);
-                    }
-                    //Close database session
-                    database.close();
-                    return true; 
+               
+                /***************************USER INSERTS DEPENDING ON USER TYPE******************/
+                if(formData[1].equals("Motorist")) //Motorist Inserts
+                {   
+                    //SQL insert parameters - upon account creation, username and membership values are inserted.
+                    fields = new  MijdasDB.Motorist[]{MijdasDB.Motorist.USERNAME,  MijdasDB.Motorist.HASMEMBERSHIP};
+
+                    /*******************************************************************************
+                     * writeToStorage(TableName, insert fields, varies)
+                     * NOTE: ordering of fields and values (String...values) must be the same.
+                     * formData[0] - username
+                     * Boolean.false.toString() - assumes no membership for members upon user creation.
+                    ********************************************************************************/
+                    database.writeToStorage(MijdasDB.Tables.MOTORISTS, fields, //after fields, paramter list is variadic
+                                           formData[0], Boolean.FALSE.toString());
+                }
+                else if(formData[1].equals("Mechanic")) //Mechanic Inserts
+                {
+                    fields = new MijdasDB.Mechanic[]{MijdasDB.Mechanic.USERNAME};
+                    database.writeToStorage(MijdasDB.Tables.MECHANICS,fields, formData[0]);
+                }
+                //Close database session
+                database.close();
+                return true; 
             }
         }
         catch(SQLException e){e.printStackTrace();}

@@ -159,17 +159,12 @@ class RegisterForm extends FormLayout
     
     public void submitForm()
     {
-        String user = "'"+username.getValue()+"'";
-        String fName = "'"+firstName.getValue()+"'";
-        String lName = "'"+lastName.getValue()+"'";
-        String mail = "'"+email.getValue()+"'";
-        String pword = "'"+password.getValue()+"'";
-        
+ 
 
         
         //Submit form
-        if(regProcessor.submitRegistration(user, userType.getValue(),
-                                           fName, lName, mail, pword))
+        if(regProcessor.submitRegistration(username.getValue(), userType.getValue(),firstName.getValue(),
+                                           lastName.getValue(), email.getValue(), password.getValue()))
         {
             getUI().ifPresent(ui-> ui.getPage().executeJavaScript("window.location.href = 'login' "));
         }

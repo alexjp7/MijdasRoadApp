@@ -11,4 +11,11 @@ public interface Insertable
      * @return - the string name for a column name in SQL table
     **********************************************************/
     public String getValue();
+    
+    /**********************************************************
+     * @return - whether the table field is intended to 
+     * be inserted as a string literal
+    **********************************************************/
+    public boolean isLiteral();
+    
 }

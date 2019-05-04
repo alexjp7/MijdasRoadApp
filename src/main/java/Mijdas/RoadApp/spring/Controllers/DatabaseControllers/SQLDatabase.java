@@ -48,11 +48,11 @@ public class SQLDatabase
      * 
      * TO-DO add JOIN/UNION capabilites (probably best overloaded)
      ********************************************************************/
-    public ResultSet readData(MijdasDB.Tables table, String whereClause, String...values) throws SQLException 
+    public ResultSet readData(MijdasDB.Tables table, String whereClause, Insertable...values) throws SQLException 
     {
         
         ResultSet rs;
-        String fields = SQLFieldsToString(values);
+        String fields = SQLValuesToString(values);
         stmt = connection.createStatement();
 
         //if no where clause is present
@@ -68,49 +68,77 @@ public class SQLDatabase
         
         return rs;  
     }
-    /*********************************************************
-     * TO-DO: Implement writing to database (INSERT/UPDATE)
+    /*****************************************************************
+     * To be used when ALL fields of a table are going to be inserted
      * @param table - Enumerated values for the existing tables
      * @param values - the values to be inserted into the table
-    **********************************************************/
+    *******************************************************************/
     
     public void writeToStorage(MijdasDB.Tables table, String...values) throws SQLException
     {
-        String fields = SQLFieldsToString(values);
+        String sqlValues = SQLValuesToString(values, table);
+        System.out.println(sqlValues);
         stmt = connection.createStatement();
-        stmt.executeUpdate("INSERT INTO "+ table.getTableName() + " VALUES ("+fields+")");
+        stmt.executeUpdate("INSERT INTO "+ table.getTableName() + " VALUES ("+sqlValues+")");
     }  
     
-    /**********************************************************
+    /******************************************************************************
      * Overload for writeToStorage 
-     * @param params - additional SQL inert parameters
-     * must be split by comma (,) AND ordered the same as values.
-     **********************************************************/
-    public void writeToStorage(MijdasDB.Tables table, Insertable[] params, String...values) throws SQLException
+     * @param fields - additional SQL inert parameters
+     * @param values - the values to be inserted (in the same order as fields)
+     ****************************************************************************/
+    public void writeToStorage(MijdasDB.Tables table, Insertable[] fields, String...values) throws SQLException
     {
         String sqlString = null;
-        String sqlValues = SQLFieldsToString(values);
-        String sqlParams = SQLParamToString(params);
+        String sqlValues = SQLValuesToString(fields,values);
+        String sqlFields = SQLFieldsToString(fields);
         
         //Build String
         sqlString = "INSERT INTO ";
         sqlString += table.getTableName();
-        sqlString +="("+sqlParams+") ";
+        sqlString +="("+sqlFields+") ";
         sqlString +="VALUES (" + sqlValues +")";
+        stmt = connection.createStatement();
+        stmt.executeUpdate(sqlString);
+    }
+    
+    /***************************************************
+     * Used to update a row in the SQL Database
+     * @param table - table to be updated
+     * @param whereClause - SQL "WHERE" clause
+     * @param param - the field to be updated
+     * @param value - the value of the new field
+     ***************************************************/
+    public void updateData(MijdasDB.Tables table,String whereClause, Insertable field, String value) throws SQLException
+    {
+     
+        String sqlString = null;
+        //Check if value is to be inserted as a string literal/
+        value = field.isLiteral() ? "'" + value + "'" : value;
+        //Build update query
+        sqlString  ="UPDATE ";
+        sqlString  += table.getTableName();
+        sqlString  += "SET "+field.getValue();
+        sqlString  += "=" + value+" WHERE "+ whereClause;
         
         stmt = connection.createStatement();
         stmt.executeUpdate(sqlString);
-    }  
+        
+    }
 
-
-    private String SQLFieldsToString(String...fields)
+    /******************************************************
+     * @param fields - SQL table fields
+     * @return  - concatenated String value for fields
+     * e.g. field1, field2, field3
+     ***********************************************************/
+    private String SQLValuesToString(Insertable...fields)
     {
         String s="";
 
         //Concat SQL fields 
         for (int i = 0; i < fields.length; i++) 
         {
-            s += fields[i];
+            s += fields[i].getValue();
             //Only append , to intermediary fields.
             if(i < fields.length - 1)
             {
@@ -120,7 +148,54 @@ public class SQLDatabase
         return s;
     }
     
-    private String SQLParamToString(Insertable[] params)
+    /***********************************
+     * 
+     * @param values - values to be concatenated
+     * @param table - the table of which
+     * @return 
+     */
+    private String SQLValuesToString(String[] values, MijdasDB.Tables table)
+    {
+        String s ="";
+        boolean [] isLiteral = table.isLiteralField();
+        
+        for(int i = 0; i < values.length ; i++)
+        {
+             s += isLiteral[i] ? "'" + values[i] + "'": values[i];
+             if(i != values.length -1)
+             { //Only append , to intermediary fields
+                 s += ",";
+             }
+        }
+        return s;
+    }
+    
+    /*****************************************************************************
+     * @param fields - SQL table fields
+     * @param values - the value that will insert/update into SQL table
+     * @return  - concatenated String value for fields
+     ******************************************************************************/
+    private String SQLValuesToString(Insertable[] fields, String[] values)
+    {
+        String s="";
+
+        //Concat SQL fields 
+        for (int i = 0; i < values.length; i++) 
+        {
+            //Add quotes to String values  if there data type requires it
+            s +=  fields[i].isLiteral() ? "'" + values[i] + "'" : values[i];
+            //Only append , to intermediary fields.
+            if(i < values.length - 1)
+            {
+                s +=",";
+            }
+        }
+        return s;
+    }
+    
+    
+    
+    private String SQLFieldsToString(Insertable[] params)
     {
         String s ="";
         
@@ -135,31 +210,34 @@ public class SQLDatabase
        }
         return s;
     }
+    
+
 
     /************************************************
      * 
      * @param table - table to be checked to have data
      * @return - represents if table has data
      *************************************************/
-    public boolean hasData(MijdasDB.Tables table)
-    { 
-        try
-        {
-            open();
-            ResultSet rs = readData(table,null,"*");
-            
-            if(!rs.next())
+    /*
+        public boolean hasData(MijdasDB.Tables table)
+        { 
+            try
             {
-                return true;
-            }    
-            close();
+                open();
+                ResultSet rs = readData(table,null,"*");
+
+                if(!rs.next())
+                {
+                    return true;
+                }    
+                close();
+            }
+            catch(SQLException e){e.printStackTrace();}
+
+            return false;
         }
-        catch(SQLException e){e.printStackTrace();}
-   
-        return false;
-    }
-    
-    
+    */
+  
 }
 
 
