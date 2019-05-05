@@ -159,9 +159,6 @@ class RegisterForm extends FormLayout
     
     public void submitForm()
     {
- 
-
-        
         //Submit form
         if(regProcessor.submitRegistration(username.getValue(), userType.getValue(),firstName.getValue(),
                                            lastName.getValue(), email.getValue(), password.getValue()))

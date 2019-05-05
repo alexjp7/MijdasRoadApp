@@ -19,7 +19,7 @@ public class SessionController
         private ControllerInstance(){} //This class is not to be instantiated
  
         private static SessionController getInstance()
-        {  //Static instance of login controller
+        {  // Instance of SessionController
             if(INSTANCE == null)
             {   
                 SessionController loginController = new  SessionController();
@@ -41,9 +41,7 @@ public class SessionController
     {
         return ControllerInstance.INSTANCE;
     }
-   
-    
-    /**************************************************
+     /**************************************************
      * Checks login credentials against database
      * Sets global login value to true
      *

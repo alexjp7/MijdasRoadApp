@@ -176,6 +176,7 @@ public class DBQueryProcessor
                 //Close database session
                 database.close();
                 return true; 
+
             }
         }
         catch(SQLException e){e.printStackTrace();}

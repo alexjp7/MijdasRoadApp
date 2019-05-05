@@ -11,14 +11,6 @@ TODO:
 
 public class MijdasDB
 {
-    //Table strucutre of fields (in order)- whether or not they are required to be literal or not
-    private static final boolean[] userFields         = new boolean[]{true,true,true,true,true};
-    private static final boolean[] motoristFields     = new boolean[]{true,false,true,false};
-    private static final boolean[] mechanicFields     = new boolean[]{true,false,false};
-    //Not yet implemented.
-    private static  boolean[] transactionFields;
-    private static  boolean[] vehicleFields;      
-    
     public enum Tables 
     {
         USER("USER",userFields),
@@ -128,7 +120,14 @@ public class MijdasDB
            return isLiteral;
         }
     }
-
+    
+    //Table strucutre of fields (in order)- whether or not they are required to be literal or not
+    private static final boolean[] userFields         = new boolean[]{true,true,true,true,true};
+    private static final boolean[] motoristFields     = new boolean[]{true,false,true,false};
+    private static final boolean[] mechanicFields     = new boolean[]{true,false,false};
+    //Not yet implemented.
+    private static  boolean[] transactionFields;
+    private static  boolean[] vehicleFields;      
 }
 
 
