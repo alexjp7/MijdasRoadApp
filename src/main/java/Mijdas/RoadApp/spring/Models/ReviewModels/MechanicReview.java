@@ -1,7 +1,7 @@
 
 package Mijdas.RoadApp.spring.Models.ReviewModels;
 
-import Mijdas.RoadApp.spring.Models.ReviewModels.TransactionModels.TransactionHistory;
+import Mijdas.RoadApp.spring.Models.TransactionModels.TransactionHistory;
 
 
 public class MechanicReview

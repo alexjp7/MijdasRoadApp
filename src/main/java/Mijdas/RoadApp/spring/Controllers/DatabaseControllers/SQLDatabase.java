@@ -1,6 +1,7 @@
 
 package Mijdas.RoadApp.spring.Controllers.DatabaseControllers;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -102,6 +103,20 @@ public class SQLDatabase
         stmt.executeUpdate(sqlString);
     }
     
+    public ResultSet executeFunction(MijdasDB.Function function, String value) throws SQLException
+    {
+        ResultSet rs = null;
+
+        String sqlString;
+        sqlString = "SELECT ";
+        sqlString += function.getFunctionName() + "("+value+")";
+        System.out.println(sqlString);
+        stmt = connection.createStatement();
+        rs = stmt.executeQuery(sqlString);
+       return rs;
+     
+    }
+    
     /***************************************************
      * Used to update a row in the SQL Database
      * @param table - table to be updated
@@ -125,6 +140,8 @@ public class SQLDatabase
         stmt.executeUpdate(sqlString);
         
     }
+    
+    
 
     /******************************************************
      * @param fields - SQL table fields

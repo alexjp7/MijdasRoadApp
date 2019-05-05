@@ -1,6 +1,9 @@
 
 package Mijdas.RoadApp.spring.Controllers;
 //Local Imports
+import Mijdas.RoadApp.spring.Models.UserModels.Mechanic;
+import Mijdas.RoadApp.spring.Models.UserModels.Motorist;
+import Mijdas.RoadApp.spring.Models.UserModels.User;
 import Mijdas.RoadApp.spring.Views.Login.LoginView;
 import Mijdas.RoadApp.spring.Views.MainLayout;
 
@@ -24,6 +27,7 @@ public class SessionController
             {   
                 SessionController loginController = new  SessionController();
                 loginController.isLogin = false; //Assume the default login-status
+                loginController.loggedinUser = null;
                 return loginController;
             }
            return INSTANCE;
@@ -31,9 +35,9 @@ public class SessionController
         }
     }
     
-    //flags whether a login session has started
-    private  boolean isLogin;
-    //private User loggedinUser;  TO-DO: make user data-model
+   
+    private  boolean isLogin;  //flags whether a login session has started
+    private User loggedinUser; //User is created when succesful login attempt is made
     private SessionController(){}//Private constructor to stop instantiation
     
     //returns current instance of nav controller
@@ -53,12 +57,11 @@ public class SessionController
     {
         //Request username and password from Database
         String[] loginInfo   = DBQueryProcessor.getInstance().makeLoginRequest(username, password);
-        System.out.println("username "+ loginInfo[0] + " password "+ loginInfo[1]);
         //Check entered values against database values
         if(username.equals(loginInfo[0]) && password.equals(loginInfo[1]))
         {       
             isLogin = true;
-            //TO-DO: request user info to store in User object.
+            initUser(username);
             MainLayout.reload();//set navigation bar to login view
             //TO-DO: get this prompt to show (might need to stop-and-wait/thread sleep. 
              MainLayout.displayInformationPrompt("Login Succesful!");
@@ -73,9 +76,34 @@ public class SessionController
     public void logOut()
     {
          isLogin = false;
+         loggedinUser = null; 
          LoginView.refreshLogin(); //re-enable login button
          MainLayout.reload(); // reset navigation bar to loggeed-out view
  
+    }
+    
+    public void initUser(String username)
+    {
+        
+        //Check if Motorist
+        if(DBQueryProcessor.getInstance().isMotorist(username))
+        {
+            System.out.println("is Motorist");
+         //   loggedinUser = new Motorist();
+        }
+   
+        else if(DBQueryProcessor.getInstance().isMechanic(username))
+        {
+          //  loggedinUser = new Mechanic();
+        }
+        else
+        {
+            System.out.println("not motorist/mechanic");
+        }
+        
+        
+       //Check for Mechanic
+           
     }
 
   /*********************

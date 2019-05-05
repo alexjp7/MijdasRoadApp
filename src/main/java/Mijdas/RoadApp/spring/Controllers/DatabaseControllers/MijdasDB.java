@@ -121,6 +121,23 @@ public class MijdasDB
         }
     }
     
+    public enum Function
+    {
+        CHECK_MOTORIST("checkMotorist"),
+        CHECK_MECHANIC("checkMechanic");
+        
+        private String value;
+        private Function(String value)
+        {
+            this.value = value;
+        }
+        
+        public String getFunctionName()
+        {
+            return value;
+        }
+    }
+    
     //Table strucutre of fields (in order)- whether or not they are required to be literal or not
     private static final boolean[] userFields         = new boolean[]{true,true,true,true,true};
     private static final boolean[] motoristFields     = new boolean[]{true,false,true,false};

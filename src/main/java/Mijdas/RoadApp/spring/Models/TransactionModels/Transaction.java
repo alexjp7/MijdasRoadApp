@@ -1,5 +1,5 @@
 
-package Mijdas.RoadApp.spring.Models.ReviewModels.TransactionModels;
+package Mijdas.RoadApp.spring.Models.TransactionModels;
 
 import Mijdas.RoadApp.spring.Models.UserModels.User;
 

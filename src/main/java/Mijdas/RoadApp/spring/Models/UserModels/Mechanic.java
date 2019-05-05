@@ -2,18 +2,17 @@
 package Mijdas.RoadApp.spring.Models.UserModels;
 
 import Mijdas.RoadApp.spring.Models.ReviewModels.MechanicReview;
-import Mijdas.RoadApp.spring.Models.ReviewModels.TransactionModels.TransactionHistory;
+import Mijdas.RoadApp.spring.Models.TransactionModels.TransactionHistory;
 import java.util.ArrayList;
 
 public class Mechanic extends User
 {
     private Integer quality;
     private int licenseNumber;
-    private int mechanicId;
     private ArrayList<MechanicReview> reviews;
     private TransactionHistory transactionHistory;
     
-    public Mechanic(String username, String firstName, String lastName, String email, int mechanicId)
+    public Mechanic(String username, String firstName, String lastName, String email)
     {
         super(username, firstName, lastName, email);
         //quality should display as "Unset" on view.
@@ -22,7 +21,7 @@ public class Mechanic extends User
     }
     
     //Allows for setting of quality on constructor
-    public Mechanic(String username, String firstName, String lastName, String email,int mechanicId ,int quality)
+    public Mechanic(String username, String firstName, String lastName, String email, int quality)
     {
         super(username, firstName, lastName, email);
         this.quality = quality; // upon instatiation, quality of stars may not be set
@@ -44,7 +43,6 @@ public class Mechanic extends User
   
     }
         
-
     /************************SETTERS***************************/
     //Should be set in order to calculate quality
     public void setReviewList(ArrayList<MechanicReview> rList)
@@ -84,10 +82,7 @@ public class Mechanic extends User
         return licenseNumber;
     }
 
-    public int getMechanicId()
-    {
-        return mechanicId;
-    }
+
 
     @Override
     public String toString()

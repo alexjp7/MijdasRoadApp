@@ -4,8 +4,13 @@ package Mijdas.RoadApp.spring.Controllers;
 import Mijdas.RoadApp.spring.Controllers.DatabaseControllers.Insertable;
 import Mijdas.RoadApp.spring.Controllers.DatabaseControllers.MijdasDB;
 import Mijdas.RoadApp.spring.Controllers.DatabaseControllers.SQLDatabase;
+import Mijdas.RoadApp.spring.Models.UserModels.Mechanic;
+import Mijdas.RoadApp.spring.Models.UserModels.Motorist;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**********************************************************************8
@@ -181,6 +186,53 @@ public class DBQueryProcessor
         }
         catch(SQLException e){e.printStackTrace();}
         return false;
+    }
+    
+    public boolean isMotorist(String username)
+    {
+        ResultSet rs;
+     
+        try
+        {
+            if(!database.open()){return false;}
+            else
+            {
+
+                rs = database.executeFunction(MijdasDB.Function.CHECK_MOTORIST, "'"+username+"'");
+            
+                //If there is there is data in the motorist table 
+                //corresponding to the username entered
+                rs.next();
+                
+                if(rs.getString(1) == null)
+                {
+                    return false;
+                }
+                
+                database.close();
+                return true;
+             
+            }
+        } 
+       
+        catch (SQLException ex) {ex.printStackTrace(); }
+        
+        return false;
+    }
+    
+    public boolean isMechanic(String username)
+    {
+        return false;
+    }
+    
+    public Mechanic getMechanic()
+    {
+        return null;
+    }
+    
+    public Motorist getMotorist()
+    {
+        return null;
     }
     
     
