@@ -11,7 +11,7 @@ TODO:
 
 public class MijdasDB
 {
-    public enum Tables 
+    public enum Tables
     {
         USER("USER",userFields),
         MOTORISTS("MOTORIST", motoristFields),
@@ -31,13 +31,13 @@ public class MijdasDB
         {
             return name;
         }
-        
+
         public boolean[] isLiteralField()
         {
             return isFieldLiteral;
         }
     }
-    
+
     public enum User implements Insertable
     {
         USERNAME("username",true),
@@ -64,7 +64,6 @@ public class MijdasDB
         {
            return isLiteral;
         }
-
     }
 
     public enum Motorist implements Insertable
@@ -94,13 +93,12 @@ public class MijdasDB
         }
     }
 
-    
     public enum Mechanic implements Insertable
     {
         USERNAME("username",true),
         STARS("qualityInStars",false),
         LICENSE("license",false);
-  
+
         private final String value;
         private final boolean isLiteral;
         private Mechanic(String value, boolean isLiteral)
@@ -120,34 +118,29 @@ public class MijdasDB
            return isLiteral;
         }
     }
-    
+
     public enum Function
     {
         CHECK_MOTORIST("checkMotorist"),
         CHECK_MECHANIC("checkMechanic");
-        
+
         private String value;
         private Function(String value)
         {
             this.value = value;
         }
-        
+
         public String getFunctionName()
         {
             return value;
         }
     }
-    
+
     //Table strucutre of fields (in order)- whether or not they are required to be literal or not
     private static final boolean[] userFields         = new boolean[]{true,true,true,true,true};
     private static final boolean[] motoristFields     = new boolean[]{true,false,true,false};
     private static final boolean[] mechanicFields     = new boolean[]{true,false,false};
     //Not yet implemented.
     private static  boolean[] transactionFields;
-    private static  boolean[] vehicleFields;      
+    private static  boolean[] vehicleFields;
 }
-
-
-
-
-
