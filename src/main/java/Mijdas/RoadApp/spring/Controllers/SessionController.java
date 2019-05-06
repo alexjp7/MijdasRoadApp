@@ -1,8 +1,6 @@
 
 package Mijdas.RoadApp.spring.Controllers;
 //Local Imports
-import Mijdas.RoadApp.spring.Models.UserModels.Mechanic;
-import Mijdas.RoadApp.spring.Models.UserModels.Motorist;
 import Mijdas.RoadApp.spring.Models.UserModels.User;
 import Mijdas.RoadApp.spring.Views.Login.LoginView;
 import Mijdas.RoadApp.spring.Views.MainLayout;
@@ -33,9 +31,10 @@ public class SessionController
            return INSTANCE;
         }
     }
-    
-    private  boolean isLogin;  //flags whether a login session has started
-    private User loggedinUser; //User is created when succesful login attempt is made
+   
+    private  boolean isLogin;   //flags whether a login session has started
+    private User loggedinUser;  //User is created when succesful login attempt is made
+    private UserType userType;  // Enumerated value for user types (motorist/mechanic)
     private SessionController(){}//Private constructor to stop instantiation
 
     //returns current instance of nav controller
@@ -78,27 +77,42 @@ public class SessionController
          MainLayout.reload(); // reset navigation bar to loggeed-out view
     }
 
+    /********************************************
+     *  Constructs the appropriate user type based on table data 
+     * @param username username entered from login form
+     *************************************************************/
     public void initUser(String username)
     {
         //Check if Motorist
         if(DBQueryProcessor.getInstance().isMotorist(username))
         {
-            System.out.println("is Motorist");
-         //   loggedinUser = new Motorist();
+            userType = UserType.MOTORIST;
+            loggedinUser = DBQueryProcessor.getInstance().getMotorist(username);
         }
-
+        //Check if for Mechanic
         else if(DBQueryProcessor.getInstance().isMechanic(username))
         {
-            System.out.println("is Mechanic");
-          //  loggedinUser = new Mechanic();
+            userType = UserType.MECHANIC;
+            loggedinUser = DBQueryProcessor.getInstance().getMechanic(username);
         }
         else
         {
             System.out.println("not motorist/mechanic");
         }
-       //Check for Mechanic
+       //TEST PRINT
+       System.out.println(loggedinUser.toString());
     }
-
+    
+    public UserType getUserType()
+    {
+        return userType;
+    }
+    
+    
+    public User getUser()
+    {
+        return loggedinUser;
+    }
   /*********************
    *
    * @return the login status

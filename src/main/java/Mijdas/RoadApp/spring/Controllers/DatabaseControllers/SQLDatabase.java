@@ -38,7 +38,6 @@ public class SQLDatabase
         connection.close();
     }
     /********************************************************************
-     *
      * @param table - Enumerated values for the existing tables
      * @param whereClause - optional, to allow for additional where clauses
      *              should be set to null if not necessary.
@@ -70,11 +69,9 @@ public class SQLDatabase
      * @param table - Enumerated values for the existing tables
      * @param values - the values to be inserted into the table
     *******************************************************************/
-
     public void writeToStorage(MijdasDB.Tables table, String...values) throws SQLException
     {
         String sqlValues = SQLValuesToString(values, table);
-        System.out.println(sqlValues);
         stmt = connection.createStatement();
         stmt.executeUpdate("INSERT INTO "+ table.getTableName() + " VALUES ("+sqlValues+")");
     }
@@ -106,9 +103,19 @@ public class SQLDatabase
         String sqlString;
         sqlString = "SELECT ";
         sqlString += function.getFunctionName() + "("+value+")";
-        System.out.println(sqlString);
         stmt = connection.createStatement();
         rs = stmt.executeQuery(sqlString);
+        return rs;
+    }
+    
+    public ResultSet executeProcedure(MijdasDB.Procedure procedure, String value) throws SQLException
+    {
+        ResultSet rs = null;
+        String sqlString;
+        sqlString = "CALL " + procedure.getProcedureName() + "(" + value + ")";
+        stmt = connection.createStatement();
+        rs = stmt.executeQuery(sqlString);
+      
         return rs;
     }
 
