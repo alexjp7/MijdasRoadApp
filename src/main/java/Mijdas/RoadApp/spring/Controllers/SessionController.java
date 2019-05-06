@@ -94,6 +94,7 @@ public class SessionController
    
         else if(DBQueryProcessor.getInstance().isMechanic(username))
         {
+            System.out.println("is Mechanic");
           //  loggedinUser = new Mechanic();
         }
         else

@@ -39,8 +39,8 @@ public class DBQueryProcessor
                 //Conenction info.
                 String HOST    = "localhost";
                 String DB_NAME = "mijdasroadapp";
-                String USER    = "root";
-                String PASSWD  = "csit115";
+                String USER    = "MijdasUser";
+                String PASSWD  = "mijdas123";
                 int PORT       = 3306;
                 //Create new instance of SQLDatabase.
                 queryProcessor.database = new SQLDatabase(HOST,PORT,DB_NAME,USER,PASSWD); 
@@ -191,6 +191,7 @@ public class DBQueryProcessor
     public boolean isMotorist(String username)
     {
         ResultSet rs;
+        boolean userIsMotorist = false;
      
         try
         {
@@ -206,23 +207,49 @@ public class DBQueryProcessor
                 
                 if(rs.getString(1) == null)
                 {
-                    return false;
+                    userIsMotorist = false;
                 }
                 
                 database.close();
-                return true;
+                userIsMotorist = true;
              
             }
         } 
        
         catch (SQLException ex) {ex.printStackTrace(); }
         
-        return false;
+        return userIsMotorist;
     }
     
     public boolean isMechanic(String username)
     {
-        return false;
+        ResultSet rs;
+        boolean userIsMechanic = false;
+        try
+        {
+            if(!database.open()){return false;}
+            else
+            {
+
+                rs = database.executeFunction(MijdasDB.Function.CHECK_MECHANIC, "'"+username+"'");
+            
+                //If there is there is data in the motorist table 
+                //corresponding to the username entered
+                rs.next();
+                
+                if(rs.getString(1) == null)
+                {
+                    userIsMechanic = false;
+                }
+                
+                database.close();
+             
+            }
+        } 
+       
+        catch (SQLException ex) {ex.printStackTrace(); }
+        
+        return userIsMechanic;
     }
     
     public Mechanic getMechanic()
