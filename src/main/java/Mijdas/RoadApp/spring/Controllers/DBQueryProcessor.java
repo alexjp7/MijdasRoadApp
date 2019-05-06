@@ -12,25 +12,24 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**********************************************************************8
- * 
+ *
  * This class acts a service provider for the main
  * controllers of the system through processing queries and
  * interfacing with the MySQL database.
- * 
- * The focus of the DBQueryProcessor is to provide 
+ *
+ * The focus of the DBQueryProcessor is to provide
  * public member functions that return the relevant result sets
  * of particular queries such as; logging in, registration,
  * user management etc.
  *************************************************************************/
-public class DBQueryProcessor 
-{  
+public class DBQueryProcessor
+{
     private static class SingletonHolder
     {
         private static DBQueryProcessor INSTANCE = createInstance();
         private SingletonHolder(){}
-        
+
         private static DBQueryProcessor createInstance()
         {
             if(INSTANCE == null)
@@ -43,41 +42,36 @@ public class DBQueryProcessor
                 String PASSWD  = "mijdas123";
                 int PORT       = 3306;
                 //Create new instance of SQLDatabase.
-                queryProcessor.database = new SQLDatabase(HOST,PORT,DB_NAME,USER,PASSWD); 
-                
+                queryProcessor.database = new SQLDatabase(HOST,PORT,DB_NAME,USER,PASSWD);
+
                 return queryProcessor;
             }
-            
             return INSTANCE;
         }
     }
-    
-    
+
     //The active database of the query processor
     private SQLDatabase database;
-        
-     
-    private DBQueryProcessor() {} // This class is a service class, and should 
+
+    private DBQueryProcessor() {} // This class is a service class, and should
                                   // not be instanciated
-    
     public static DBQueryProcessor getInstance()
     {
         return SingletonHolder.INSTANCE;
     }
-    
-    
+
     /*******************************************************
-     * 
+     *
      * @param username - passed in from login controller
      * @param password - passed in from login controller
      * @return [0] = username, [1] password.
      ********************************************************/
     public String [] makeLoginRequest(String username, String password)
     {
-    
+
         ResultSet rs = null;
         String [] loginInfo = new String[2];
-        
+
         String whereClause = "username = '"+username+"' AND password = '"+password+"';";
         try
         {
@@ -85,8 +79,8 @@ public class DBQueryProcessor
             {   //Unsuccesful connection has occured-
                 throw new SQLException("Connection To SQL instance Aborted");
             }
-            else    
-            { 
+            else
+            {
                 /*******************************************************************
                  * MijdasDB.Tables.User - Table to be read from
                  * whereClause - pre-built where clause to read a specific row
@@ -104,18 +98,16 @@ public class DBQueryProcessor
             database.close();
         }
         catch(SQLException e){e.printStackTrace();}
-       
+
         return loginInfo;
     }
-    
- 
-    
+
     public String queryUsername(String username)
     {
         ResultSet rs = null;
-        String queryReturn = null; 
+        String queryReturn = null;
         String whereClase = "username = '" + username +"';";
-        
+
         try
         {
             if(!database.open())
@@ -129,19 +121,17 @@ public class DBQueryProcessor
                 {
                     queryReturn = rs.getString(1);
                 }
-               
             }
             database.close();
         }
         catch(SQLException e){e.printStackTrace();}
-        
         return queryReturn;
     }
-    
+
     /**************************************************************
      * Writes the registration form details to persistent storage.
      * -----------------------------------------------------------
-     * @param formData - variadic string parameter representing the 
+     * @param formData - variadic string parameter representing the
      *                   values entered from login.
      * @return - whether a successful write to storage has occurred
      ***************************************************************/
@@ -157,10 +147,10 @@ public class DBQueryProcessor
                 //Write User information to User SQL table.
                 database.writeToStorage(MijdasDB.Tables.USER ,formData[0],formData[5],
                                         formData[2],formData[3],formData[4]);
-               
+
                 /***************************USER INSERTS DEPENDING ON USER TYPE******************/
                 if(formData[1].equals("Motorist")) //Motorist Inserts
-                {   
+                {
                     //SQL insert parameters - upon account creation, username and membership values are inserted.
                     fields = new  MijdasDB.Motorist[]{MijdasDB.Motorist.USERNAME,  MijdasDB.Motorist.HASMEMBERSHIP};
 
@@ -180,14 +170,13 @@ public class DBQueryProcessor
                 }
                 //Close database session
                 database.close();
-                return true; 
-
+                return true;
             }
         }
         catch(SQLException e){e.printStackTrace();}
         return false;
     }
-    
+
     public boolean isMotorist(String username)
     {
         ResultSet rs;
@@ -198,29 +187,27 @@ public class DBQueryProcessor
             if(!database.open()){return false;}
             else
             {
-
                 rs = database.executeFunction(MijdasDB.Function.CHECK_MOTORIST, "'"+username+"'");
-            
-                //If there is there is data in the motorist table 
+
+                //If there is there is data in the motorist table
                 //corresponding to the username entered
                 rs.next();
-                
+
                 if(rs.getString(1) == null)
                 {
                     userIsMotorist = false;
                 }
-                
+
                 database.close();
                 userIsMotorist = true;
              
             }
-        } 
-       
+        }
         catch (SQLException ex) {ex.printStackTrace(); }
         
         return userIsMotorist;
     }
-    
+
     public boolean isMechanic(String username)
     {
         ResultSet rs;
@@ -251,24 +238,20 @@ public class DBQueryProcessor
         
         return userIsMechanic;
     }
-    
+
     public Mechanic getMechanic()
     {
         return null;
     }
-    
+
     public Motorist getMotorist()
     {
         return null;
     }
-    
-    
+
     /* Write data models/Database
         public User getLoginedUser()
         {
         }
     */
-    
-    
-    
 }

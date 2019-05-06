@@ -5,11 +5,6 @@ INSERT INTO USER VALUES("isThisTaken","1234","Test 1 ","alnerdo@hotmail.com");
 INSERT INTO USER VALUES("john","1234","John","Barlow","Jb@hotmail.com");
 INSERT INTO MECHANIC(username) VALUES("alex");
 
-
 INSERT INTO USER VALUES ('test11','12345','test','lel','tl@gmail.com');
 
 select*from mechanic;
-
-
-
-
