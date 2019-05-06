@@ -11,8 +11,8 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
 
-@StyleSheet("frontend://styles/registerForm.css")
-class RegisterForm extends FormLayout
+@StyleSheet("frontend://styles/MembershipForm.css")
+class MemberForm extends FormLayout
 {
     private TextField registrationNumber = new TextField("Registration Number");
     private TextField licenseNumber = new TextField("License Number");

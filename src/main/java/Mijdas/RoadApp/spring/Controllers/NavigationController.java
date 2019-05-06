@@ -65,14 +65,14 @@ public class NavigationController
         //Check to see if logincontroller has set login value
         if(!SessionController.getInstance().isLogin())
         {
-           links.add(new RouterLink(null, HomeView.class));
-           links.add(new RouterLink(null, LoginView.class));
-           links.add(new RouterLink(null, RegisterView.class));
+            links.add(new RouterLink(null, HomeView.class));
+            links.add(new RouterLink(null, LoginView.class));
+            links.add(new RouterLink(null, RegisterView.class));
         }
-        else if (SessionController.getInstance().isLogin())
+        /*else if (SessionController.getInstance().isLogin() && SessionController.getInstance().userIsMotorist )
         {
-          links.add(new RouterLink(null, MemberView.class))
-        }
+            links.add(new RouterLink(null, MemberView.class))
+        }*/
         else
         {
             //Login links (my profile, check balance, subscription, make a service request etc.
@@ -81,7 +81,7 @@ public class NavigationController
         return links;
     }
 
-     //Returns current list of navigation links
+    //Returns current list of navigation links
     public ArrayList<RouterLink> getLinks()
     {
         links = getNavigationList();

@@ -23,7 +23,7 @@ public class SessionController
         {  // Instance of SessionController
             if(INSTANCE == null)
             {
-                SessionController loginController = new  SessionController();
+                SessionController loginController = new SessionController();
                 loginController.isLogin = false; //Assume the default login-status
                 loginController.loggedinUser = null;
                 return loginController;
@@ -31,8 +31,8 @@ public class SessionController
            return INSTANCE;
         }
     }
-   
-    private  boolean isLogin;   //flags whether a login session has started
+
+    private boolean isLogin;   //flags whether a login session has started
     private User loggedinUser;  //User is created when succesful login attempt is made
     private UserType userType;  // Enumerated value for user types (motorist/mechanic)
     private SessionController(){}//Private constructor to stop instantiation
@@ -53,7 +53,7 @@ public class SessionController
     public boolean checkLogin(String username, String password)
     {
         //Request username and password from Database
-        String[] loginInfo   = DBQueryProcessor.getInstance().makeLoginRequest(username, password);
+        String[] loginInfo = DBQueryProcessor.getInstance().makeLoginRequest(username, password);
         //Check entered values against database values
         if(username.equals(loginInfo[0]) && password.equals(loginInfo[1]))
         {
@@ -78,7 +78,7 @@ public class SessionController
     }
 
     /********************************************
-     *  Constructs the appropriate user type based on table data 
+     *  Constructs the appropriate user type based on table data
      * @param username username entered from login form
      *************************************************************/
     public void initUser(String username)
@@ -102,13 +102,12 @@ public class SessionController
        //TEST PRINT
        System.out.println(loggedinUser.toString());
     }
-    
+
     public UserType getUserType()
     {
         return userType;
     }
-    
-    
+
     public User getUser()
     {
         return loggedinUser;

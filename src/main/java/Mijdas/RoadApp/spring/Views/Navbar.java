@@ -12,35 +12,32 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.RouterLink;
 import java.util.ArrayList;
 
-
-
 /*******************************************************************
- * 
- * Renders navigation elements and their links 
+ *
+ * Renders navigation elements and their links
    to the view
  *******************************************************************/
 @StyleSheet("frontend://styles/navbar.css")
+
 public class Navbar extends Div
 {
     private Div navbar;
     private ArrayList<RouterLink> links;
-    private Button logOut; 
-  
+    private Button logOut;
 
     public Navbar()
     {   //Components
         navbar = new Div();
         links  = new ArrayList<>();
         logOut = new Button("Logout");
-              
+
         setId("navbar");
         logOut.setId("logOut");
         logOut.addClassName("navElement");
         logOut.addClickListener(e->handleLogout());
- 
+
         setSizeFull();
         setNavigation();
-   
     }
 
     public void setNavigation()
@@ -51,32 +48,34 @@ public class Navbar extends Div
         if(!SessionController.getInstance().isLogin())
         {
             //Login Page
-            links.get(1).add(new Icon(VaadinIcon.USER), new Text("Login"));   
+            links.get(1).add(new Icon(VaadinIcon.USER), new Text("Login"));
             //Register Page
-            links.get(2).add(new Icon(VaadinIcon.USERS),new Text("Register"));  
+            links.get(2).add(new Icon(VaadinIcon.USERS), new Text("Register"));
             addToNavigation();
         }
         else
-        { 
+        {
             /*******
              * TODO: add other navigation bar displays
              */
+             //the code below maybe useful idk?
+            //links.get(3).add(new Icon(VaadinIcon.GROUP), new Text("Membership"));
             addToNavigation();
             add(logOut);
-        }    
+        }
     }
     /*****************************************************
-     * Clears components and allows them to be reset 
+     * Clears components and allows them to be reset
      * for when changes to navigation are required
      **********************************/
     private void clearAndReset()
     {
-        removeAll(); // Clear components to be set  
+        removeAll(); // Clear components to be set
         links.forEach((rl) -> rl.removeAll() );
         //Get most recent list of navigation links
-        this.links = NavigationController.getInstance().getLinks(); 
+        this.links = NavigationController.getInstance().getLinks();
     }
- 
+
     private void addToNavigation()
     {
         for(RouterLink rl: links)
@@ -85,7 +84,7 @@ public class Navbar extends Div
             add(rl);
         }
     }
-    
+
     /***********************************************************************
      *notifies controller of when user has clicked the logout button
      *******************************************************************/

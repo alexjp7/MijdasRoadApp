@@ -6,7 +6,6 @@ package Mijdas.RoadApp.spring.Controllers.DatabaseControllers;
 * these are used to reduce errors in typing sql strings.
 TODO:
     * Fill in rest of tables
-
 */
 
 public class MijdasDB
@@ -106,6 +105,7 @@ public class MijdasDB
             this.value = value;
             this.isLiteral = isLiteral;
         }
+
         @Override
         public String getValue()
         {
@@ -135,8 +135,7 @@ public class MijdasDB
             return value;
         }
     }
-    
-    
+
     public enum Procedure
     {
         GET_MOTORIST("getMotorist"),

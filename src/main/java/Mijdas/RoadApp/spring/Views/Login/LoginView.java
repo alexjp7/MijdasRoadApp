@@ -11,7 +11,6 @@ import com.vaadin.flow.component.login.AbstractLogin.LoginEvent;
 import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.router.PageTitle;
-
 import com.vaadin.flow.router.Route;
 
 @Route(value="login", layout=MainLayout.class)

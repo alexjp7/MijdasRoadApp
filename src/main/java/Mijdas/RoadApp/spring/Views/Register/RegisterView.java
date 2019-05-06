@@ -9,6 +9,7 @@ import com.vaadin.flow.router.Route;
 
 @Route(value="register", layout=MainLayout.class)
 @PageTitle("Register")
+
 public class RegisterView extends Div
 {
     public RegisterView()

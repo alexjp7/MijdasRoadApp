@@ -107,7 +107,7 @@ public class DBQueryProcessor
         ResultSet rs = null;
         String queryReturn = null;
         String whereClase = "username = '" + username +"';";
-        
+
         try
         {
             if(!database.open())
@@ -147,7 +147,7 @@ public class DBQueryProcessor
                 //Write User information to User SQL table.
                 database.writeToStorage(MijdasDB.Tables.USER ,formData[0],formData[5],
                                         formData[2],formData[3],formData[4]);
-                
+
                 /***************************USER INSERTS DEPENDING ON USER TYPE******************/
                 if(formData[1].equals("Motorist")) //Motorist Inserts
                 {
@@ -185,7 +185,7 @@ public class DBQueryProcessor
     {
         ResultSet rs;
         boolean userIsMotorist = false;
-     
+
         try
         {
             if(!database.open()){return false;}
@@ -201,11 +201,10 @@ public class DBQueryProcessor
                     userIsMotorist = true;
                 }
                 database.close();
-             
             }
         }
         catch (SQLException ex) {ex.printStackTrace(); }
-        
+
         return userIsMotorist;
     }
     /*******************************************************************
@@ -221,21 +220,19 @@ public class DBQueryProcessor
             if(!database.open()){return false;}
             else
             {
-                rs = database.executeFunction(MijdasDB.Function.CHECK_MECHANIC, "'"+username+"'");         
-                //If there is there is data in the motorist table 
+                rs = database.executeFunction(MijdasDB.Function.CHECK_MECHANIC, "'"+username+"'");
+                //If there is there is data in the motorist table
                 //corresponding to the username entered
                 rs.next();
-                
+
                 if(rs.getString(1) != null)
                 {
                     userIsMechanic = true;
                 }
                 database.close();
             }
-        } 
-       
+        }
         catch (SQLException ex) {ex.printStackTrace(); }
-        
         return userIsMechanic;
     }
 
@@ -248,15 +245,15 @@ public class DBQueryProcessor
         String email = "";
         Integer quality = null;
         Integer lNum = null;
-        
+
         ResultSet rs = null;
         try
         {
            if(!database.open()){return null;}
-           else 
+           else
            {
                rs = database.executeProcedure(MijdasDB.Procedure.GET_MECHANIC, "'"+user+"'");
-               
+
                while(rs.next())
                {
                     username  = rs.getString(1);
@@ -266,14 +263,12 @@ public class DBQueryProcessor
                     quality   = rs.getInt(7);
                     lNum      = rs.getInt(8);
                }
-               
                 database.close();
-                mechanic = new Mechanic(username, firstName, lastName, email, quality, lNum);     
+                mechanic = new Mechanic(username, firstName, lastName, email, quality, lNum);
            }
-           
+
         }
         catch (SQLException e){e.printStackTrace();}
-     
         return mechanic;
     }
 
@@ -287,16 +282,14 @@ public class DBQueryProcessor
         Integer paymentOption = null;
         Integer lNum = null;
 
-        
-        
         ResultSet rs = null;
         try
         {
            if(!database.open()){return null;}
-           else 
+           else
            {
                rs = database.executeProcedure(MijdasDB.Procedure.GET_MOTORIST, "'"+user+"'");
-               
+
                while(rs.next())
                {
                     username  = rs.getString(1);
@@ -304,17 +297,12 @@ public class DBQueryProcessor
                     lastName  = rs.getString(3);
                     email     = rs.getString(4);
                     lNum   = rs.getInt(9);
-                    
                }
-               
                 database.close();
-                mechanic = new Motorist(username, firstName, lastName, email, lNum);     
+                mechanic = new Motorist(username, firstName, lastName, email, lNum);
            }
-           
         }
         catch (SQLException e){e.printStackTrace();}
-     
         return mechanic;
     }
 }
-
