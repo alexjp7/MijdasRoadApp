@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Mechanic extends User
 {
     private Integer quality;
-    private int licenseNumber;
+    private Integer licenseNumber;
     private ArrayList<MechanicReview> reviews;
     private TransactionHistory transactionHistory;
 
@@ -21,10 +21,11 @@ public class Mechanic extends User
     }
 
     //Allows for setting of quality on constructor
-    public Mechanic(String username, String firstName, String lastName, String email, int quality)
+    public Mechanic(String username, String firstName, String lastName, String email, Integer quality, Integer licenseNumber)
     {
         super(username, firstName, lastName, email);
         this.quality = quality; // upon instatiation, quality of stars may not be set
+        this.licenseNumber = licenseNumber;
         init();
 
     }
@@ -74,7 +75,7 @@ public class Mechanic extends User
         return quality;
     }
 
-    public int getLicenseNumber()
+    public Integer getLicenseNumber()
     {
         return licenseNumber;
     }

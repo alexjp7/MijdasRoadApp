@@ -3,9 +3,10 @@ package Mijdas.RoadApp.spring.Models.UserModels;
 
 public class Motorist extends User
 {
-    private int licenseNum;
+    private Integer licenseNum;
     private Membership membership;
     //private PaymentOption payOption;
+<<<<<<< HEAD
 
     public Motorist(String username, String firstName, String lastName, String email)
     {
@@ -14,6 +15,17 @@ public class Motorist extends User
     }
 
     public Motorist(String username, String firstName, String lastName, String email, Membership membership)
+=======
+    
+    public Motorist(String username, String firstName, String lastName, String email, Integer licenseNum)
+    {
+        super(username,firstName,lastName,email);
+        this.licenseNum = licenseNum;
+        membership = null; 
+    }
+    
+    public Motorist(String username, String firstName, String lastName, String email,Integer licenseNum, Membership membership)
+>>>>>>> 343cce9bbd98f4acd115fe8d62ce0661f68fba64
     {
         super(username,firstName,lastName,email);
         membership = new Membership(membership);
@@ -30,7 +42,7 @@ public class Motorist extends User
     }
 
     /*********************GETTERS*********************/
-    public int getLicenseNum()
+    public Integer getLicenseNum()
     {
         return licenseNum;
     }

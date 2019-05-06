@@ -135,6 +135,24 @@ public class MijdasDB
             return value;
         }
     }
+    
+    
+    public enum Procedure
+    {
+        GET_MOTORIST("getMotorist"),
+        GET_MECHANIC("getMechanic");
+
+        private String value;
+        private Procedure(String value)
+        {
+            this.value = value;
+        }
+
+        public String getProcedureName()
+        {
+            return value;
+        }
+    }
 
     //Table strucutre of fields (in order)- whether or not they are required to be literal or not
     private static final boolean[] userFields         = new boolean[]{true,true,true,true,true};

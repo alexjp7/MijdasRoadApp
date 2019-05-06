@@ -107,7 +107,7 @@ public class DBQueryProcessor
         ResultSet rs = null;
         String queryReturn = null;
         String whereClase = "username = '" + username +"';";
-
+        
         try
         {
             if(!database.open())
@@ -147,7 +147,7 @@ public class DBQueryProcessor
                 //Write User information to User SQL table.
                 database.writeToStorage(MijdasDB.Tables.USER ,formData[0],formData[5],
                                         formData[2],formData[3],formData[4]);
-
+                
                 /***************************USER INSERTS DEPENDING ON USER TYPE******************/
                 if(formData[1].equals("Motorist")) //Motorist Inserts
                 {
@@ -177,6 +177,10 @@ public class DBQueryProcessor
         return false;
     }
 
+    /*******************************************************************
+     * @param username - the username entered into login screen
+     * @return - whether the user has data entered into motorist table
+     ******************************************************************/
     public boolean isMotorist(String username)
     {
         ResultSet rs;
@@ -188,18 +192,15 @@ public class DBQueryProcessor
             else
             {
                 rs = database.executeFunction(MijdasDB.Function.CHECK_MOTORIST, "'"+username+"'");
-
                 //If there is there is data in the motorist table
                 //corresponding to the username entered
                 rs.next();
 
-                if(rs.getString(1) == null)
+                if(rs.getString(1) != null)
                 {
-                    userIsMotorist = false;
+                    userIsMotorist = true;
                 }
-
                 database.close();
-                userIsMotorist = true;
              
             }
         }
@@ -207,7 +208,10 @@ public class DBQueryProcessor
         
         return userIsMotorist;
     }
-
+    /*******************************************************************
+     * @param username - the username entered into login screen
+     * @return - whether the user has data entered into Mechanic table
+     ******************************************************************/
     public boolean isMechanic(String username)
     {
         ResultSet rs;
@@ -217,20 +221,16 @@ public class DBQueryProcessor
             if(!database.open()){return false;}
             else
             {
-
-                rs = database.executeFunction(MijdasDB.Function.CHECK_MECHANIC, "'"+username+"'");
-            
+                rs = database.executeFunction(MijdasDB.Function.CHECK_MECHANIC, "'"+username+"'");         
                 //If there is there is data in the motorist table 
                 //corresponding to the username entered
                 rs.next();
                 
-                if(rs.getString(1) == null)
+                if(rs.getString(1) != null)
                 {
-                    userIsMechanic = false;
+                    userIsMechanic = true;
                 }
-                
                 database.close();
-             
             }
         } 
        
@@ -239,19 +239,82 @@ public class DBQueryProcessor
         return userIsMechanic;
     }
 
-    public Mechanic getMechanic()
+    public Mechanic getMechanic(String user)
     {
-        return null;
-    }
-
-    public Motorist getMotorist()
-    {
-        return null;
-    }
-
-    /* Write data models/Database
-        public User getLoginedUser()
+        Mechanic mechanic = null;
+        String username = "";
+        String firstName = "";
+        String lastName = "";
+        String email = "";
+        Integer quality = null;
+        Integer lNum = null;
+        
+        ResultSet rs = null;
+        try
         {
+           if(!database.open()){return null;}
+           else 
+           {
+               rs = database.executeProcedure(MijdasDB.Procedure.GET_MECHANIC, "'"+user+"'");
+               
+               while(rs.next())
+               {
+                    username  = rs.getString(1);
+                    firstName = rs.getString(2);
+                    lastName  = rs.getString(3);
+                    email     = rs.getString(4);
+                    quality   = rs.getInt(7);
+                    lNum      = rs.getInt(8);
+               }
+               
+                database.close();
+                mechanic = new Mechanic(username, firstName, lastName, email, quality, lNum);     
+           }
+           
         }
-    */
+        catch (SQLException e){e.printStackTrace();}
+     
+        return mechanic;
+    }
+
+    public Motorist getMotorist(String user)
+    {
+        Motorist mechanic = null;
+        String username = "";
+        String firstName = "";
+        String lastName = "";
+        String email = "";
+        Integer paymentOption = null;
+        Integer lNum = null;
+
+        
+        
+        ResultSet rs = null;
+        try
+        {
+           if(!database.open()){return null;}
+           else 
+           {
+               rs = database.executeProcedure(MijdasDB.Procedure.GET_MOTORIST, "'"+user+"'");
+               
+               while(rs.next())
+               {
+                    username  = rs.getString(1);
+                    firstName = rs.getString(2);
+                    lastName  = rs.getString(3);
+                    email     = rs.getString(4);
+                    lNum   = rs.getInt(9);
+                    
+               }
+               
+                database.close();
+                mechanic = new Motorist(username, firstName, lastName, email, lNum);     
+           }
+           
+        }
+        catch (SQLException e){e.printStackTrace();}
+     
+        return mechanic;
+    }
 }
+
