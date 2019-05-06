@@ -12,22 +12,18 @@ import com.vaadin.flow.router.Route;
 @StyleSheet("frontend://styles/home.css")
 @Route(value="", layout=MainLayout.class)
 @PageTitle("Home")
+
 public class HomeView extends Div
 {
     public HomeView()
     {
-        
         setWidthFull();
         setHeightFull();
         Div imgBkg = new Div();
-   
+
         imgBkg.setWidthFull();
         imgBkg.setId("imgBkg");
 
         add(imgBkg);
-        
-        
-    }
-
-    
+    }  
 }

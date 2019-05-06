@@ -14,7 +14,7 @@ import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 
 @StyleSheet("frontend://styles/registerForm.css")
-class RegisterForm extends FormLayout 
+class RegisterForm extends FormLayout
 {
     //Controller
     private  RegistrationProcessor regProcessor;
@@ -31,20 +31,19 @@ class RegisterForm extends FormLayout
     private PasswordField password2 = new PasswordField("Re-Type Password");
     private Button register         = new Button("Register");
     private Button clear            = new Button ("Clear");
-    
+
     public RegisterForm()
     {
         regProcessor = new RegistrationProcessor();
         //Assume invalid inputs on page construction
         isValidUsername = false;
         isValidPassword = false;
-       
+
         setFieldProperties();
         setEventListeners();
         setFormLayout();
-
     }
-    
+
     private void setFormLayout()
     {
         //Form Layout
@@ -56,13 +55,12 @@ class RegisterForm extends FormLayout
 
         buttonGroup.setJustifyContentMode(FlexComponent.JustifyContentMode.START);
         buttonGroup.setWidthFull();
-        
+
         //Component ordering
         formLayout.add(topLayer,nameGroup,email,passwordGroup,buttonGroup);
         add(formLayout);
-        
     }
-    
+
     private void setFieldProperties()
     {
         //Component Styling
@@ -71,7 +69,7 @@ class RegisterForm extends FormLayout
         clear.setId("formButton");
         userType.setPlaceholder("I am a..");
         userType.setLabel("Pick one");
-         
+
         //Mark fields as requried
         username.setRequired(true);
         firstName.setRequired(true);
@@ -79,9 +77,8 @@ class RegisterForm extends FormLayout
         email.setRequired(true);
         password.setRequired(true);
         password2.setRequired(true);
-        
     }
-    
+
     private void setEventListeners()
     {
         //Makes a call to db to check for a unique username
@@ -89,15 +86,13 @@ class RegisterForm extends FormLayout
         //Listeners to check when user focuses off password fields.
         password.addBlurListener(e->validatePassword());
         password2.addBlurListener(e->validatePassword());
-        
+
         //Form submission and clearing
         register.addClickListener(e->submitForm());
         clear.addClickListener(e->clearForm());
         register.setEnabled(false);
-        
     }
-    
-    
+
     /*************************************************
      * checks if username is already taken.
      **************************************************/
@@ -114,12 +109,11 @@ class RegisterForm extends FormLayout
             else
             {
                 isValidUsername = true;
-            }            
+            }
         }
         setRegisterEnabled();
     }
-    
-    
+
     /*************************************************
      * checks if password fields are the same values.
     **************************************************/
@@ -132,18 +126,17 @@ class RegisterForm extends FormLayout
                 if(!password.getValue().equals(password2.getValue()))
                 {
                     MainLayout.displayInformationPrompt("Passwords do not match!");
-                    isValidPassword = false;  
+                    isValidPassword = false;
                 }
                 else
                 {
                     isValidPassword = true;
                 }
-                
                 setRegisterEnabled();
             }
         }
     }
-    
+
     private void setRegisterEnabled()
     {
         if(isValidUsername && isValidPassword)
@@ -154,9 +147,8 @@ class RegisterForm extends FormLayout
         {
            register.setEnabled(false);
         }
-    
     }
-    
+
     public void submitForm()
     {
         //Submit form
@@ -169,10 +161,8 @@ class RegisterForm extends FormLayout
         {
             //dispaly prompt
         }
-        
-        
     }
-    
+
     public void clearForm()
     {
         username.clear();
@@ -182,5 +172,4 @@ class RegisterForm extends FormLayout
         password.clear();
         password2.clear();
     }
-
 }

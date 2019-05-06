@@ -63,6 +63,6 @@ public class Transaction
     @Override
     public String toString()
     {
-        return "Transaction{" + "amountPayed=" + amountPayed + ", isComplete=" + isComplete + ", payee=" + payee + ", payer=" + payer + '}';
+        return "Transaction{" + "amountPayed = " + amountPayed + ", isComplete = " + isComplete + ", payee = " + payee + ", payer = " + payer + '}';
     }
 }

@@ -3,7 +3,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
-/* 
+/*
     Created on : 25/04/2019, 2:35:48 AM
     Author     : Alex
 
@@ -15,12 +15,10 @@ and open the template in the editor.
 
 #navbar
 {
-   
+
    background-color: hsla(211, 100%, 50%, 0.86);
    text-align: center;
    padding:10px;
-   
-   
 }
 .navElement
 {
@@ -33,4 +31,3 @@ and open the template in the editor.
     background: url(../img/mijdas.png);
     background-size: cover;
 }
-

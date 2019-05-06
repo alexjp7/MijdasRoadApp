@@ -3,27 +3,23 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
-/* 
+/*
     Created on : 25/04/2019, 3:47:37 PM
     Author     : Alex
 */
-
 
 #registerForm
 {
    display:-webkit-inline-box;
 }
 
-
 #passwordMatch
 {
-    
+
 }
 
-.v-textfield 
-{ 
-
-border: dashed green;
- border:     thin dashed;
-
+.v-textfield
+{
+  border: dashed green;
+  border:     thin dashed;
 }
