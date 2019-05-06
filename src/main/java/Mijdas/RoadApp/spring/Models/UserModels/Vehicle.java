@@ -16,7 +16,7 @@ public class Vehicle
         this.model = model;
         this.color = color;
     }
-    
+
     /******************SETTERS***********************/
     public void setRegistration(String registration)
     {
@@ -56,7 +56,5 @@ public class Vehicle
     public String getColor()
     {
         return color;
-    }
-
-    
+    }  
 }

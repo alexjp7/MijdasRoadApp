@@ -3,7 +3,6 @@ package Mijdas.RoadApp.spring.Models.TransactionModels;
 
 import Mijdas.RoadApp.spring.Models.UserModels.User;
 
-
 public class Transaction
 {
     private float amountPayed;
@@ -39,6 +38,7 @@ public class Transaction
     {
         return payer;
     }
+
      /**************************SETTERS**********************/
     public void setAmountPayed(float amountPayed)
     {
@@ -59,17 +59,10 @@ public class Transaction
     {
         this.payer = payer;
     }
-    
-    
-    
 
     @Override
     public String toString()
     {
         return "Transaction{" + "amountPayed=" + amountPayed + ", isComplete=" + isComplete + ", payee=" + payee + ", payer=" + payer + '}';
     }
-    
-    
-    
-    
 }

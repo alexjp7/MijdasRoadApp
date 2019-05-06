@@ -8,7 +8,7 @@ public class Membership
     private final static float VEHICLE_FEE = 110;
     private int licenseNum;
     private ArrayList<Vehicle> vehicles;
-    
+
     /************************************************************
      * @param licenseNum - license number of membership holder
     **********************************************************/
@@ -30,7 +30,7 @@ public class Membership
     {
         vehicles.add(v);
     }
-    
+
     /***************************************************
      * Removes vehicle based on matching registration
      * @param v - a vehicle to be removed
@@ -45,17 +45,17 @@ public class Membership
      ***************************************************/
     public void removeVehicle(String rego)
     {
-         vehicles.removeIf(vehicleChecked -> (rego.equals(vehicleChecked.getRegistration()))); 
+         vehicles.removeIf(vehicleChecked -> (rego.equals(vehicleChecked.getRegistration())));
     }
-    
+
     /************************************************************
      * @return - the list of valid vehicles covered by a membership
-     ***************************************************************/        
+     ***************************************************************/
     public ArrayList<Vehicle> getVehicles()
     {
         return vehicles;
     }
-    
+
     /***********************************
      * @return - payable amount for membership holder
      *********************************************/
@@ -68,5 +68,4 @@ public class Membership
     {
         return VEHICLE_FEE * vehicleNumber;
     }
- 
 }

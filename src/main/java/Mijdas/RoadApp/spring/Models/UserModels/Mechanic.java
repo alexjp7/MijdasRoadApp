@@ -11,7 +11,7 @@ public class Mechanic extends User
     private int licenseNumber;
     private ArrayList<MechanicReview> reviews;
     private TransactionHistory transactionHistory;
-    
+
     public Mechanic(String username, String firstName, String lastName, String email)
     {
         super(username, firstName, lastName, email);
@@ -19,30 +19,29 @@ public class Mechanic extends User
         this.quality = null; // upon instatiation, quality of stars may not be set
         init();
     }
-    
+
     //Allows for setting of quality on constructor
     public Mechanic(String username, String firstName, String lastName, String email, int quality)
     {
         super(username, firstName, lastName, email);
         this.quality = quality; // upon instatiation, quality of stars may not be set
         init();
-      
+
     }
-    
+
     private void init()
     {
         if(reviews == null)
         {
             reviews = new ArrayList<>();
         }
-        
+
         if(transactionHistory == null)
-        {   
-            transactionHistory = new TransactionHistory(); 
+        {
+            transactionHistory = new TransactionHistory();
         }
-  
     }
-        
+
     /************************SETTERS***************************/
     //Should be set in order to calculate quality
     public void setReviewList(ArrayList<MechanicReview> rList)
@@ -53,23 +52,21 @@ public class Mechanic extends User
     {
         this.licenseNumber = licenseNumber;
     }
-    
+
     /**************************************************
-     *Calculate quality through average star rating 
+     *Calculate quality through average star rating
      ************************************************/
     private void calcQuality()
     {
         int totalStars = 0;
-        
+
         for(MechanicReview r: reviews)
         {
             totalStars += r.getRating();
         }
         quality = totalStars/ reviews.size();
     }
-    
 
-    
     /************************GETTERS***************************/
     public Integer getQuality()
     {   //ensure any request of quality is up-to date
@@ -82,17 +79,9 @@ public class Mechanic extends User
         return licenseNumber;
     }
 
-
-
     @Override
     public String toString()
     {
         return super.toString() + "Mechanic{" + "quality=" + quality + ", licenseNumber=" + licenseNumber;
-    }
-    
-    
-    
-    
-    
-    
+    }  
 }
