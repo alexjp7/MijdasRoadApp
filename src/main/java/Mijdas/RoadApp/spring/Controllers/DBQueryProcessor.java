@@ -366,4 +366,20 @@ public class DBQueryProcessor
         
         return request;
     }
+    
+    public boolean writeService(String...formData) {
+        Insertable[] fields;
+        try {
+            if( !database.open() ) {
+                throw new SQLException("Error writing service request to database");
+            } else {
+                fields = new MijdasDB.ServiceRequests[]{MijdasDB.ServiceRequests.USERNAME, MijdasDB.ServiceRequests.ADDRESS, MijdasDB.ServiceRequests.DETAILS};
+                database.writeToStorage(MijdasDB.Tables.SERVICE_REQUESTS, fields, formData[0], formData[1], formData[2]);
+                return true;
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
