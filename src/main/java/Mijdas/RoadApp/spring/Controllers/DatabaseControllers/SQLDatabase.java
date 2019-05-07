@@ -134,9 +134,11 @@ public class SQLDatabase
         //Build update query
         sqlString  ="UPDATE ";
         sqlString  += table.getTableName();
-        sqlString  += "SET "+field.getValue();
+        sqlString  += " SET "+field.getValue();
         sqlString  += "=" + value+" WHERE "+ whereClause;
 
+        System.out.println(sqlString);
+        
         stmt = connection.createStatement();
         stmt.executeUpdate(sqlString);
     }
