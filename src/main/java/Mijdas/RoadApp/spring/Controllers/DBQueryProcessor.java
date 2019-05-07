@@ -322,9 +322,9 @@ public class DBQueryProcessor
                {
                     requestNum  = rs.getInt(1);
                     motoristUsername = rs.getString(2);
-                    details  = rs.getString(3);
-                    latitude     = rs.getInt(4);
-                    longitude   = rs.getInt(5);
+                    details  = rs.getString(4);
+                    latitude     = rs.getFloat(5);
+                    longitude   = rs.getFloat(6);
                }
                 database.close();
                 request = new Requests(requestNum, motoristUsername, details, latitude, longitude);
