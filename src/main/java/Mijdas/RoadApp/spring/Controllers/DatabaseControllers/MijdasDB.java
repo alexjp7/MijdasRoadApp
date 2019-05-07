@@ -15,6 +15,7 @@ public class MijdasDB
         USER("USER",userFields),
         MOTORISTS("MOTORIST", motoristFields),
         MECHANICS("MECHANIC",mechanicFields),
+        SERVICEREQUESTS("SERVICEREQUEST",serviceRequestFields),
         TRANSACTIONS("TRANSACTIONS",transactionFields),
         VECHILE("VEHICLE",vehicleFields);
 
@@ -118,6 +119,36 @@ public class MijdasDB
            return isLiteral;
         }
     }
+    
+    public enum ServiceRequests implements Insertable
+    {
+        REQUESTNUM("requestNum",false),
+	USERNAME("motoristUsername",true),
+	ADDRESS("nearestAddress",true),
+	DETAILS("details",true),
+	LATITUDE("latitude",false),
+	LONGITUDE("longitude",false);
+
+        private final String value;
+        private final boolean isLiteral;
+        private ServiceRequests(String value, boolean isLiteral)
+        {
+            this.value = value;
+            this.isLiteral = isLiteral;
+        }
+
+        @Override
+        public String getValue()
+        {
+            return value;
+        }
+
+        @Override
+        public boolean isLiteral()
+        {
+           return isLiteral;
+        }
+    }
 
     public enum Function
     {
@@ -157,6 +188,7 @@ public class MijdasDB
     private static final boolean[] userFields         = new boolean[]{true,true,true,true,true};
     private static final boolean[] motoristFields     = new boolean[]{true,false,true,false};
     private static final boolean[] mechanicFields     = new boolean[]{true,false,false};
+    private static final boolean[] serviceRequestFields  = new boolean[]{false,true,true,true,false,false};
     //Not yet implemented.
     private static  boolean[] transactionFields;
     private static  boolean[] vehicleFields;
