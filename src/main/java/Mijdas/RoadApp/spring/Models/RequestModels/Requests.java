@@ -11,19 +11,23 @@ package Mijdas.RoadApp.spring.Models.RequestModels;
  */
 public class Requests {
     private int requestNum;
-    private String motoristUsername,details;
+    private String nearestAddress,motoristUsername,details;
     private float latitude,longitude;
-    
-    public Requests(int requestNum,String motoristUsername,String details,float latitude, float longitude){
-        this.requestNum=requestNum;
-        this.motoristUsername=motoristUsername;
-        this.details=details;
-        this.latitude=latitude;
-        this.longitude=longitude;
-    }
 
-    public Requests(int requestNum, String motoristUsername, String details) {
+    public Requests(int requestNum, String nearestAddress, String motoristUsername, String details, float latitude, float longitude) {
         this.requestNum = requestNum;
+        this.nearestAddress = nearestAddress;
+        this.motoristUsername = motoristUsername;
+        this.details = details;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+    
+
+
+    public Requests(int requestNum, String nearestAddress, String motoristUsername, String details) {
+        this.requestNum = requestNum;
+        this.nearestAddress = nearestAddress;
         this.motoristUsername = motoristUsername;
         this.details = details;
     }
@@ -48,8 +52,16 @@ public class Requests {
         return longitude;
     }
 
+    public String getNearestAddress() {
+        return nearestAddress;
+    }
+
     public void setRequestNum(int requestNum) {
         this.requestNum = requestNum;
+    }
+
+    public void setNearestAddress(String nearestAddress) {
+        this.nearestAddress = nearestAddress;
     }
 
     public void setMotoristUsername(String motoristUsername) {
@@ -67,5 +79,8 @@ public class Requests {
     public void setLongitude(float longitude) {
         this.longitude = longitude;
     }
-    
+    @Override
+    public Requests clone() throws CloneNotSupportedException {
+        return (Requests) super.clone();
+    }
 }

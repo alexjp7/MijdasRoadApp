@@ -338,7 +338,7 @@ public class DBQueryProcessor
     public Requests getRequest(String rNum){
         Requests request =null;
         int requestNum=0;
-        String motoristUsername="",details="";
+        String nearestAddress="",motoristUsername="",details="";
         float latitude=0,longitude=0;
 
         ResultSet rs = null;
@@ -353,12 +353,13 @@ public class DBQueryProcessor
                {
                     requestNum  = rs.getInt(1);
                     motoristUsername = rs.getString(2);
+                    nearestAddress = rs.getString(3);
                     details  = rs.getString(4);
                     latitude     = rs.getFloat(5);
                     longitude   = rs.getFloat(6);
                }
                 database.close();
-                request = new Requests(requestNum, motoristUsername, details, latitude, longitude);
+                request = new Requests(requestNum, nearestAddress,motoristUsername, details, latitude, longitude);
            }
         }
         catch (SQLException e){e.printStackTrace();}

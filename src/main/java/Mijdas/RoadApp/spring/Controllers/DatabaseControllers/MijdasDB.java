@@ -15,7 +15,7 @@ public class MijdasDB
         USER("USER",userFields),
         MOTORISTS("MOTORIST", motoristFields),
         MECHANICS("MECHANIC",mechanicFields),
-        SERVICEREQUESTS("SERVICEREQUEST",serviceRequestFields),
+        SERVICE_REQUESTS("SERVICE_REQUEST",serviceRequestFields),
         TRANSACTIONS("TRANSACTIONS",transactionFields),
         VECHILE("VEHICLE",vehicleFields);
 
@@ -120,7 +120,7 @@ public class MijdasDB
         }
     }
     
-    public enum ServiceRequests implements Insertable
+    public enum Service_Requests implements Insertable
     {
         REQUESTNUM("requestNum",false),
 	USERNAME("motoristUsername",true),
@@ -131,7 +131,7 @@ public class MijdasDB
 
         private final String value;
         private final boolean isLiteral;
-        private ServiceRequests(String value, boolean isLiteral)
+        private Service_Requests(String value, boolean isLiteral)
         {
             this.value = value;
             this.isLiteral = isLiteral;
