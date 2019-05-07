@@ -1,6 +1,6 @@
-
 package Mijdas.RoadApp.spring.Views;
 
+import Mijdas.RoadApp.spring.Controllers.UserType;
 import Mijdas.RoadApp.spring.Controllers.SessionController;
 import Mijdas.RoadApp.spring.Controllers.NavigationController;
 import com.vaadin.flow.component.Text;
@@ -40,37 +40,35 @@ public class Navbar extends Div
         setNavigation();
     }
 
+    /*******
+     * TODO: add other navigation bar displays
+     */
     public void setNavigation()
     {
         clearAndReset();
         //Home page
         links.get(0).add(new Icon(VaadinIcon.CAR), new Text("Home"));
+
         if(!SessionController.getInstance().isLogin())
         {
             //Login Page
             links.get(1).add(new Icon(VaadinIcon.USER), new Text("Login"));
             //Register Page
             links.get(2).add(new Icon(VaadinIcon.USERS), new Text("Register"));
-            addToNavigation();
         }
-        else if(SessionController.getInstance().isLogin()) //if(SessionController.getInstance().getUserType() == UserType.MOTORIST)
+        else if(SessionController.getInstance().isLogin())
         {
-            links.get(1).add(new Icon(VaadinIcon.GROUP), new Text("Membership"));
-            addToNavigation();
+            if(SessionController.getInstance().getUserType() == UserType.MOTORIST)
+            {
+                links.get(1).add(new Icon(VaadinIcon.GROUP), new Text("Membership"));
+            }
+            else if(SessionController.getInstance().getUserType() == UserType.MECHANIC)
+            {
+
+            }
             add(logOut);
         }
-        /*else if(SessionController.getInstance().getUserType() == UserType.MECHANIC)
-        {
-
-        }*/
-        /*else
-        {
-            /*******
-             * TODO: add other navigation bar displays
-             */
-            //addToNavigation();
-            //add(logOut);
-        //}
+        addToNavigation();
     }
     /*****************************************************
      * Clears components and allows them to be reset
@@ -90,6 +88,11 @@ public class Navbar extends Div
         {
             rl.setClassName("navElement");
             add(rl);
+        }
+
+        if(SessionController.getInstance().isLogin())
+        {
+            add(logOut);
         }
     }
 
