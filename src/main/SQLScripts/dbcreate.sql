@@ -33,15 +33,15 @@ CREATE TABLE MECHANIC
 );
 
 
-#CREATE TABLE SERVICE_REQUEST
-#(
-#	requestNum 		INT NOT NULL AUTO_INCREMENT,
-#	motoristUsername 	VARCHAR (20) NOT NULL,
-#	nearestAddress		VARCHAR(50) NOT NULL,
-#	details			VARCHAR(140) NOT NULL,  /*Tweet length description too small?*/
-#	lat			float(10,6),
-#	long			float(10,6),
-#	
-#	CONSTRAINT pk1_service_requests PRIMARY KEY (requestNum),
-#	CONSTRAINT fk1_service_requests FOREIGN KEY (motoristUsername) REFERENCES MOTORIST(username)  ON UPDATE CASCADE
-#);
+CREATE TABLE SERVICE_REQUEST
+(
+	requestNum 		INT NOT NULL AUTO_INCREMENT,
+	motoristUsername 	VARCHAR (20) NOT NULL,
+	nearestAddress		VARCHAR(50) NOT NULL,
+	details			VARCHAR(140) NOT NULL,  /*Tweet length description too small?*/
+	latitude		float(10,6),
+	longitude		float(10,6),
+	
+	CONSTRAINT pk1_service_requests PRIMARY KEY (requestNum),
+	CONSTRAINT fk1_service_requests FOREIGN KEY (motoristUsername) REFERENCES MOTORIST(username)  ON UPDATE CASCADE
+);
