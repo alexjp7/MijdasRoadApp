@@ -4,6 +4,7 @@ package Mijdas.RoadApp.spring.Views.Requests;
 import Mijdas.RoadApp.spring.Models.RequestModels.RequestService;
 import Mijdas.RoadApp.spring.Models.RequestModels.Requests;
 import Mijdas.RoadApp.spring.Views.MainLayout;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.router.PageTitle;
@@ -24,7 +25,9 @@ public class RequestsView extends Div
        add(grid);
        setSizeFull();
        updateList();
+       grid.addComponentColumn(button -> new Button("Message",clickEvent ->{System.out.println("Message");})).setHeader("Actions");
     }
+    
     public void updateList(){
         grid.setItems(service.findAll());
     }
