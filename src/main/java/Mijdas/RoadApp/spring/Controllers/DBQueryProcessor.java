@@ -373,7 +373,7 @@ public class DBQueryProcessor
             if( !database.open() ) {
                 throw new SQLException("Error writing service request to database");
             } else {
-                fields = new MijdasDB.ServiceRequests[]{MijdasDB.ServiceRequests.USERNAME, MijdasDB.ServiceRequests.ADDRESS, MijdasDB.ServiceRequests.DETAILS};
+                fields = new MijdasDB.Service_Requests[]{MijdasDB.Service_Requests.USERNAME, MijdasDB.Service_Requests.ADDRESS, MijdasDB.Service_Requests.DETAILS};
                 database.writeToStorage(MijdasDB.Tables.SERVICE_REQUESTS, fields, formData[0], formData[1], formData[2]);
                 return true;
             }
