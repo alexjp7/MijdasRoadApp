@@ -71,7 +71,7 @@ public class NavigationController
         }
         else if (SessionController.getInstance().isLogin())
         {
-          links.add(new RouterLink(null, MemberView.class))
+//          links.add(new RouterLink(null, MemberView.class));
         }
         else
         {
