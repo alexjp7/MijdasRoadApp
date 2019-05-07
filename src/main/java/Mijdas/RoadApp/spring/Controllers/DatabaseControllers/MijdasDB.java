@@ -170,7 +170,8 @@ public class MijdasDB
     public enum Procedure
     {
         GET_MOTORIST("getMotorist"),
-        GET_MECHANIC("getMechanic");
+        GET_MECHANIC("getMechanic"),
+        GET_REQUEST("getRequest");
 
         private String value;
         private Procedure(String value)
