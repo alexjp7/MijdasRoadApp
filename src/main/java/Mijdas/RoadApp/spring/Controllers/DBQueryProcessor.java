@@ -4,13 +4,12 @@ package Mijdas.RoadApp.spring.Controllers;
 import Mijdas.RoadApp.spring.Controllers.DatabaseControllers.Insertable;
 import Mijdas.RoadApp.spring.Controllers.DatabaseControllers.MijdasDB;
 import Mijdas.RoadApp.spring.Controllers.DatabaseControllers.SQLDatabase;
+import Mijdas.RoadApp.spring.Models.RequestModels.Requests;
 import Mijdas.RoadApp.spring.Models.UserModels.Mechanic;
 import Mijdas.RoadApp.spring.Models.UserModels.Motorist;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**********************************************************************8
  *
@@ -304,5 +303,35 @@ public class DBQueryProcessor
         }
         catch (SQLException e){e.printStackTrace();}
         return mechanic;
+    }
+    public Requests getRequest(String rNum){
+        Requests request =null;
+        int requestNum=0;
+        String motoristUsername="",details="";
+        float latitude=0,longitude=0;
+
+        ResultSet rs = null;
+        try
+        {
+           if(!database.open()){return null;}
+           else
+           {
+               rs = database.executeProcedure(MijdasDB.Procedure.GET_REQUEST, rNum);
+
+               while(rs.next())
+               {
+                    requestNum  = rs.getInt(1);
+                    motoristUsername = rs.getString(2);
+                    details  = rs.getString(3);
+                    latitude     = rs.getInt(4);
+                    longitude   = rs.getInt(5);
+               }
+                database.close();
+                request = new Requests(requestNum, motoristUsername, details, latitude, longitude);
+           }
+        }
+        catch (SQLException e){e.printStackTrace();}
+        
+        return request;
     }
 }
