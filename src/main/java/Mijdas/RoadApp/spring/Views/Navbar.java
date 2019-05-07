@@ -1,5 +1,6 @@
 package Mijdas.RoadApp.spring.Views;
 
+import Mijdas.RoadApp.spring.Controllers.UserType;
 import Mijdas.RoadApp.spring.Controllers.SessionController;
 import Mijdas.RoadApp.spring.Controllers.NavigationController;
 import com.vaadin.flow.component.Text;
@@ -55,7 +56,6 @@ public class Navbar extends Div
             //Register Page
             links.get(2).add(new Icon(VaadinIcon.USERS), new Text("Register"));
         }
-        //clearAndReset();
         else if(SessionController.getInstance().isLogin())
         {
             //if(SessionController.getInstance().getUserType() == UserType.MOTORIST)
@@ -68,7 +68,7 @@ public class Navbar extends Div
             //else if(SessionController.getInstance().getUserType() == UserType.MECHANIC)
             //{
 
-            //}
+            }
             add(logOut);
         }
         addToNavigation();
@@ -91,6 +91,11 @@ public class Navbar extends Div
         {
             rl.setClassName("navElement");
             add(rl);
+        }
+
+        if(SessionController.getInstance().isLogin())
+        {
+            add(logOut);
         }
     }
 

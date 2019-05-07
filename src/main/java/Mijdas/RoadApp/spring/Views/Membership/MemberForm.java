@@ -65,10 +65,12 @@ class MemberForm extends FormLayout
         add(formLayout);
     }
 
-    public void submitForm()
+    /*public void submitForm()
     {
 //        if(membershipController.submitRegistration(registrationNumber.getValue(), licenseNumber.getValue(), creditCardType.getValue(), creditCardName.getValue(), creditCardNumber.getValue(), creditCardCVV.getValue()));
     }
+        if(membershipController.submitRegistration(registrationNumber.getValue(), licenseNumber.getValue(), creditCardType.getValue(), creditCardName.getValue(), creditCardNumber.getValue(), creditCardCVV.getValue()))
+    }*/
 
     public void clearForm()
     {

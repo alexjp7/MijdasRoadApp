@@ -11,4 +11,8 @@ public class MembershipController
 //    {
 //        //return DBQueryProcessor.getInstance().writeRegistration(registrationNumber, licenseNumber, creditCardType, creditCardName, creditCardNumber, creditCardCVV);
 //    }
+    /*public boolean submitMemberShipPayment(String registrationNumber, String licenseNumber, String creditCardType, String creditCardName, String creditCardNumber, String creditCardCVV)
+    {
+        //return DBQueryProcessor.getInstance().writeRegistration(registrationNumber, licenseNumber, creditCardType, creditCardName, creditCardNumber, creditCardCVV);
+    }*/
 }
