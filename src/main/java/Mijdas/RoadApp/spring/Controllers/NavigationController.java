@@ -6,7 +6,7 @@ import Mijdas.RoadApp.spring.Views.Login.LoginView;
 import Mijdas.RoadApp.spring.Views.Register.RegisterView;
 import Mijdas.RoadApp.spring.Views.Membership.MemberView;
 import Mijdas.RoadApp.spring.Views.Profile.ProfileView;
-
+import Mijdas.RoadApp.spring.Views.Requests.RequestsView;
 import com.vaadin.flow.router.RouterLink;
 import java.util.ArrayList;
 
@@ -80,8 +80,9 @@ public class NavigationController
             }
             else if(SessionController.getInstance().getUserType() == UserType.MECHANIC)
             {
-                links.add(new RouterLink(null, MemberView.class));
                 links.add(new RouterLink(null, ProfileView.class));
+                links.add(new RouterLink(null, RequestsView.class));
+                
 
             }
             //Login links (my profile, check balance, subscription, make a service request etc.

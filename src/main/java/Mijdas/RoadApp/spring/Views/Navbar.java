@@ -68,7 +68,9 @@ public class Navbar extends Div
             else if(SessionController.getInstance().getUserType() == UserType.MECHANIC)
             {
                 //Profile Page
-                links.get(2).add(new Icon(VaadinIcon.COGS), new Text("Profile"));
+                links.get(1).add(new Icon(VaadinIcon.COGS), new Text("Profile"));
+                //View requests
+                links.get(2).add(new Icon(VaadinIcon.COGS), new Text("View Requests"));
             }
             add(logOut);
         }
