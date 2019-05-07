@@ -15,7 +15,7 @@ public class MijdasDB
         USER("USER",userFields),
         MOTORISTS("MOTORIST", motoristFields),
         MECHANICS("MECHANIC",mechanicFields),
-        SERVICEREQUESTS("SERVICEREQUEST",serviceRequestFields),
+        SERVICEREQUESTS("SERVICE_REQUEST",serviceRequestFields),
         TRANSACTIONS("TRANSACTIONS",transactionFields),
         VECHILE("VEHICLE",vehicleFields);
 
