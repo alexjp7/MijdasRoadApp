@@ -5,6 +5,7 @@ import Mijdas.RoadApp.spring.Views.Home.HomeView;
 import Mijdas.RoadApp.spring.Views.Login.LoginView;
 import Mijdas.RoadApp.spring.Views.Register.RegisterView;
 import Mijdas.RoadApp.spring.Views.Membership.MemberView;
+import Mijdas.RoadApp.spring.Views.Service.ServiceView;
 
 import com.vaadin.flow.router.RouterLink;
 import java.util.ArrayList;
@@ -75,6 +76,7 @@ public class NavigationController
             if(SessionController.getInstance().getUserType() == UserType.MOTORIST)
             {
                 links.add(new RouterLink(null, MemberView.class));
+                links.add(new RouterLink(null, ServiceView.class));
             }
             else if(SessionController.getInstance().getUserType() == UserType.MECHANIC)
             {
