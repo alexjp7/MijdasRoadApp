@@ -22,6 +22,12 @@ public class Requests {
         this.longitude=longitude;
     }
 
+    public Requests(int requestNum, String motoristUsername, String details) {
+        this.requestNum = requestNum;
+        this.motoristUsername = motoristUsername;
+        this.details = details;
+    }
+    
     public int getRequestNum() {
         return requestNum;
     }
