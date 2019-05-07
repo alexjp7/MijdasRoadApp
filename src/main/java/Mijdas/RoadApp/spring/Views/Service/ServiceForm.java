@@ -1,6 +1,8 @@
 package Mijdas.RoadApp.spring.Views.Service;
 
+import Mijdas.RoadApp.spring.Controllers.DBQueryProcessor;
 import Mijdas.RoadApp.spring.Controllers.ServiceProcessor;
+import Mijdas.RoadApp.spring.Controllers.SessionController;
 import Mijdas.RoadApp.spring.Views.MainLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
@@ -12,14 +14,16 @@ import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.textfield.TextArea;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.Html;
+import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 /**
  *
  * @author Dyl
  */
 public class ServiceForm extends FormLayout {
 
-    private Html label = new Html("<h1>Create a service request</h1>");
+    private Text label = new Text("Create a service request");
     private TextField username = new TextField("Username");
     private TextField address = new TextField("Address");
     private TextArea details = new TextArea("Details");
@@ -32,6 +36,12 @@ public class ServiceForm extends FormLayout {
     }
     public void setFormLayout() {
         details.setMaxLength(120);
+        
+        try {
+            String user = SessionController.getInstance().getUser().getUsername();
+            username.setValue(user);
+            username.setEnabled(false);
+        } catch(Exception e) { }
         
         VerticalLayout formLayout = new VerticalLayout();
 
