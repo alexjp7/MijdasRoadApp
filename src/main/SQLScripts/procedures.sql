@@ -1,4 +1,5 @@
 
+
 DELIMITER $$
 CREATE FUNCTION checkMotorist(uName VARCHAR(20))returns VARCHAR(20)
 BEGIN

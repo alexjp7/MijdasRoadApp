@@ -19,7 +19,11 @@ CREATE TABLE MOTORIST
 
 	CONSTRAINT fk1_motorists FOREIGN KEY (username) REFERENCES USER(username) ON UPDATE CASCADE ,
 	CONSTRAINT pk1_motorists PRIMARY KEY (username),
+<<<<<<< HEAD
     CONSTRAINT OPTION_TYPE CHECK (STATUS IN ('NONE','CREDIT-CARD','PAYPAL','CASH'))
+=======
+  CONSTRAINT OPTION_TYPE CHECK (paymentOption IN ('NONE','CREDIT-CARD','PAYPAL','CASH'))
+>>>>>>> 6551186cf41ea6812a3e8967df916de638340c57
 );
 
 CREATE TABLE MECHANIC
@@ -32,6 +36,7 @@ CREATE TABLE MECHANIC
 	CONSTRAINT fk1_mechanics FOREIGN KEY (username) REFERENCES USER(username)  ON UPDATE CASCADE
 );
 
+<<<<<<< HEAD
 CREATE TABLE SERVICE_REQUEST
 (
 	requestNum 			INT NOT NULL AUTO_INCREMENT,
@@ -44,3 +49,18 @@ CREATE TABLE SERVICE_REQUEST
 	CONSTRAINT pk1_service_requests PRIMARY KEY (requestNum),
 	CONSTRAINT fk1_service_requests FOREIGN KEY (motoristUsername) REFERENCES MOTORIST(username)  ON UPDATE CASCADE
 );
+=======
+
+#CREATE TABLE SERVICE_REQUEST
+#(
+#	requestNum 		INT NOT NULL AUTO_INCREMENT,
+#	motoristUsername 	VARCHAR (20) NOT NULL,
+#	nearestAddress		VARCHAR(50) NOT NULL,
+#	details			VARCHAR(140) NOT NULL,  /*Tweet length description too small?*/
+#	lat			float(10,6),
+#	long			float(10,6),
+#	
+#	CONSTRAINT pk1_service_requests PRIMARY KEY (requestNum),
+#	CONSTRAINT fk1_service_requests FOREIGN KEY (motoristUsername) REFERENCES MOTORIST(username)  ON UPDATE CASCADE
+#);
+>>>>>>> 6551186cf41ea6812a3e8967df916de638340c57
