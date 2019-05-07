@@ -27,7 +27,6 @@ public class Mechanic extends User
         this.quality = quality; // upon instatiation, quality of stars may not be set
         this.licenseNumber = licenseNumber;
         init();
-
     }
 
     private void init()
@@ -84,5 +83,5 @@ public class Mechanic extends User
     public String toString()
     {
         return super.toString() + "Mechanic{" + "quality=" + quality + ", licenseNumber=" + licenseNumber;
-    }  
+    }
 }

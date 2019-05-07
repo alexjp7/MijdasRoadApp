@@ -110,6 +110,7 @@ public class Navbar extends Div
         if(SessionController.getInstance().isLogin())
         {
             SessionController.getInstance().logOut();
+            getUI().ifPresent(ui-> ui.getPage().executeJavaScript("window.location.href = '' "));
         }
     }
 }

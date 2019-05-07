@@ -1,10 +1,17 @@
 package Mijdas.RoadApp.spring.Controllers;
 
+import Mijdas.RoadApp.spring.Models.UserModels.Membership;
+import Mijdas.RoadApp.spring.Models.UserModels.Vehicle;
+
 public class MembershipController
 {
+    //private Membership membership;
+    //private Vehicle vehicle;
+
     public MembershipController()
     {
-
+        //membership = new Membership();
+        //vehicle = new Vehicle();
     }
 
     // Finish this off soon so that it goes into a database.
@@ -12,4 +19,14 @@ public class MembershipController
     {
         return DBQueryProcessor.getInstance().writeRegistration(registrationNumber, licenseNumber, manufacturer, model, color, creditCardType, creditCardName, creditCardNumber, creditCardCVV);
     }*/
+
+    public void membershipForm(String registrationNumber, String licenseNumber, String creditCardType, String creditCardName, String creditCardNumber, String creditCardCVV)
+    {
+        //membership.Membership(registrationNumber, licenseNumber, creditCardType, creditCardName, creditCardNumber, creditCardCVV);
+    }
+
+    public void vehicleForm(String licenseNumber, String manufacturer, String model, String color)
+    {
+        //vehicle.Vehicle(licenseNumber, manufacturer, model, color);
+    }
 }
