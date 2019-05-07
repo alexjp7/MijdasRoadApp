@@ -37,7 +37,6 @@ public class ServiceForm extends FormLayout {
 
         //Component ordering
         formLayout.add(label, username, address, details, submit);
-        formLayout.set
         add(formLayout);
     }
     
