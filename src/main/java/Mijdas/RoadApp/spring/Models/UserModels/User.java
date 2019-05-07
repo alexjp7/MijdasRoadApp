@@ -1,7 +1,7 @@
 
 package Mijdas.RoadApp.spring.Models.UserModels;
 
-public class User
+public abstract class User
 {
     protected String username;
     protected String firstName;
@@ -11,6 +11,7 @@ public class User
     public User(String username, String firstName, String lastName, String email)
     {
         this.username = username;
+        System.out.println(this.username);
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -36,6 +37,8 @@ public class User
     {
         this.email = email;
     }
+    
+    public abstract void setLicenseNum(int licenseNum);
 
        /*********************GETTERS*********************/
     public String getUsername()
@@ -57,6 +60,9 @@ public class User
     {
         return email;
     }
+    
+    public abstract Integer getLicenseNum();
+    
 
     @Override
     public String toString()

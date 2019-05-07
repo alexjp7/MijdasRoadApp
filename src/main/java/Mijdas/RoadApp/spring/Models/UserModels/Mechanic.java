@@ -49,7 +49,9 @@ public class Mechanic extends User
     {
         this.reviews = rList;
     }
-    public void setLicenseNumber(int licenseNumber)
+    
+    @Override
+    public void setLicenseNum(int licenseNumber)
     {
         this.licenseNumber = licenseNumber;
     }
@@ -75,7 +77,8 @@ public class Mechanic extends User
         return quality;
     }
 
-    public Integer getLicenseNumber()
+    @Override
+    public Integer getLicenseNum()
     {
         return licenseNumber;
     }

@@ -21,6 +21,7 @@ public class Motorist extends User
     {
         super(username,firstName,lastName,email);
         this.licenseNum = licenseNum;
+//        System.out.println(this.username);
         membership = null; 
     }
     
@@ -31,6 +32,7 @@ public class Motorist extends User
         membership = new Membership(membership);
     }
     /******************SETTERS***********************/
+    @Override
     public void setLicenseNum(int licenseNum)
     {
         this.licenseNum = licenseNum;
@@ -42,6 +44,7 @@ public class Motorist extends User
     }
 
     /*********************GETTERS*********************/
+    @Override
     public Integer getLicenseNum()
     {
         return licenseNum;
