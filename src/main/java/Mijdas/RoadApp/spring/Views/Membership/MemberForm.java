@@ -18,6 +18,9 @@ class MemberForm extends FormLayout
 
     private TextField registrationNumber = new TextField("Registration Number");
     private TextField licenseNumber = new TextField("License Number");
+    private TextField manufacturer = new TextField("Manufacturer");
+    private TextField model = new TextField("Model");
+    private TextField color = new TextField("Color");
     private Select<String> creditCardType = new Select<>("VISA","MASTERCARD");
     private TextField creditCardName = new TextField("Name On Card");
     private TextField creditCardNumber = new TextField("Card Number");
@@ -28,7 +31,6 @@ class MemberForm extends FormLayout
     public MemberForm()
     {
         membershipController = new MembershipController();
-
         setFieldProperties();
         setEventListeners();
         setFormLayout();
@@ -36,6 +38,21 @@ class MemberForm extends FormLayout
 
     private void setFieldProperties()
     {
+        registrationNumber.setPlaceholder("xxxxxx");
+        licenseNumber.setPlaceholder("xxxxxxxx");
+        manufacturer.setPlaceholder("Subaru");
+        model.setPlaceholder("2002 WRX Impreza");
+        color.setPlaceholder("Subaru Blue");
+        creditCardType.setLabel("Card Type");
+        creditCardType.setPlaceholder("VISA");
+        creditCardName.setSizeFull();
+        creditCardName.setPlaceholder("John Smith");
+        creditCardNumber.setSizeFull();
+        creditCardNumber.setPlaceholder("xxxx xxxx xxxx xxxx");
+        creditCardCVV.setPlaceholder("xxx");
+        submitPayment.setId("formButton");
+        clear.setId("formButton");
+
         registrationNumber.setRequired(true);
         licenseNumber.setRequired(true);
         creditCardName.setRequired(true);
@@ -45,32 +62,41 @@ class MemberForm extends FormLayout
 
     private void setEventListeners()
     {
-
-        //submitPayment.setEnabled(false);
+        submitPayment.addClickListener(e->submitForm());
+        clear.addClickListener(e->clearForm());
     }
 
     private void setFormLayout()
     {
         VerticalLayout formLayout = new VerticalLayout();
         HorizontalLayout layerOne = new HorizontalLayout(registrationNumber, licenseNumber);
-        HorizontalLayout layerTwo = new HorizontalLayout(creditCardName);
-        HorizontalLayout layerThree = new HorizontalLayout(creditCardNumber);
-        HorizontalLayout layerFour = new HorizontalLayout(creditCardCVV, creditCardType);
+        HorizontalLayout layerTwo = new HorizontalLayout(manufacturer);
+        HorizontalLayout layerThree = new HorizontalLayout(model);
+        HorizontalLayout layerFour = new HorizontalLayout(color);
+        HorizontalLayout layerFive = new HorizontalLayout(creditCardName);
+        HorizontalLayout layerSix = new HorizontalLayout(creditCardNumber);
+        HorizontalLayout layerSeven = new HorizontalLayout(creditCardCVV, creditCardType);
         HorizontalLayout buttonGroup = new HorizontalLayout(submitPayment, clear);
 
         buttonGroup.setJustifyContentMode(FlexComponent.JustifyContentMode.START);
         buttonGroup.setWidthFull();
 
-        formLayout.add(layerOne, layerTwo, layerThree, layerFour, buttonGroup);
+        formLayout.add(layerOne, layerTwo, layerThree, layerFour, layerFive, layerSix, layerSeven, buttonGroup);
         add(formLayout);
     }
 
-    /*public void submitForm()
+    public void submitForm()
     {
-//        if(membershipController.submitRegistration(registrationNumber.getValue(), licenseNumber.getValue(), creditCardType.getValue(), creditCardName.getValue(), creditCardNumber.getValue(), creditCardCVV.getValue()));
+        /*if(membershipController.submitMemberShipPayment(registrationNumber.getValue(), licenseNumber.getValue(), manufacturer.getValue(), model.getValue(), color.getValue(), creditCardType.getValue(), creditCardName.getValue(), creditCardNumber.getValue(), creditCardCVV.getValue()))
+        {
+            getUI().ifPresent(ui-> ui.getPage().executeJavaScript("window.location.href = '' "));
+        }
+        else
+        {
+            MainLayout.displayInformationPrompt("Fields are empty!");
+        }*/
+        getUI().ifPresent(ui-> ui.getPage().executeJavaScript("window.location.href = '' "));
     }
-        if(membershipController.submitRegistration(registrationNumber.getValue(), licenseNumber.getValue(), creditCardType.getValue(), creditCardName.getValue(), creditCardNumber.getValue(), creditCardCVV.getValue()))
-    }*/
 
     public void clearForm()
     {
