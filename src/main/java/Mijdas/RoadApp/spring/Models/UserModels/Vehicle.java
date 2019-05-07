@@ -5,14 +5,14 @@ package Mijdas.RoadApp.spring.Models.UserModels;
 public class Vehicle
 {
     private String registration;
-    private String manufacterer;
+    private String manufacturer;
     private String model;
     private String color;
 
-    public Vehicle(String registration, String manufacterer, String model, String color)
+    public Vehicle(String registration, String manufacturer, String model, String color)
     {
         this.registration = registration;
-        this.manufacterer = manufacterer;
+        this.manufacturer = manufacturer;
         this.model = model;
         this.color = color;
     }
@@ -25,7 +25,7 @@ public class Vehicle
 
     public void setManufacterer(String manufacterer)
     {
-        this.manufacterer = manufacterer;
+        this.manufacturer = manufacturer;
     }
 
     public void setModel(String model)
@@ -45,7 +45,7 @@ public class Vehicle
 
     public String getManufacterer()
     {
-        return manufacterer;
+        return manufacturer;
     }
 
     public String getModel()
@@ -56,5 +56,5 @@ public class Vehicle
     public String getColor()
     {
         return color;
-    }  
+    }
 }
