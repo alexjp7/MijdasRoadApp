@@ -60,7 +60,10 @@ public class Navbar extends Div
         {
             //if(SessionController.getInstance().getUserType() == UserType.MOTORIST)
             //{
+                //Membership Page
                 links.get(1).add(new Icon(VaadinIcon.GROUP), new Text("Membership"));
+                //Profile Page
+                links.get(2).add(new Icon(VaadinIcon.COGS), new Text("Profile"));
             //}
             //else if(SessionController.getInstance().getUserType() == UserType.MECHANIC)
             //{

@@ -1,0 +1,81 @@
+package Mijdas.RoadApp.spring.Views.Profile;
+
+import Mijdas.RoadApp.spring.Controllers.ProfileController;
+import Mijdas.RoadApp.spring.Views.MainLayout;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.StyleSheet;
+import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.select.Select;
+import com.vaadin.flow.component.textfield.TextField;
+
+//basic CSS form for now
+@StyleSheet("frontend://styles/RegisterForm.css")
+        
+class ProfileForm extends FormLayout
+{
+    private ProfileController profileController;
+    
+    //Used Fields
+    private TextField usernameText = new TextField("Username");
+    private TextField firstNameText = new TextField("First Name");
+    private TextField lastNameText = new TextField("Last Name");
+    private TextField emailText = new TextField("Email");
+    private TextField licenseText = new TextField("License Number");
+    
+    //Mechanic Fields
+//    private TextField qualityText = new TextField("Quality Rating");
+    
+    //Motorist Fields
+//    private TextField membershipStatusText = new TextField("Membership Status");
+    
+    //Buttons
+    private Button saveButton = new Button("Save");
+//    private Button revertButton = new Button ("Revert");
+    
+    
+    public ProfileForm()
+    {
+        profileController = new ProfileController();
+
+        setFieldProperties();
+        setFormLayout();
+    }
+    
+    private void setFormLayout()
+    {
+        VerticalLayout formLayout = new VerticalLayout();
+        HorizontalLayout rowOne = new HorizontalLayout(usernameText, licenseText);
+        HorizontalLayout rowTwo = new HorizontalLayout(firstNameText, lastNameText);
+        HorizontalLayout rowThree = new HorizontalLayout(emailText);
+        HorizontalLayout buttonRow = new HorizontalLayout(saveButton);
+
+        buttonRow.setJustifyContentMode(FlexComponent.JustifyContentMode.START);
+        buttonRow.setWidthFull();
+
+        //Component ordering
+        formLayout.add(rowOne, rowTwo, rowThree, buttonRow);
+        add(formLayout);
+    }
+    
+
+    public void submitForm()
+    {
+
+    }
+
+    private void setFieldProperties()
+    {
+//        usernameText.setRequired(true);
+        firstNameText.setRequired(true);
+        lastNameText.setRequired(true);
+        emailText.setRequired(true);
+        licenseText.setRequired(true);
+        
+        usernameText.setEnabled(false);
+//        usernameText.isReadOnly();
+    }
+
+}
