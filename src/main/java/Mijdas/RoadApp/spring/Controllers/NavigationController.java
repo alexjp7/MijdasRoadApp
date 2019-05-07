@@ -78,7 +78,7 @@ public class NavigationController
             }
             else if(SessionController.getInstance().getUserType() == UserType.MECHANIC)
             {
-                links.add(new RouterLink(null, MemberView.class));
+                
             }
             //Login links (my profile, check balance, subscription, make a service request etc.
             //links.add(new RouterLink(null, HomeView.class));

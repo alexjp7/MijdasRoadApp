@@ -1,5 +1,6 @@
 package Mijdas.RoadApp.spring.Views;
 
+import Mijdas.RoadApp.spring.Controllers.UserType;
 import Mijdas.RoadApp.spring.Controllers.SessionController;
 import Mijdas.RoadApp.spring.Controllers.NavigationController;
 import com.vaadin.flow.component.Text;
@@ -58,14 +59,14 @@ public class Navbar extends Div
         //clearAndReset();
         else if(SessionController.getInstance().isLogin())
         {
-            //if(SessionController.getInstance().getUserType() == UserType.MOTORIST)
-            //{
+            if(SessionController.getInstance().getUserType() == UserType.MOTORIST)
+            {
                 links.get(1).add(new Icon(VaadinIcon.GROUP), new Text("Membership"));
-            //}
-            //else if(SessionController.getInstance().getUserType() == UserType.MECHANIC)
-            //{
+            }
+            else if(SessionController.getInstance().getUserType() == UserType.MECHANIC)
+            {
 
-            //}
+            }
             add(logOut);
         }
         addToNavigation();
