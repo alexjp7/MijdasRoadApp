@@ -4,6 +4,7 @@ package Mijdas.RoadApp.spring.Controllers;
 import Mijdas.RoadApp.spring.Views.Home.HomeView;
 import Mijdas.RoadApp.spring.Views.Login.LoginView;
 import Mijdas.RoadApp.spring.Views.Register.RegisterView;
+import Mijdas.RoadApp.spring.Views.Membership.MemberView;
 
 import com.vaadin.flow.router.RouterLink;
 import java.util.ArrayList;
@@ -27,8 +28,7 @@ public class NavigationController
             {
                 //Home, Login and Registration views are pre-loaded into navbar
                 NavigationController navController = new  NavigationController();
-                navController.links   = new ArrayList<>();
-
+                navController.links = new ArrayList<>();
                 return navController;
             }
            return INSTANCE;
@@ -63,26 +63,23 @@ public class NavigationController
 
         ************************************************/
         //Check to see if logincontroller has set login value
+        links.add(new RouterLink(null, HomeView.class));
+
         if(!SessionController.getInstance().isLogin())
         {
-            links.add(new RouterLink(null, HomeView.class));
             links.add(new RouterLink(null, LoginView.class));
             links.add(new RouterLink(null, RegisterView.class));
         }
-        /*else if (SessionController.getInstance().isLogin() && SessionController.getInstance().userIsMotorist )
+        else if(SessionController.getInstance().getUserType() == UserType.MOTORIST)
         {
-<<<<<<< HEAD
-            links.add(new RouterLink(null, MemberView.class))
-        }*/
-=======
-//          links.add(new RouterLink(null, MemberView.class));
+            links.add(new RouterLink(null, MemberView.class));
         }
->>>>>>> cf521fc92a30fe210fa816fb1d24b458c63ca265
-        else
+        else if(SessionController.getInstance().getUserType() == UserType.MECHANIC)
         {
+
+        }
             //Login links (my profile, check balance, subscription, make a service request etc.
-            links.add(new RouterLink(null, HomeView.class));
-        }
+            //links.add(new RouterLink(null, HomeView.class));
         return links;
     }
 

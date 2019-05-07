@@ -53,16 +53,24 @@ public class Navbar extends Div
             links.get(2).add(new Icon(VaadinIcon.USERS), new Text("Register"));
             addToNavigation();
         }
-        else
+        else if(SessionController.getInstance().isLogin()) //if(SessionController.getInstance().getUserType() == UserType.MOTORIST)
+        {
+            links.get(1).add(new Icon(VaadinIcon.GROUP), new Text("Membership"));
+            addToNavigation();
+            add(logOut);
+        }
+        /*else if(SessionController.getInstance().getUserType() == UserType.MECHANIC)
+        {
+
+        }*/
+        /*else
         {
             /*******
              * TODO: add other navigation bar displays
              */
-             //the code below maybe useful idk?
-            //links.get(3).add(new Icon(VaadinIcon.GROUP), new Text("Membership"));
-            addToNavigation();
-            add(logOut);
-        }
+            //addToNavigation();
+            //add(logOut);
+        //}
     }
     /*****************************************************
      * Clears components and allows them to be reset

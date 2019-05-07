@@ -7,7 +7,7 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@Route(value="membership", layout=MainLayout.class)
+@Route(value = "membership", layout = MainLayout.class)
 @PageTitle("Membership")
 
 public class MemberView extends Div
