@@ -44,6 +44,7 @@ class ProfileForm extends FormLayout
         setFieldProperties();
         setFormLayout();
         fillFieldProperties();
+        setEventListeners();
     }
     
     private void setFormLayout()
@@ -65,19 +66,26 @@ class ProfileForm extends FormLayout
 
     public void submitForm()
     {
-
+        //args = (username, firstname, lastname, email, lnumber)
+        profileController.saveProfileUpdates(usernameText.getValue(), 
+                firstNameText.getValue(), lastNameText.getValue(), 
+                emailText.getValue(), licenseText.getValue());
+        
+        loggedInUser.setFirstName(firstNameText.getValue());
+        loggedInUser.setLastName(lastNameText.getValue());
+        loggedInUser.setEmail(emailText.getValue());
+        loggedInUser.setLicenseNum(Integer.parseInt(licenseText.getValue()));
+        
     }
 
     private void setFieldProperties()
     {
-//        usernameText.setRequired(true);
         firstNameText.setRequired(true);
         lastNameText.setRequired(true);
         emailText.setRequired(true);
         licenseText.setRequired(true);
         
         usernameText.setEnabled(false);
-//        usernameText.isReadOnly();
     }
     
     private void fillFieldProperties()
@@ -87,6 +95,12 @@ class ProfileForm extends FormLayout
         lastNameText.setValue(loggedInUser.getLastName());
         emailText.setValue(loggedInUser.getEmail());
         licenseText.setValue(loggedInUser.getLicenseNum().toString());
+    }
+    
+    private void setEventListeners()
+    {
+        saveButton.addClickListener(e->submitForm());
+        
     }
 
 }

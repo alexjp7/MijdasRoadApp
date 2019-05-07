@@ -176,6 +176,37 @@ public class DBQueryProcessor
         catch(SQLException e){e.printStackTrace();}
         return false;
     }
+    
+    //args = (username, firstname, lastname, email, lnumber)
+    public boolean writeProfileUpdate(String username, String fName, String lName, String email, String lnum)
+    {   //Insertable interface to enable a polymorphic behaviour for the table enums
+        String profileWhereClause = "username = '" + username + "';";
+        try
+        {
+            if(!database.open()){return false;}
+            else
+            {
+                //Update User information to User SQL table.
+                database.updateData(MijdasDB.Tables.USER, profileWhereClause, MijdasDB.User.FNAME, fName);
+                database.updateData(MijdasDB.Tables.USER, profileWhereClause, MijdasDB.User.LNAME, lName);
+                database.updateData(MijdasDB.Tables.USER, profileWhereClause, MijdasDB.User.EMAIL, email);
+                
+                if(SessionController.getInstance().getUserType() == UserType.MECHANIC){
+                    database.updateData(MijdasDB.Tables.MECHANICS, profileWhereClause, MijdasDB.Mechanic.LICENSE, lnum);
+                }
+                else if(SessionController.getInstance().getUserType() == UserType.MOTORIST){
+                    database.updateData(MijdasDB.Tables.MOTORISTS, profileWhereClause, MijdasDB.Motorist.LICENSE, lnum);
+                }
+
+                //Close database session
+                database.close();
+                return true;
+            }
+        }
+        catch(SQLException e){e.printStackTrace();}
+        return false;
+    }
+    
 
     /*******************************************************************
      * @param username - the username entered into login screen
