@@ -1,14 +1,14 @@
 package Mijdas.RoadApp.spring.Views.Profile;
 
 import Mijdas.RoadApp.spring.Controllers.ProfileController;
-import Mijdas.RoadApp.spring.Views.MainLayout;
+import Mijdas.RoadApp.spring.Controllers.SessionController;
+import Mijdas.RoadApp.spring.Models.UserModels.User;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
 
 //basic CSS form for now
@@ -17,6 +17,7 @@ import com.vaadin.flow.component.textfield.TextField;
 class ProfileForm extends FormLayout
 {
     private ProfileController profileController;
+    private User loggedInUser = SessionController.getInstance().getUser();
     
     //Used Fields
     private TextField usernameText = new TextField("Username");
@@ -42,6 +43,7 @@ class ProfileForm extends FormLayout
 
         setFieldProperties();
         setFormLayout();
+        fillFieldProperties();
     }
     
     private void setFormLayout()
@@ -76,6 +78,15 @@ class ProfileForm extends FormLayout
         
         usernameText.setEnabled(false);
 //        usernameText.isReadOnly();
+    }
+    
+    private void fillFieldProperties()
+    {
+        usernameText.setValue(loggedInUser.getUsername());
+        firstNameText.setValue(loggedInUser.getFirstName());
+        lastNameText.setValue(loggedInUser.getLastName());
+        emailText.setValue(loggedInUser.getEmail());
+        licenseText.setValue(loggedInUser.getLicenseNum().toString());
     }
 
 }

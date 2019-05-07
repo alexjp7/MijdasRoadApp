@@ -257,9 +257,9 @@ public class DBQueryProcessor
                while(rs.next())
                {
                     username  = rs.getString(1);
-                    firstName = rs.getString(2);
-                    lastName  = rs.getString(3);
-                    email     = rs.getString(4);
+                    firstName = rs.getString(3);
+                    lastName  = rs.getString(4);
+                    email     = rs.getString(5);
                     quality   = rs.getInt(7);
                     lNum      = rs.getInt(8);
                }
@@ -293,9 +293,9 @@ public class DBQueryProcessor
                while(rs.next())
                {
                     username  = rs.getString(1);
-                    firstName = rs.getString(2);
-                    lastName  = rs.getString(3);
-                    email     = rs.getString(4);
+                    firstName = rs.getString(3);
+                    lastName  = rs.getString(4);
+                    email     = rs.getString(5);
                     lNum   = rs.getInt(9);
                }
                 database.close();
