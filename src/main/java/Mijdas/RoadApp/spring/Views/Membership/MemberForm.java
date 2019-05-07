@@ -32,10 +32,18 @@ class MemberForm extends FormLayout
         setFieldProperties();
         setEventListeners();
         setFormLayout();
+        formFilled();
     }
 
     private void setFieldProperties()
     {
+        creditCardType.setLabel("Card Type");
+        creditCardType.setPlaceholder("VISA");
+        creditCardName.setSizeFull();
+        creditCardNumber.setSizeFull();
+        submitPayment.setId("formButton");
+        clear.setId("formButton");
+
         registrationNumber.setRequired(true);
         licenseNumber.setRequired(true);
         creditCardName.setRequired(true);
@@ -45,8 +53,8 @@ class MemberForm extends FormLayout
 
     private void setEventListeners()
     {
-
-        //submitPayment.setEnabled(false);
+        submitPayment.addClickListener(e->submitForm());
+        clear.addClickListener(e->clearForm());
     }
 
     private void setFormLayout()
@@ -65,10 +73,26 @@ class MemberForm extends FormLayout
         add(formLayout);
     }
 
-    /*public void submitForm()
+    private void formFilled()
     {
-        if(membershipController.submitRegistration(registrationNumber.getValue(), licenseNumber.getValue(), creditCardType.getValue(), creditCardName.getValue(), creditCardNumber.getValue(), creditCardCVV.getValue()))
-    }*/
+        if(registrationNumber.isEmpty() && licenseNumber.isEmpty() && creditCardType.isEmpty() && creditCardName.isEmpty() && creditCardNumber.isEmpty() && creditCardCVV.isEmpty())
+        {
+            submitPayment.setEnabled(true);
+        }
+    }
+
+    public void submitForm()
+    {
+        /*if(membershipController.submitMemberShipPayment(registrationNumber.getValue(), licenseNumber.getValue(), creditCardType.getValue(), creditCardName.getValue(), creditCardNumber.getValue(), creditCardCVV.getValue()))
+        {
+            getUI().ifPresent(ui-> ui.getPage().executeJavaScript("window.location.href = '' "));
+        }
+        else
+        {
+            MainLayout.displayInformationPrompt("Fields are empty!");
+        }*/
+        getUI().ifPresent(ui-> ui.getPage().executeJavaScript("window.location.href = '' "));
+    }
 
     public void clearForm()
     {
