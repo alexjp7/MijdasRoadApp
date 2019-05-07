@@ -58,16 +58,17 @@ public class Navbar extends Div
         }
         else if(SessionController.getInstance().isLogin())
         {
-            //if(SessionController.getInstance().getUserType() == UserType.MOTORIST)
-            //{
+            if(SessionController.getInstance().getUserType() == UserType.MOTORIST)
+            {
                 //Membership Page
                 links.get(1).add(new Icon(VaadinIcon.GROUP), new Text("Membership"));
                 //Profile Page
                 links.get(2).add(new Icon(VaadinIcon.COGS), new Text("Profile"));
-            //}
-            //else if(SessionController.getInstance().getUserType() == UserType.MECHANIC)
-            //{
-
+            }
+            else if(SessionController.getInstance().getUserType() == UserType.MECHANIC)
+            {
+                //Profile Page
+                links.get(2).add(new Icon(VaadinIcon.COGS), new Text("Profile"));
             }
             add(logOut);
         }
