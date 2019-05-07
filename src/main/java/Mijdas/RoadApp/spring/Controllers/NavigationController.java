@@ -5,8 +5,13 @@ import Mijdas.RoadApp.spring.Views.Home.HomeView;
 import Mijdas.RoadApp.spring.Views.Login.LoginView;
 import Mijdas.RoadApp.spring.Views.Register.RegisterView;
 import Mijdas.RoadApp.spring.Views.Membership.MemberView;
+<<<<<<< HEAD
 import Mijdas.RoadApp.spring.Views.Service.ServiceView;
 
+=======
+import Mijdas.RoadApp.spring.Views.Profile.ProfileView;
+import Mijdas.RoadApp.spring.Views.Requests.RequestsView;
+>>>>>>> origin/master
 import com.vaadin.flow.router.RouterLink;
 import java.util.ArrayList;
 
@@ -28,7 +33,7 @@ public class NavigationController
             if(INSTANCE == null)
             {
                 //Home, Login and Registration views are pre-loaded into navbar
-                NavigationController navController = new  NavigationController();
+                NavigationController navController = new NavigationController();
                 navController.links = new ArrayList<>();
                 return navController;
             }
@@ -76,11 +81,18 @@ public class NavigationController
             if(SessionController.getInstance().getUserType() == UserType.MOTORIST)
             {
                 links.add(new RouterLink(null, MemberView.class));
+<<<<<<< HEAD
                 links.add(new RouterLink(null, ServiceView.class));
+=======
+                links.add(new RouterLink(null, ProfileView.class));
+>>>>>>> origin/master
             }
             else if(SessionController.getInstance().getUserType() == UserType.MECHANIC)
             {
+                links.add(new RouterLink(null, ProfileView.class));
+                links.add(new RouterLink(null, RequestsView.class));
                 
+
             }
             //Login links (my profile, check balance, subscription, make a service request etc.
             //links.add(new RouterLink(null, HomeView.class));

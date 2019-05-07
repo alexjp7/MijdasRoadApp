@@ -13,6 +13,11 @@ and open the template in the editor.
    display:-webkit-inline-box;
 }
 
+#profileForm
+{
+   display:-webkit-inline-box;
+}
+
 #passwordMatch
 {
 
