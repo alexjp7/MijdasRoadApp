@@ -71,8 +71,13 @@ public class NavigationController
         }
         /*else if (SessionController.getInstance().isLogin() && SessionController.getInstance().userIsMotorist )
         {
+<<<<<<< HEAD
             links.add(new RouterLink(null, MemberView.class))
         }*/
+=======
+//          links.add(new RouterLink(null, MemberView.class));
+        }
+>>>>>>> cf521fc92a30fe210fa816fb1d24b458c63ca265
         else
         {
             //Login links (my profile, check balance, subscription, make a service request etc.

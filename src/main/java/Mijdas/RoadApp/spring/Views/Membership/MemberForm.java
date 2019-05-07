@@ -11,7 +11,11 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
 
+<<<<<<< HEAD
 @StyleSheet("frontend://styles/MembershipForm.css")
+=======
+@StyleSheet("frontend://styles/registerForm.css")
+>>>>>>> cf521fc92a30fe210fa816fb1d24b458c63ca265
 class MemberForm extends FormLayout
 {
     private TextField registrationNumber = new TextField("Registration Number");
@@ -32,7 +36,7 @@ class MemberForm extends FormLayout
     {
         registrationNumber.setRequired(true);
         licenseNumber.setRequired(true);
-        creditCardType.setRequired(true);
+        //creditCardType.setRequired(true);
         creditCardName.setRequired(true);
         creditCardNumber.setRequired(true);
         creditCardCVV.setRequired(true);
