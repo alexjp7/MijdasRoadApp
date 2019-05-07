@@ -56,7 +56,6 @@ public class Navbar extends Div
             //Register Page
             links.get(2).add(new Icon(VaadinIcon.USERS), new Text("Register"));
         }
-        //clearAndReset();
         else if(SessionController.getInstance().isLogin())
         {
             if(SessionController.getInstance().getUserType() == UserType.MOTORIST)
@@ -89,6 +88,11 @@ public class Navbar extends Div
         {
             rl.setClassName("navElement");
             add(rl);
+        }
+
+        if(SessionController.getInstance().isLogin())
+        {
+            add(logOut);
         }
     }
 

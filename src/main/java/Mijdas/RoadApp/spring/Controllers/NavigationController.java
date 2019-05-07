@@ -27,7 +27,7 @@ public class NavigationController
             if(INSTANCE == null)
             {
                 //Home, Login and Registration views are pre-loaded into navbar
-                NavigationController navController = new  NavigationController();
+                NavigationController navController = new NavigationController();
                 navController.links = new ArrayList<>();
                 return navController;
             }
@@ -78,7 +78,7 @@ public class NavigationController
             }
             else if(SessionController.getInstance().getUserType() == UserType.MECHANIC)
             {
-                
+
             }
             //Login links (my profile, check balance, subscription, make a service request etc.
             //links.add(new RouterLink(null, HomeView.class));
