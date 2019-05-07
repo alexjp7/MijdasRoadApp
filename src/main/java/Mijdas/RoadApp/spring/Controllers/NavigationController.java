@@ -70,16 +70,19 @@ public class NavigationController
             links.add(new RouterLink(null, LoginView.class));
             links.add(new RouterLink(null, RegisterView.class));
         }
-        else if(SessionController.getInstance().getUserType() == UserType.MOTORIST)
+        else if(SessionController.getInstance().isLogin())
         {
-            links.add(new RouterLink(null, MemberView.class));
-        }
-        else if(SessionController.getInstance().getUserType() == UserType.MECHANIC)
-        {
-
-        }
+            if(SessionController.getInstance().getUserType() == UserType.MOTORIST)
+            {
+                links.add(new RouterLink(null, MemberView.class));
+            }
+            else if(SessionController.getInstance().getUserType() == UserType.MECHANIC)
+            {
+                links.add(new RouterLink(null, MemberView.class));
+            }
             //Login links (my profile, check balance, subscription, make a service request etc.
             //links.add(new RouterLink(null, HomeView.class));
+        }
         return links;
     }
 

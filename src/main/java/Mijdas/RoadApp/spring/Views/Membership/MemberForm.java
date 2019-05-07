@@ -14,6 +14,8 @@ import com.vaadin.flow.component.textfield.TextField;
 @StyleSheet("frontend://styles/MembershipForm.css")
 class MemberForm extends FormLayout
 {
+    private MembershipController membershipController;
+
     private TextField registrationNumber = new TextField("Registration Number");
     private TextField licenseNumber = new TextField("License Number");
     private Select<String> creditCardType = new Select<>("VISA","MASTERCARD");
@@ -23,9 +25,13 @@ class MemberForm extends FormLayout
     private Button submitPayment = new Button("Submit Payment");
     private Button clear = new Button ("Clear");
 
-    public void submitForm()
+    public MemberForm
     {
+        membershipController = new MembershipController();
 
+        setFieldProperties()
+        setEventListeners()
+        setFormLayout()
     }
 
     private void setFieldProperties()
@@ -35,6 +41,33 @@ class MemberForm extends FormLayout
         creditCardName.setRequired(true);
         creditCardNumber.setRequired(true);
         creditCardCVV.setRequired(true);
+    }
+
+    private void setEventListeners()
+    {
+
+        //submitPayment.setEnabled(false);
+    }
+
+    private void setFormLayout()
+    {
+        VerticalLayout formLayout = new VerticalLayout();
+        HorizontalLayout layerOne = new HorizontalLayout(registrationNumber, licenseNumber);
+        HorizontalLayout layerTwo = new HorizontalLayout(creditCardName);
+        HorizontalLayout layerThree = new HorizontalLayout(creditCardNumber);
+        HorizontalLayout layerFour = new HorizontalLayout(creditCardCVV, creditCardType);
+        HorizontalLayout buttonGroup = new HorizontalLayout(submitPayment, clear);
+
+        buttonGroup.setJustifyContentMode(FlexComponent.JustifyContentMode.START);
+        buttonGroup.setWidthFull();
+
+        formLayout.add(layerOne, layerTwo, layerThree, layerFour, buttonGroup);
+        add(formLayout);
+    }
+
+    public void submitForm()
+    {
+        if(membershipController.submitRegistration(registrationNumber.getValue(), licenseNumber.getValue(), creditCardType.getValue(), creditCardName.getValue(), creditCardNumber.getValue(), creditCardCVV.getValue()))
     }
 
     public void clearForm()
