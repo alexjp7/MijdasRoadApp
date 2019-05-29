@@ -39,8 +39,7 @@ CREATE TABLE SERVICE_REQUEST
 	motoristUsername 	VARCHAR (20) NOT NULL,
 	nearestAddress		VARCHAR(50) NOT NULL,
 	details				VARCHAR(140) NOT NULL,  /*Tweet length description too small?*/
-	latitude			float(10,6),
-	longitude			float(10,6),
+	isComplete			BOOLEAN NOT NULL,
 
 	CONSTRAINT pk1_service_requests PRIMARY KEY (requestNum),
 	CONSTRAINT fk1_service_requests FOREIGN KEY (motoristUsername) REFERENCES MOTORIST(username)  ON UPDATE CASCADE
