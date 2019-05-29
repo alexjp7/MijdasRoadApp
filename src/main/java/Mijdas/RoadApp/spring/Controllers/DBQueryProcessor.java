@@ -339,7 +339,7 @@ public class DBQueryProcessor
         Requests request =null;
         int requestNum=0;
         String nearestAddress="",motoristUsername="",details="";
-        float latitude=0,longitude=0;
+        boolean isComplete=false;
 
         ResultSet rs = null;
         try
@@ -355,18 +355,39 @@ public class DBQueryProcessor
                     motoristUsername = rs.getString(2);
                     nearestAddress = rs.getString(3);
                     details  = rs.getString(4);
-                    latitude     = rs.getFloat(5);
-                    longitude   = rs.getFloat(6);
+                    isComplete     = rs.getBoolean(5);
+                    
                }
                 database.close();
-                request = new Requests(requestNum, nearestAddress,motoristUsername, details, latitude, longitude);
+                request = new Requests(requestNum, nearestAddress,motoristUsername, details,isComplete);
            }
         }
         catch (SQLException e){e.printStackTrace();}
         
         return request;
     }
-    
+    public int countRequest()
+    {
+        ResultSet rs;
+        int reqCount = 0;
+        try
+        {
+            if(!database.open()){return 0;}
+            else
+            {
+                rs = database.executeProcedure(MijdasDB.Procedure.COUNT_REQUESTS," ");
+                
+                rs.next();
+
+                
+                reqCount = rs.getInt(1);
+                
+                database.close();
+            }
+        }
+        catch (SQLException ex) {ex.printStackTrace(); }
+        return reqCount;
+    }
     public boolean writeService(String...formData) {
         Insertable[] fields;
         try {

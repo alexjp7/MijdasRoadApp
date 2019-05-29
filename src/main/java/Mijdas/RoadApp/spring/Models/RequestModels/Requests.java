@@ -12,17 +12,15 @@ package Mijdas.RoadApp.spring.Models.RequestModels;
 public class Requests {
     private int requestNum;
     private String nearestAddress,motoristUsername,details;
-    private float latitude,longitude;
+    private boolean isComplete;
 
-    public Requests(int requestNum, String nearestAddress, String motoristUsername, String details, float latitude, float longitude) {
+    public Requests(int requestNum, String nearestAddress, String motoristUsername, String details, boolean isComplete) {
         this.requestNum = requestNum;
         this.nearestAddress = nearestAddress;
         this.motoristUsername = motoristUsername;
         this.details = details;
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.isComplete = isComplete;
     }
-    
 
 
     public Requests(int requestNum, String nearestAddress, String motoristUsername, String details) {
@@ -30,6 +28,7 @@ public class Requests {
         this.nearestAddress = nearestAddress;
         this.motoristUsername = motoristUsername;
         this.details = details;
+        this.isComplete = false;
     }
     
     public int getRequestNum() {
@@ -44,22 +43,21 @@ public class Requests {
         return details;
     }
 
-    public float getLatitude() {
-        return latitude;
-    }
-
-    public float getLongitude() {
-        return longitude;
-    }
 
     public String getNearestAddress() {
         return nearestAddress;
     }
-
+    public boolean isIsComplete() {
+        return isComplete;
+    }
     public void setRequestNum(int requestNum) {
         this.requestNum = requestNum;
     }
-
+    
+    public void setIsComplete(boolean isComplete) {
+        this.isComplete = isComplete;
+    }
+    
     public void setNearestAddress(String nearestAddress) {
         this.nearestAddress = nearestAddress;
     }
@@ -72,13 +70,6 @@ public class Requests {
         this.details = details;
     }
 
-    public void setLatitude(float latitude) {
-        this.latitude = latitude;
-    }
-
-    public void setLongitude(float longitude) {
-        this.longitude = longitude;
-    }
     @Override
     public Requests clone() throws CloneNotSupportedException {
         return (Requests) super.clone();

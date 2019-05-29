@@ -171,7 +171,8 @@ public class MijdasDB
     {
         GET_MOTORIST("getMotorist"),
         GET_MECHANIC("getMechanic"),
-        GET_REQUEST("getRequest");
+        GET_REQUEST("getRequest"),
+        COUNT_REQUESTS("countRequests");
 
         private String value;
         private Procedure(String value)
