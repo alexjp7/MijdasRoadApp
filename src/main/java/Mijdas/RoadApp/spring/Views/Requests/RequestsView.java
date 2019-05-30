@@ -26,10 +26,11 @@ public class RequestsView extends Div
        searchField.setPlaceholder("Street name, city, or postcode");
        add(searchField);
        add(searchButton);
-       
+       setSizeFull();
+       grid.setHeightFull();
        grid.setColumns("motoristUsername","nearestAddress","details");
        add(grid);
-       setSizeFull();
+       
        updateList();
        grid.addComponentColumn(button -> new Button("Message",clickEvent ->{System.out.println("Message");})).setHeader("Actions");
     }
