@@ -10,10 +10,10 @@
 
 using namespace std;
 
-int totalName=200,totalAddress=300,neededServices=100,accidentTypes=10;
+const int totalName=200,totalAddress=300,neededServices=100,accidentTypes=10,motoristNumber=150;
 
 int main(int argc, char** argv) {
-	string username,temp,names[totalName],addresses[totalAddress],accidents[accidentTypes];
+	string username,temp,names[totalName],addresses[totalAddress],accidents[accidentTypes],motorists[motoristNumber];
 	srand (time(NULL));
 	ifstream fin;
 	fin.open("userBase.txt");
@@ -40,16 +40,39 @@ int main(int argc, char** argv) {
 	fin.close();
 	ofstream fout;
 	
-	int randUser,randAddress,randAccident;
+	int randMot,randAddress,randAccident;
+	
+	fout.open("motorists.sql");
+	for(int i=0;i<motoristNumber;i++){
+		
+		fout<<"INSERT INTO MOTORIST(username,hasMembership,license) VALUES (\""
+		<<names[i]
+		<<"\",false,"
+		<<rand()%99999999
+		<<");\n";
+		motorists[i]=names[i];
+	}
+	
+	fout.close();
+	
 	
 	fout.open("inserts.sql");
 	for(int i=1;i<=neededServices;i++){
-		randUser = rand()%totalName;
-		randAddress=rand()%totalAddress;
+		randMot = rand()%motoristNumber;
+		randAddress=i;
 		randAccident=rand()%accidentTypes;
 		
-		fout<<"INSERT INTO SERVICE_REQUEST VALUES(\""<<i<<"\",\""<<names[randUser]<<"\",\""<<addresses[randAddress]<<"\",\""<<accidents[randAccident]<<"\",false)\n";
+		fout<<"INSERT INTO SERVICE_REQUEST VALUES(" 
+        << i 
+        <<" , \"" 
+        << motorists[randMot] 
+        << "\" , \"" 
+        << addresses[randAddress] 
+        << "\" , \""
+        <<accidents[randAccident] 
+        << "\" , false); \n";
 	}
+	fout.close();
 	return 0;
 	
 	

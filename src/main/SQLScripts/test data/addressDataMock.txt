@@ -1,44 +1,44 @@
-98 Riverside Center,Fushan,2788
+﻿98 Riverside Center,Fushan,2788
 77 Derek Road,Mubi,2855
 94506 Washington Terrace,Montrouge,2755
 21381 Novick Lane,Songjiang,2230
 8 Susan Parkway,Le Mans,2506
-72811 Vermont Pass,Villa del Rosario,2806
+72811 Vermont Pass,Villa del Rosario,2498
 2 Nevada Trail,Caxambu,2657
 46 Harper Circle,Penanggapan,2108
 26462 Clemons Way,Margasari,2760
 117 Pierstorff Trail,Mlowo,2639
-4716 Corben Pass,Puger,2400
+4716 Corben Pass,Puger,2500
 0175 Eggendart Alley,Qa‘ţabah,2114
 1740 Hermina Hill,Bouaflé,2859
 947 Sunbrook Parkway,Puente Alto,2847
-0 Kedzie Crossing,Maştağa,2251
+0 Kedzie Crossing,Maştağa,2501
 24087 American Plaza,Jiaxing,2637
 9 Blackbird Lane,Villa La Angostura,2234
 272 Forster Alley,Taounza,2227
 116 Farmco Plaza,Sebba,2172
 397 Fuller Court,Sukonolo Krajan,2274
-091 Heffernan Place,Daur,2999
+091 Heffernan Place,Daur,2500
 118 Sullivan Court,Houston,2413
 09642 Kingsford Road,Toutosa,2119
 44 Jana Court,Nomhon,2463
 17 Holmberg Park,Stapleford,2821
-37152 Duke Drive,Mbuji-Mayi,2532
+37152 Duke Drive,Mbuji-Mayi,2503
 22 Main Road,Phutthaisong,2185
-93 Graceland Court,Tolitoli,2436
+93 Graceland Court,Tolitoli,2501
 5261 Center Street,Yuzawa,2944
 366 Petterle Pass,Limoeiro de Anadia,2716
-4861 Mandrake Point,Mabuhay,2577
+4861 Mandrake Point,Mabuhay,2500
 0 Bay Avenue,Slobozia,2287
 05 Orin Alley,Quinua,2376
 908 Vernon Way,Khulm,2032
-71099 Waxwing Lane,Heung-hai,2630
+71099 Waxwing Lane,Heung-hai,2496
 68560 Bobwhite Plaza,Kotovo,2182
 8578 6th Avenue,Bandhagen,2149
 2 Lindbergh Circle,Rybatskoye,2211
 8 Sheridan Plaza,Haikou,2971
 59088 Clarendon Park,Encruzilhada do Sul,2644
-79990 Spenser Park,Birr,2965
+79990 Spenser Park,Birr,2500
 653 Northwestern Alley,Aras-asan,2726
 12847 Randy Alley,Mēga,2072
 93 Stoughton Drive,Sangallaya,2791
@@ -48,17 +48,17 @@
 8 Maywood Way,Selat,2061
 156 Monument Trail,Juan de Acosta,2405
 3622 Kensington Trail,Burqah,2490
-25 Pond Plaza,Bandar-e ‘Asalūyeh,2018
+25 Pond Plaza,Bandar-e ‘Asalūyeh,2500
 9 Dunning Road,Toulouse,2920
 03000 Fisk Road,Bantar,2719
 8437 Pawling Street,Chợ Mới,2837
-51 Darwin Lane,Conceição do Coité,2960
+51 Darwin Lane,Conceição do Coité,2497
 083 Luster Lane,Ngrejo,2566
 47 Iowa Hill,Bantarjati,2215
 348 Division Alley,Felgueiras,2976
 86 Pennsylvania Point,Hat Yai,2014
 0688 Lindbergh Alley,Pokrov,2270
-88919 Doe Crossing Trail,Telagasari,2001
+88919 Doe Crossing Trail,Telagasari,2500
 3 Buell Center,Gunziying,2314
 2 Reinke Junction,Ibiúna,2531
 397 Arkansas Court,Chaem Luang,2203
@@ -70,7 +70,7 @@
 08006 Declaration Avenue,Fortios,2843
 954 High Crossing Hill,San José de Feliciano,2036
 5 Pankratz Plaza,Gontar,2697
-036 Eagle Crest Center,Louisville,2875
+036 Eagle Crest Center,Louisville,2500
 1446 Heffernan Point,Haradok,2244
 58 Farmco Court,Vlasenica,2979
 4135 Pankratz Crossing,Qiaotou,2678
@@ -79,7 +79,7 @@
 33957 Muir Street,Thanh Khê,2758
 5 Spenser Lane,Sundbyberg,2804
 6306 Little Fleur Junction,Kalapadua,2430
-8 Summer Ridge Junction,Olhos de Água,2317
+8 Summer Ridge Junction,Olhos de Água,2500
 32300 Kennedy Trail,Huangben,2832
 725 Pepper Wood Lane,Novhorodka,2493
 5 Old Shore Point,As Sūsah,2713
@@ -88,7 +88,7 @@
 36310 Drewry Junction,Itororó,2741
 97 Green Ridge Alley,Chateaubelair,2266
 117 Lakewood Alley,Södertälje,2156
-919 Clyde Gallagher Place,Sidenreng,2144
+919 Clyde Gallagher Place,Sidenreng,2499
 98168 Morrow Hill,Zhouhu,2175
 928 Susan Court,Naurskaya,2850
 3 Forest Point,Jezzîne,2904
@@ -99,7 +99,7 @@
 973 La Follette Avenue,Lunec,2137
 56318 Oakridge Park,Hallstavik,2706
 750 Maywood Circle,Trieste,2125
-18 Comanche Circle,Xiyang,2689
+18 Comanche Circle,Xiyang,2500
 267 Warner Parkway,Myanaung,2260
 92002 Stang Circle,Qufu,2405
 20103 Montana Parkway,Borzechów,2473
@@ -116,7 +116,7 @@
 211 Ohio Trail,Dzięgielów,2502
 5612 Dawn Terrace,Cakran,2576
 2737 Sachtjen Park,Bijia,2648
-38 International Hill,Thanh Ba,2928
+38 International Hill,Thanh Ba,2500
 63 Waywood Street,Aix-en-Provence,2536
 95728 Pierstorff Court,Baltimore,2197
 21 Kim Circle,Habry,2247
@@ -153,12 +153,12 @@
 6803 Harbort Parkway,Zduńska Wola,2572
 7223 Reinke Plaza,Borzytuchom,2349
 15 Porter Court,Huashu,2602
-30 Commercial Place,Jiangdong,2787
+30 Commercial Place,Jiangdong,2500
 76 Stang Court,Xianlong,2895
 4 4th Plaza,Gostovići,2512
 69820 Village Green Hill,Hrvatska Kostajnica,2961
 01 Oneill Street,Sebadelhe,2603
-14594 Portage Place,St. Anton an der Jeßnitz,2911
+14594 Portage Place,St. Anton an der Jeßnitz,2500
 839 Messerschmidt Center,Bergen,2931
 99 Waywood Junction,Ureshino,2593
 3552 1st Road,Dayapan,2099
@@ -181,7 +181,7 @@
 34896 Arapahoe Park,Oakland,2104
 06010 Orin Junction,Tumcon Ilawod,2072
 0 Novick Avenue,Santiago de Cao,2541
-0 Delaware Street,San Ignacio de Velasco,2774
+0 Delaware Street,San Ignacio de Velasco,2500
 7156 Muir Crossing,Mariano Moreno,2952
 869 Amoth Court,Tigbao,2508
 6 Novick Way,Karangasem Laok,2544
@@ -288,13 +288,13 @@
 7624 Elka Junction,Xiaochi,2943
 37761 Clemons Pass,Yanglang,2588
 91 Corry Crossing,Farnham,2956
-5 Transport Junction,Fubei,2720
-5 Chive Trail,Conceição do Coité,2402
-01609 Melvin Alley,Sundbyberg,2305
-404 Macpherson Way,Bamnet Narong,2563
-45 Manufacturers Pass,Obolo-Eke (1),2862
-540 Arapahoe Drive,Dioila,2181
-85540 8th Lane,Saraktash,2158
-21931 Killdeer Trail,San José,2265
-46 Veith Pass,Lapa,2925
-31 Packers Way,Arnhem,2076
+5 Transport Junction,Fubei,2500
+5 Chive Trail,Conceição do Coité,2500
+01609 Melvin Alley,Sundbyberg,2500
+404 Macpherson Way,Bamnet Narong,2500
+45 Manufacturers Pass,Obolo-Eke (1),2500
+540 Arapahoe Drive,Dioila,2500
+85540 8th Lane,Saraktash,2500
+21931 Killdeer Trail,San José,2500
+46 Veith Pass,Lapa,2500
+31 Packers Way,Arnhem,2500
