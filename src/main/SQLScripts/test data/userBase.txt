@@ -42,7 +42,7 @@
 'mriddles15', 'Bg4r6hcr', 'Merline', 'Riddles', 'mriddles15@newsvine.com'
 'pspringate16', 'DaK0g6', 'Phedra', 'Springate', 'pspringate16@creativecommons.org'
 'jevennett17', 'IF1F5s21uUK', 'Jan', 'Evennett', 'jevennett17@indiatimes.com'
-'afeatherstonhaugh18', 'BUIo0qA', 'Adelaide', 'Featherstonhaugh', 'afeatherstonhaugh18@patch.com'
+'afeatherstonhaugh18', 'BUIo0qA', 'Adelaide', 'Featherstonhaug', 'afeatherstonhaugh18@patch.com'
 'nlorraway19', 'JQGq6vbIj', 'Niki', 'Lorraway', 'nlorraway19@parallels.com'
 'smcinility1a', '4Dk6TRuF', 'Starla', 'McInility', 'smcinility1a@google.ru'
 'dblanche1b', 'MlHCIM', 'Dwain', 'Blanche', 'dblanche1b@sfgate.com'
