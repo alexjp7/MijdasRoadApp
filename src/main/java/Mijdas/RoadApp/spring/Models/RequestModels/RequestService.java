@@ -67,7 +67,7 @@ public class RequestService {
     }
     
     
-    public void changeBool(int reqNum){
+    public void changeBool(int reqNum){//flips the bool both ways
         for(Requests re : allReq.values()){
             if(re.getRequestNum()==reqNum){
                 re.setIsComplete(!re.isIsComplete());
@@ -75,7 +75,7 @@ public class RequestService {
         }
         
     }
-    public boolean checkReq(Requests req){
+    public boolean checkReq(Requests req){//check requirement is already in table
         
         for(Requests re : allReq.values()){
             if(req.getRequestNum()==re.getRequestNum()){
