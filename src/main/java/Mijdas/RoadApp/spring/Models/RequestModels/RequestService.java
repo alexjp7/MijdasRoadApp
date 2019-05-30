@@ -45,12 +45,28 @@ public class RequestService {
             boolean passesFilter = (stringFilter == null || stringFilter.isEmpty()) || re.getMotoristUsername().toLowerCase().contains(stringFilter.toLowerCase());
             if (passesFilter) {
                     arrayList.add(re);
-                    System.out.println(re.getRequestNum());
+                    //System.out.println(re.getRequestNum());
             }
         }
         
         return arrayList;
     }
+    public List<Requests> findAllPostCode(String stringFilter){//USE THIS TO FIND ALL REQUESTS FROM A postcode
+        updateTable();//compare whats in the singleton to whats in the db note::only checks for rowcounts, updatse to data need to be refreshed
+        ArrayList<Requests> arrayList = new ArrayList<>();
+        for(Requests re : allReq.values()){
+            boolean passesFilter = (stringFilter == null || stringFilter.isEmpty()) || re.getNearestAddress().toLowerCase().contains(stringFilter.toLowerCase());
+            System.out.println(passesFilter);
+            if (passesFilter) {
+                    arrayList.add(re);
+                   // System.out.println(re.getRequestNum());
+            }
+        }
+        
+        return arrayList;
+    }
+    
+    
     public void changeBool(int reqNum){
         for(Requests re : allReq.values()){
             if(re.getRequestNum()==reqNum){
