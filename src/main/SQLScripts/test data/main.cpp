@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
 	fin.open("userBase.txt");
 	for(int i=0;i<totalName;i++){
 		fin>>username>>temp>>temp>>temp>>temp;
-		username.erase(remove_if(username.begin(), username.end(),[]( auto const& c ) -> bool { return !std::isalnum(c); } ), username.end());
+		username.erase(remove_if(username.begin(), username.end(),[]( auto const& c ) -> bool { return !std::isalnum(c); } ), username.end());//cleans users
 		
 		names[i]=username;
 	}
