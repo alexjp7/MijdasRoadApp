@@ -37,7 +37,7 @@ CREATE TABLE SERVICE_REQUEST
 (
 	requestNum 			INT NOT NULL AUTO_INCREMENT,
 	motoristUsername 	VARCHAR (20) NOT NULL,
-	nearestAddress		VARCHAR(50) NOT NULL,
+	nearestAddress		NVARCHAR(100) NOT NULL,
 	details				VARCHAR(140) NOT NULL,  /*Tweet length description too small?*/
 	isComplete			BOOLEAN NOT NULL,
 
