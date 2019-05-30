@@ -13,7 +13,7 @@ import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 
-@StyleSheet("frontend://styles/registerForm.css")
+
 class RegisterForm extends FormLayout
 {
     //Controller

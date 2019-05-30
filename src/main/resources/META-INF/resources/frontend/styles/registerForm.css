@@ -10,7 +10,7 @@ and open the template in the editor.
 
 #registerForm
 {
-   display:-webkit-inline-box;
+   display:inherit;
 }
 
 #profileForm
@@ -28,3 +28,25 @@ and open the template in the editor.
   border: dashed green;
   border:     thin dashed;
 }
+
+
+.userButton
+{
+    padding:50px;
+    box-shadow: -2px 1px 10px 0px;
+    display:inline-flex;
+    width: 50%;
+}
+
+
+ 
+ #directive1
+ {
+        width: 56%;
+        align-self: end;
+ }
+ 
+ #backButton
+ {
+   
+ }
