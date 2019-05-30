@@ -38,11 +38,11 @@ public class RequestService {
     public List<Requests> findAll(){
         return findAll(null);
     }
-    public List<Requests> findAll(String stringFilter){
+    public List<Requests> findAll(String stringFilter){//USE THIS TO FIND ALL REQUESTS FROM A USERNAME
         updateTable();//compare whats in the singleton to whats in the db note::only checks for rowcounts, updatse to data need to be refreshed
         ArrayList<Requests> arrayList = new ArrayList<>();
         for(Requests re : allReq.values()){
-            boolean passesFilter = (stringFilter == null || stringFilter.isEmpty()) || allReq.toString().toLowerCase().contains(stringFilter.toLowerCase());
+            boolean passesFilter = (stringFilter == null || stringFilter.isEmpty()) || re.getMotoristUsername().toLowerCase().contains(stringFilter.toLowerCase());
             if (passesFilter) {
                     arrayList.add(re);
                     System.out.println(re.getRequestNum());
