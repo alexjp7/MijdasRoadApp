@@ -5,6 +5,7 @@ INSERT INTO USER VALUES("isThisTaken","1234","Test1FName", "Test1LName","alnerdo
 INSERT INTO USER VALUES("john","1234","John","Barlow","Jb@hotmail.com");
 INSERT INTO MECHANIC(username, qualityInStars, license) VALUES("alex",5,12325);
 INSERT INTO MOTORIST(username,hasMembership,license) VALUES ("stevejp",false,5225);
+INSERT INTO MECHANIC(username, qualityInStars, license) VALUES("testuser",1,11235);
 
 insert into USER (username, password, fName, lName, email) values ('rtomblin0', 'lxgpitnNnY', 'Rockie', 'Tomblin', 'rtomblin0@mtv.com');
 insert into USER (username, password, fName, lName, email) values ('dcowtherd1', 'tXujnv1uqGtr', 'Dori', 'Cowtherd', 'dcowtherd1@wired.com');

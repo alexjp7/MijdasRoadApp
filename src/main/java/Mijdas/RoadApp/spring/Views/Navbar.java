@@ -73,6 +73,8 @@ public class Navbar extends Div
                 links.get(1).add(new Icon(VaadinIcon.COGS), new Text("Profile"));
                 //View requests
                 links.get(2).add(new Icon(VaadinIcon.COGS), new Text("View Requests"));
+                
+                links.get(3).add(new Icon(VaadinIcon.CHAT), new Text("Messages"));
             }
             add(logOut);
         }

@@ -4,6 +4,7 @@ package Mijdas.RoadApp.spring.Controllers;
 import Mijdas.RoadApp.spring.Controllers.DatabaseControllers.Insertable;
 import Mijdas.RoadApp.spring.Controllers.DatabaseControllers.MijdasDB;
 import Mijdas.RoadApp.spring.Controllers.DatabaseControllers.SQLDatabase;
+import Mijdas.RoadApp.spring.Models.MessageModels.Message;
 import Mijdas.RoadApp.spring.Models.RequestModels.Requests;
 import Mijdas.RoadApp.spring.Models.UserModels.Mechanic;
 import Mijdas.RoadApp.spring.Models.UserModels.Motorist;
@@ -366,6 +367,37 @@ public class DBQueryProcessor
         
         return request;
     }
+    public Message getMessage(String mNum){
+        Message message =null;
+        int messageNum=0;
+        String mechanicUsername="",motoristUsername="",userText="";
+        boolean isComplete=false;
+
+        ResultSet rs = null;
+        try
+        {
+           if(!database.open()){return null;}
+           else
+           {
+               rs = database.executeProcedure(MijdasDB.Procedure.GET_MESSAGE, mNum);
+
+               while(rs.next())
+               {
+                    messageNum  = rs.getInt(1);
+                    motoristUsername = rs.getString(2);
+                    mechanicUsername = rs.getString(3);
+                    userText  = rs.getString(4);
+                    isComplete     = rs.getBoolean(5);
+                    
+               }
+                database.close();
+                message = new Message(messageNum, mechanicUsername,motoristUsername, userText,isComplete);
+           }
+        }
+        catch (SQLException e){e.printStackTrace();}
+        
+        return message;
+    }
     public int countRequest()
     {
         ResultSet rs;
@@ -387,6 +419,28 @@ public class DBQueryProcessor
         }
         catch (SQLException ex) {ex.printStackTrace(); }
         return reqCount;
+    }
+    public int countMessage()
+    {
+        ResultSet rs;
+        int mesCount = 0;
+        try
+        {
+            if(!database.open()){return 0;}
+            else
+            {
+                rs = database.executeProcedure(MijdasDB.Procedure.COUNT_MESSAGE," ");
+                
+                rs.next();
+
+                
+                mesCount = rs.getInt(1);
+                
+                database.close();
+            }
+        }
+        catch (SQLException ex) {ex.printStackTrace(); }
+        return mesCount;
     }
     public boolean writeService(String...formData) {
         Insertable[] fields;

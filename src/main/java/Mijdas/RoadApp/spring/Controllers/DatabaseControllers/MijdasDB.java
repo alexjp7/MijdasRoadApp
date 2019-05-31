@@ -17,7 +17,8 @@ public class MijdasDB
         MECHANICS("MECHANIC",mechanicFields),
         SERVICE_REQUESTS("SERVICE_REQUEST",serviceRequestFields),
         TRANSACTIONS("TRANSACTIONS",transactionFields),
-        VECHILE("VEHICLE",vehicleFields);
+        VECHILE("VEHICLE",vehicleFields),
+        MESSAGE("MESSAGE",messageFields);
 
         private final String name;
         private boolean[] isFieldLiteral;
@@ -119,7 +120,34 @@ public class MijdasDB
            return isLiteral;
         }
     }
-    
+    public enum Message implements Insertable
+    {
+        ID("Id",false),
+	MOTORISTUSERNAME("motoristUsername",true),
+	MECHANICUSERNAME("mechanicUsername",true),
+	MESSAGETEXT("messageText",true),
+	MOTORISTSENT("motoristSent",false);
+
+        private final String value;
+        private final boolean isLiteral;
+        private Message(String value, boolean isLiteral)
+        {
+            this.value = value;
+            this.isLiteral = isLiteral;
+        }
+
+        @Override
+        public String getValue()
+        {
+            return value;
+        }
+
+        @Override
+        public boolean isLiteral()
+        {
+           return isLiteral;
+        }
+    }
     public enum Service_Requests implements Insertable
     {
         REQUESTNUM("requestNum",false),
@@ -172,8 +200,10 @@ public class MijdasDB
         GET_MOTORIST("getMotorist"),
         GET_MECHANIC("getMechanic"),
         GET_REQUEST("getRequest"),
-        COUNT_REQUESTS("countRequests");
-
+        GET_MESSAGE("getMessage"),
+        COUNT_REQUESTS("countRequests"),
+        COUNT_MESSAGE("countMessage");
+            
         private String value;
         private Procedure(String value)
         {
@@ -190,7 +220,8 @@ public class MijdasDB
     private static final boolean[] userFields         = new boolean[]{true,true,true,true,true};
     private static final boolean[] motoristFields     = new boolean[]{true,false,true,false};
     private static final boolean[] mechanicFields     = new boolean[]{true,false,false};
-    private static final boolean[] serviceRequestFields  = new boolean[]{false,true,true,true,false,false};
+    private static final boolean[] serviceRequestFields  = new boolean[]{false,true,true,true,false};
+    private static final boolean[] messageFields      = new boolean[]{false,true,true,true,false};
     //Not yet implemented.
     private static  boolean[] transactionFields;
     private static  boolean[] vehicleFields;
