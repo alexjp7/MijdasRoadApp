@@ -16,7 +16,7 @@ class MemberForm extends FormLayout
 {
     private MembershipController membershipController;
 
-    private TextField registrationNumber = new TextField("Registration Number");
+    private TextField registrationNumber = new TextField("Vehicle Registration");
     private TextField licenseNumber = new TextField("License Number");
     private TextField manufacturer = new TextField("Manufacturer");
     private TextField model = new TextField("Model");
