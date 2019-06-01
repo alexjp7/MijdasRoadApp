@@ -55,8 +55,21 @@ class ProfileForm extends FormLayout
         HorizontalLayout rowThree = new HorizontalLayout(emailText);
         HorizontalLayout buttonRow = new HorizontalLayout(saveButton);
 
-        buttonRow.setJustifyContentMode(FlexComponent.JustifyContentMode.START);
+        buttonRow.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
         buttonRow.setWidthFull();
+        
+        //Styling the fields
+        saveButton.addClassNames("w3-button", "w3-dark-grey");
+        
+        
+        //styling layouts
+        formLayout.addClassNames("w3-display-container", "w3-animate-opacity");
+        rowOne.addClassNames("w3-large", "w3-animate-top");
+        rowTwo.addClassNames("w3-large", "w3-animate-top");
+        rowThree.addClassNames("w3-large", "w3-animate-top");
+        buttonRow.addClassNames("w3-large", "w3-center", "w3-animate-top");
+        
+        
 
         //Component ordering
         formLayout.add(rowOne, rowTwo, rowThree, buttonRow);
