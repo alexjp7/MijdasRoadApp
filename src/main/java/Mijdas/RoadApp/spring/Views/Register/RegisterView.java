@@ -27,6 +27,7 @@ public class RegisterView extends Div
     private VerticalLayout contentDiv = new VerticalLayout();
     private H3 introText = new H3();
     private H4 directive1 = new H4();
+    private Button backButton = new Button();
     
     
     
@@ -34,6 +35,9 @@ public class RegisterView extends Div
     {
         headerLayout.setSizeFull();
         header.setText("Welcome to Assistr!");
+       
+             
+        
         setDefaultSetUp();
         
         sethandlers();
@@ -44,13 +48,14 @@ public class RegisterView extends Div
     {
         motoristButton.addClickListener(e -> motoristPressed());
         mechanicButton.addClickListener(e -> mechanicPressed());
+        backButton.addClickListener(e -> navigateBack());
     }
     private void motoristPressed()
     {
-        introText.setText("Customer Account Creation");
+        directive1.setId("directiveText");
         directive1.setText("Fill in your details!");
-        RegisterForm form = new RegisterForm();
-        Button backButton = new Button();
+        MotoristRegisterForm form = new MotoristRegisterForm();
+        backButton = new Button();
         
         backButton.setText("Back");
         backButton.setId("backButton");
@@ -60,13 +65,29 @@ public class RegisterView extends Div
         form.setId("registerForm");
         headerLayout.removeAll();
         contentDiv.removeAll();
-        headerLayout.add(header,introText,directive1,backButton);
+        //add(backButton);
+        headerLayout.add(introText,directive1);
         contentDiv.add(form);
     }
     
     private void mechanicPressed()
     {
+        directive1.setId("directiveText");
+        directive1.setText("Fill in your details!");
+        MechanicRegisterForm form = new MechanicRegisterForm();
         
+        
+        backButton.setText("Back");
+        backButton.setId("backButton");
+        backButton.setIcon(new Icon(VaadinIcon.ARROW_LEFT));
+       
+        
+        form.setId("registerForm");
+        //add(backButton);
+        headerLayout.removeAll();
+        contentDiv.removeAll();
+        headerLayout.add(introText,directive1);
+        contentDiv.add(form);
     }
 
     private void setDefaultSetUp()
@@ -99,6 +120,13 @@ public class RegisterView extends Div
         mechanicButton.setText("Mechanic");
 
         add(headerLayout,contentDiv);
+        
+    }
+    
+    private void navigateBack()
+    {
+        removeAll();
+        setDefaultSetUp();
         
     }
 }

@@ -3,18 +3,24 @@ package Mijdas.RoadApp.spring.Views.Register;
 
 import Mijdas.RoadApp.spring.Controllers.RegistrationProcessor;
 import Mijdas.RoadApp.spring.Views.MainLayout;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.component.upload.SucceededEvent;
+import com.vaadin.flow.component.upload.Upload;
+import com.vaadin.flow.component.upload.receivers.MemoryBuffer;
+import java.io.InputStream;
 
 
-class RegisterForm extends FormLayout
+class MechanicRegisterForm extends FormLayout
 {
     //Controller
     private  RegistrationProcessor regProcessor;
@@ -31,13 +37,18 @@ class RegisterForm extends FormLayout
     private PasswordField password2 = new PasswordField("Re-Type Password");
     private Button register         = new Button("Register");
     private Button clear            = new Button ("Clear");
+    MemoryBuffer  buffer = new MemoryBuffer();
+    Upload upload = new Upload(buffer);
 
-    public RegisterForm()
+    public MechanicRegisterForm()
     {
         regProcessor = new RegistrationProcessor();
         //Assume invalid inputs on page construction
         isValidUsername = false;
         isValidPassword = false;
+        
+       
+
 
         setFieldProperties();
         setEventListeners();
@@ -48,16 +59,26 @@ class RegisterForm extends FormLayout
     {
         //Form Layout
         VerticalLayout formLayout = new VerticalLayout();
-        HorizontalLayout topLayer = new HorizontalLayout(username,userType);
+        HorizontalLayout topLayer = new HorizontalLayout(username);
         HorizontalLayout nameGroup = new HorizontalLayout(firstName,lastName);
         HorizontalLayout passwordGroup = new HorizontalLayout(password,password2);
+        HorizontalLayout uploader = new HorizontalLayout(upload);
         HorizontalLayout buttonGroup = new HorizontalLayout(register,clear);
-
+        
+        upload.setDropLabel(new Label("Qualifications / Credentials"));
+        upload.setSizeFull();
+        uploader.setSizeFull();
+        uploader.setAlignItems(FlexComponent.Alignment.CENTER);
+        
+        upload.addSucceededListener(event -> System.out.println("hey"));
+      
         buttonGroup.setJustifyContentMode(FlexComponent.JustifyContentMode.START);
         buttonGroup.setWidthFull();
+        topLayer.setWidthFull();
+        username.setSizeFull();
 
         //Component ordering
-        formLayout.add(topLayer,nameGroup,email,passwordGroup,buttonGroup);
+        formLayout.add(topLayer,nameGroup,email,passwordGroup,uploader,buttonGroup);
         add(formLayout);
     }
 
@@ -152,7 +173,7 @@ class RegisterForm extends FormLayout
     public void submitForm()
     {
         //Submit form
-        if(regProcessor.submitRegistration(username.getValue(), userType.getValue(),firstName.getValue(),
+        if(regProcessor.submitRegistration(username.getValue(), "Mechanic" ,firstName.getValue(),
                                            lastName.getValue(), email.getValue(), password.getValue()))
         {
             getUI().ifPresent(ui-> ui.getPage().executeJavaScript("window.location.href = 'login' "));
@@ -171,5 +192,10 @@ class RegisterForm extends FormLayout
         email.clear();
         password.clear();
         password2.clear();
+    }
+
+    private Component createComponent(String mimeType, String fileName, InputStream inputStream)
+    {
+       return null;
     }
 }
