@@ -11,7 +11,7 @@ public abstract class User
     public User(String username, String firstName, String lastName, String email)
     {
         this.username = username;
-        System.out.println(this.username);
+//        System.out.println(this.username);
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
