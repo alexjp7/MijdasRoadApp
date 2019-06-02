@@ -1,10 +1,16 @@
 INSERT INTO USER VALUES("alex","1234","Alexander","Perceval","alnerdo@hotmail.com");
 INSERT INTO USER VALUES("stevejp","1234","Steven","Paramount","sp@gmail.com");
 INSERT INTO USER VALUES("testuser","1234","Test","Johnson","tjo@hotmail.com");
+INSERT INTO USER VALUES("testmechanic","1234","Mike","Mechanic","testmek@hotmail.com");
 INSERT INTO USER VALUES("isThisTaken","1234","Test1FName", "Test1LName","alnerdo@hotmail.com");
 INSERT INTO USER VALUES("john","1234","John","Barlow","Jb@hotmail.com");
 INSERT INTO MECHANIC(username, qualityInStars, license) VALUES("alex",5,12325);
-INSERT INTO MOTORIST(username,hasMembership,license) VALUES ("stevejp",false,5225);
+INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("stevejp",false,5225);
+INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("testmechanic",false,7849);
+
+INSERT INTO REGO VALUES(5225, "ST3VEJ", "Subaru", "2002 WRX Impreza", "Blue");
+INSERT INTO REGO VALUES(7849, "TESTMK", "Nissan", "1994 R32 Skyline", "Black");
+
 
 insert into USER (username, password, fName, lName, email) values ('rtomblin0', 'lxgpitnNnY', 'Rockie', 'Tomblin', 'rtomblin0@mtv.com');
 insert into USER (username, password, fName, lName, email) values ('dcowtherd1', 'tXujnv1uqGtr', 'Dori', 'Cowtherd', 'dcowtherd1@wired.com');

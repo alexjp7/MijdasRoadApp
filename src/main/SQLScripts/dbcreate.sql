@@ -10,27 +10,16 @@ CREATE TABLE USER
   	CONSTRAINT pk1_user PRIMARY KEY(username)
 );
 
-CREATE TABLE REGO
-(
-	license			INT(8) NOT NULL,
-        regPlate                VARCHAR(6) NOT NULL,
-        manufacturer            VARCHAR(10) NOT NULL,
-        model                   VARCHAR(50) NOT NULL,
-        color                   VARCHAR(20) NOT NULL,
-        
-	CONSTRAINT pk1_rego PRIMARY KEY (license)
-);
 
 CREATE TABLE MOTORIST
 (
 	username 		VARCHAR (20) NOT NULL,
 	hasMemberShip 	BOOLEAN NOT NULL,
   	paymentOption 	VARCHAR(10),
-	lNum			INT(8) NOT NULL,
+	lNum			INT(8) UNIQUE,
 
 	CONSTRAINT fk1_motorists FOREIGN KEY (username) REFERENCES USER(username) ON UPDATE CASCADE,
 	CONSTRAINT pk1_motorists PRIMARY KEY (username),
-        CONSTRAINT fk2_motorists FOREIGN KEY (lNum) REFERENCES REGO(license),
     CONSTRAINT OPTION_TYPE CHECK (paymentOption IN ('NONE','CREDIT-CARD','PAYPAL','CASH'))
 );
 
@@ -42,6 +31,20 @@ CREATE TABLE MECHANIC
 
 	CONSTRAINT pk1_mechanics PRIMARY KEY (username),
 	CONSTRAINT fk1_mechanics FOREIGN KEY (username) REFERENCES USER(username) ON UPDATE CASCADE
+);
+
+CREATE TABLE REGO
+(
+	license			INT(8) NOT NULL,
+        regPlate                VARCHAR(6) NOT NULL,
+        manufacturer            VARCHAR(10) NOT NULL,
+        model                   VARCHAR(50) NOT NULL,
+        color                   VARCHAR(20) NOT NULL,
+        
+        CONSTRAINT fk1_rego FOREIGN KEY (license) REFERENCES MOTORIST(lNum) ON UPDATE CASCADE,
+        CONSTRAINT pk1_rego PRIMARY KEY (regPlate)
+        
+        
 );
 
 
