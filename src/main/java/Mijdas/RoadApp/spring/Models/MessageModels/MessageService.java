@@ -74,21 +74,30 @@ public class MessageService {
         
         return arrayList;
     }
-    public List<Message> findFromUser(String myUser,String otherUser){
+    public List<Message> findFromUser(String myUser,String otherUser,boolean isMechanic){
         List<Message> arrayList = new ArrayList<>();
         arrayList = findAll(myUser);
+        boolean listHasContent=false;
         ArrayList<Message> finalList = new ArrayList<>();
         for(Message me : arrayList){
             boolean passesFilter = (otherUser == null || otherUser.isEmpty()) || (me.getMotoristUsername().toLowerCase().contains(otherUser.toLowerCase())|| me.getMechanicUsername().toLowerCase().contains(otherUser.toLowerCase()));
-            System.out.println("bbbA");
+            //System.out.println("bbbA");
             if (passesFilter) {
                     finalList.add(me);
-                    System.out.println("AAAAAAAAAAAAAAAA"+me.getMessageText());
-            }else{
-               
+                    listHasContent=true;
+                   // System.out.println("AAAAAAAAAAAAAAAA"+me.getMessageText());
             }
         }
-        
+        if(!listHasContent){
+            Message fake;
+            if(isMechanic){
+                fake = new Message(1, myUser, otherUser, "Hi! It looks like theres no messages here, start the conversation!", false);
+            }
+            else{
+                fake = new Message(1, otherUser, myUser, "Hi! It looks like theres no messages here, start the conversation!", true);
+            }
+            finalList.add(fake);
+        }
         return finalList;
     }
     public boolean checkReq(Message req){//check requirement is already in table
