@@ -1,6 +1,7 @@
 
 package Mijdas.RoadApp.spring.Views.Requests;
 
+import Mijdas.RoadApp.spring.Controllers.MessagingController;
 import Mijdas.RoadApp.spring.Controllers.ProfileController;
 import Mijdas.RoadApp.spring.Controllers.RegoController;
 import Mijdas.RoadApp.spring.Controllers.SessionController;
@@ -22,9 +23,6 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.renderer.TemplateRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.PopupView;
-import com.vaadin.ui.Window;
 
 @StyleSheet("frontend://styles/w3.css")
 @Route(value = "requests", layout = MainLayout.class)
@@ -73,7 +71,7 @@ public class RequestsView extends Div
            System.out.println("Message Clicked.");
            //go to messages
            getUI().ifPresent(ui-> ui.getPage().executeJavaScript("window.location.href = 'messaging' "));
-           messageView.jumpToMsgs(loggedInUser.getUsername(), button.getMotoristUsername());
+           MessagingController.getInstance().setBoth(loggedInUser.getUsername(),button.getMotoristUsername());
        })).setHeader("Actions");
        
        
