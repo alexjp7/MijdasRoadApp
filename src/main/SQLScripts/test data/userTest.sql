@@ -8,8 +8,8 @@ INSERT INTO USER VALUES("john","1234","John","Barlow","Jb@hotmail.com");
 
 insert into USER (username, password, fName, lName, email) values ('doliverasf', 'ukdBKLNOQLr6', 'Dickie', 'Oliveras', 'doliverasf@uiuc.edu');
 INSERT INTO MECHANIC(username, qualityInStars, license) VALUES("alex",5,12325);
-INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("stevejp",false,5225);
 INSERT INTO MECHANIC(username, qualityInStars, license) VALUES("testuser",1,11235);
+INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("stevejp",false,5225);
 INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("doliverasf",false,1432);
 INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("testmechanic",false,1433);
 
