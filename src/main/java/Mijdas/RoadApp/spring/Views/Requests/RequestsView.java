@@ -3,12 +3,18 @@ package Mijdas.RoadApp.spring.Views.Requests;
 
 import Mijdas.RoadApp.spring.Controllers.ProfileController;
 import Mijdas.RoadApp.spring.Controllers.RegoController;
+import Mijdas.RoadApp.spring.Controllers.SessionController;
 import Mijdas.RoadApp.spring.Models.RequestModels.RequestService;
 import Mijdas.RoadApp.spring.Models.RequestModels.Requests;
+import Mijdas.RoadApp.spring.Models.UserModels.User;
 import Mijdas.RoadApp.spring.Views.MainLayout;
+import Mijdas.RoadApp.spring.Views.Messaging.MessagingView;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.Grid.Column;
+import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -18,8 +24,9 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.PopupView;
+import com.vaadin.ui.Window;
 
-
+@StyleSheet("frontend://styles/w3.css")
 @Route(value = "requests", layout = MainLayout.class)
 @PageTitle("Requests")
 
@@ -27,6 +34,8 @@ public class RequestsView extends Div
 {
     private RegoController regoController = new RegoController();
     private ProfileController profileController = new ProfileController();
+    private User loggedInUser = SessionController.getInstance().getUser();
+    private MessagingView messageView = new MessagingView();
     private RequestService service = RequestService.getInstance();
     Grid<Requests> grid = new Grid<>(Requests.class);
     TextField searchField = new TextField();
@@ -41,36 +50,38 @@ public class RequestsView extends Div
        grid.setHeightFull();
        grid.setColumns("motoristUsername","nearestAddress","details");
        
-//       grid.setSelectionMode(Grid.SelectionMode.NONE);
-//       grid.setItemDetailsRenderer(TemplateRenderer.<Requests> of(
-//               "<div class='custom-details' style='border: 1px solid gray; padding: 10px; width: 100%; box-sizing: border-box;'>"
-//                       +"<div>Hi Test!</div>"
-//                       +"</div>")
-//               .withEventHandler("handleClick", c -> {
-//                   grid.getDataProvider().refreshItem(c);
-//                   System.out.println("TESTTTTT");
-//               }));
-//       grid.setDetailsVisibleOnClick(false);
        
-//       
-//       VerticalLayout popupContent = new VerticalLayout(); 
-//       popupContent.addComponentAsFirst(new TextField("TextField"));
-//       popupContent.addComponentAtIndex(1, new Button("Send"));
-//       PopupView popup = new PopupView("", (Component) popupContent);
-       
-
        add(grid);
        updateList();
        
        //This line below breaks the view:
        grid.addComponentColumn(car -> new Label(regoController.getRego(profileController.getUser(car.getMotoristUsername()).getLicenseNum().toString()).getModel())).setHeader("Car Model");
+       grid.addThemeVariants(GridVariant.LUMO_ROW_STRIPES);
+//       grid.addColumn(TemplateRenderer.<Requests> of(
+//                "<div id='msgDiv' class='w3-container'>"
+//                + "<button id='button' class='w3-button w3-dark-grey' on-click='handleMessage'>Message</button>"
+//                + "</div>")
+//               .withEventHandler("handleMessage", button -> {
+//                    System.out.println("Button Clicked!!");
+//                    
+//               })).setHeader("Actions");
+               
+       
+       
+       
        grid.addComponentColumn(button -> new Button("Message",clickEvent ->{
            System.out.println("Message Clicked.");
-//           grid.setDetailsVisible(button, !grid.isDetailsVisible(button));
+           //go to messages
+           getUI().ifPresent(ui-> ui.getPage().executeJavaScript("window.location.href = 'messaging' "));
+           messageView.jumpToMsgs(loggedInUser.getUsername(), button.getMotoristUsername());
        })).setHeader("Actions");
        
        
     }
+    
+//    private void handleClick(){
+//        System.out.println("SOMETHING CLICKED");
+//    }
     
     private void updateList(){
         grid.setItems(service.findAll());

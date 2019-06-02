@@ -65,6 +65,11 @@ public class MessagingView extends Div
     private void updateListPrivate(String me, String them){
         gridDetails.setItems(service.findFromUser(me,them));
     }
+    
+    public void jumpToMsgs(String from, String to){
+        getUI().ifPresent(ui-> ui.getPage().executeJavaScript("window.location.href = 'messaging' "));
+        updateListPrivate(from, to);
+    }
    
 }
 
