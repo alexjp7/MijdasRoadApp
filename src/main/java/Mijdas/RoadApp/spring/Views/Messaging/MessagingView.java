@@ -54,7 +54,34 @@ public class MessagingView extends Div
        add(horizontal);
        
     }
-    
+    public MessagingView(String me, String them)
+    {
+       
+       boolean isMech;
+       setSizeFull();
+       //grid.setHeightFull();
+       
+       grid.setSelectionMode(Grid.SelectionMode.NONE);
+       gridDetails.setColumns("messageText");
+       if(session.getUserType() == UserType.MECHANIC){
+           grid.setColumns("motoristUsername");
+           grid.addItemClickListener(
+                event -> updateListPrivate(session.getUser().getUsername(), event.getItem().getMotoristUsername()));
+       }
+       else{
+           grid.setColumns("mechanicUsername");
+           grid.addItemClickListener(
+               event -> updateListPrivate(session.getUser().getUsername(), event.getItem().getMechanicUsername()));
+       }
+        
+       updateList(session.getUser().getUsername());
+       updateListPrivate(me,them);
+       horizontal.add(grid);
+       horizontal.add(gridDetails);
+       
+       add(horizontal);
+       
+    }
     private void updateList(){
         grid.setItems(service.findAll());
     }
