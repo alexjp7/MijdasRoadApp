@@ -34,21 +34,17 @@ public class MainLayout extends Div implements RouterLayout
         //Common Layout Styles
         setSizeFull();
         setId("main-layout"); //Common layout themes
-        header = new Div();
         //Info Prompt
         infoPrompt = new Notification();
         infoPrompt.setId("infoPrompt");
         infoPrompt.setDuration(3000);
         infoPrompt.setPosition(Notification.Position.TOP_CENTER);
         
-        
-
+       
         //Navigation Bar
         System.out.println("In home view constructor!");
         navigation = new Navbar();
-
-        header.add(navigation);
-        add(header);
+        add(navigation);
     }
 
     public static void reload()

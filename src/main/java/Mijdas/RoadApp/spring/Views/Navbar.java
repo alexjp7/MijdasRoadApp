@@ -36,7 +36,7 @@ public class Navbar extends Div
         logOut.addClassName("navElement");
         logOut.addClickListener(e->handleLogout());
 
-        setSizeFull();
+        setWidthFull();
         setNavigation();
     }
 
@@ -72,7 +72,7 @@ public class Navbar extends Div
                 //Profile Page
                 links.get(1).add(new Icon(VaadinIcon.COGS), new Text("Profile"));
                 //View requests
-                links.get(2).add(new Icon(VaadinIcon.COGS), new Text("View Requests"));
+                links.get(2).add(new Icon(VaadinIcon.TOOLBOX), new Text("View Requests"));
                 
                 links.get(3).add(new Icon(VaadinIcon.CHAT), new Text("Messages"));
             }

@@ -8,6 +8,12 @@ and open the template in the editor.
     Author     : Alex
 */
 
+#registerView
+{
+    
+}
+
+
 #registerForm
 {
    display:inherit;
@@ -36,6 +42,7 @@ and open the template in the editor.
     box-shadow: -2px 1px 10px 0px;
     display:inline-flex;
     width: 50%;
+    background-color: #7ac2ff38  !important;
 }
 
 

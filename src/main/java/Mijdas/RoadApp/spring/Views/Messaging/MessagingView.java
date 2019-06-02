@@ -6,6 +6,7 @@ import Mijdas.RoadApp.spring.Models.MessageModels.Message;
 import Mijdas.RoadApp.spring.Controllers.SessionController;
 import Mijdas.RoadApp.spring.Controllers.MessagingController;
 import Mijdas.RoadApp.spring.Controllers.UserType;
+import Mijdas.RoadApp.spring.Views.Footer;
 import Mijdas.RoadApp.spring.Views.MainLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
@@ -71,6 +72,8 @@ public class MessagingView extends Div
         horizontal.add(grid,vertical);
        
         add(horizontal);
+        setId("background");
+        add(new Footer());
        
     }
     

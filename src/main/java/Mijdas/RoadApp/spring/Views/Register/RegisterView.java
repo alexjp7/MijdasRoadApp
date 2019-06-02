@@ -1,6 +1,7 @@
 
 package Mijdas.RoadApp.spring.Views.Register;
 
+import Mijdas.RoadApp.spring.Views.Footer;
 import Mijdas.RoadApp.spring.Views.MainLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
@@ -25,6 +26,7 @@ public class RegisterView extends Div
     private VerticalLayout headerLayout = new VerticalLayout();
     private H1 header = new H1();
     private VerticalLayout contentDiv = new VerticalLayout();
+    private Div bodyDiv = new Div();
     private H3 introText = new H3();
     private H4 directive1 = new H4();
     private Button backButton = new Button();
@@ -33,11 +35,17 @@ public class RegisterView extends Div
     
     public RegisterView()
     {
-        headerLayout.setSizeFull();
-        header.setText("Welcome to Assistr!");
-      
+        contentDiv.setSizeFull();
         setDefaultSetUp();
         sethandlers();
+        setSizeFull();
+        bodyDiv.setSizeFull();
+        header.setText("Welcome to Assistr!");
+        setId("registerView");
+        bodyDiv.setId("background");
+        bodyDiv.addClassNames("w3-display-container", "w3-animate-opacity");
+        add(new Footer());
+        
         
     }
     
@@ -48,47 +56,49 @@ public class RegisterView extends Div
         backButton.addClickListener(e -> navigateBack());
     }
     private void motoristPressed()
-    {
-        directive1.setId("directiveText");
-        directive1.setText("Fill in your details!");
+    {   //Instantiate form component
         MotoristRegisterForm form = new MotoristRegisterForm();
-        backButton = new Button();
-        
-        backButton.setText("Back");
-        backButton.setId("backButton");
-        backButton.setIcon(new Icon(VaadinIcon.ARROW_LEFT));
-        backButton.addClickListener(e ->setDefaultSetUp());
-        
-        form.setId("registerForm");
+        //Remove current contents 
         headerLayout.removeAll();
         contentDiv.removeAll();
-        //add(backButton);
+        //Styles
+        directive1.setId("directiveText");
+        directive1.setText("Fill in your details!");
+        backButton.setText("Back");
+        backButton.setId("backButton");
+        form.setId("registerForm");
+        
+        backButton.setIcon(new Icon(VaadinIcon.ARROW_LEFT));
+        backButton = new Button();
+
+ 
         headerLayout.add(introText,directive1);
         contentDiv.add(form);
     }
     
     private void mechanicPressed()
     {
-        directive1.setId("directiveText");
-        directive1.setText("Fill in your details!");
         MechanicRegisterForm form = new MechanicRegisterForm();
-        
-        
-        backButton.setText("Back");
-        backButton.setId("backButton");
-        backButton.setIcon(new Icon(VaadinIcon.ARROW_LEFT));
-       
-        
-        form.setId("registerForm");
-        //add(backButton);
+        //Remove current contents 
         headerLayout.removeAll();
         contentDiv.removeAll();
+        //Styles
+        directive1.setId("directiveText");
+        directive1.setText("Fill in your details!");
+        backButton.setText("Back");
+        backButton.setId("backButton");
+        form.setId("registerForm");
+        backButton.setIcon(new Icon(VaadinIcon.ARROW_LEFT));
+    
+        //add(backButton);
+    
         headerLayout.add(introText,directive1);
-        contentDiv.add(form);
+        contentDiv.add(form);;
     }
 
     private void setDefaultSetUp()
     {
+        bodyDiv.removeAll();
         headerLayout.removeAll();
         contentDiv.removeAll();
         headerLayout.setAlignItems(FlexComponent.Alignment.CENTER);
@@ -101,7 +111,7 @@ public class RegisterView extends Div
         directive1.setId("directive1");
 
        
-        contentDiv.setAlignItems(FlexComponent.Alignment.CENTER);
+        contentDiv.setAlignItems(FlexComponent.Alignment.CENTER);;
 
         contentDiv.add(motoristButton,mechanicButton);
 
@@ -115,8 +125,9 @@ public class RegisterView extends Div
 
         motoristButton.setText("Motorist");
         mechanicButton.setText("Mechanic");
-
-        add(headerLayout,contentDiv);
+        
+        bodyDiv.add(headerLayout, contentDiv);
+        add(bodyDiv);
         
     }
     

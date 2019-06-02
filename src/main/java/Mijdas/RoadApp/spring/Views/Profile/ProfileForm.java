@@ -13,7 +13,6 @@ import com.vaadin.flow.component.textfield.TextField;
 
 //basic CSS form for now
 @StyleSheet("frontend://styles/RegisterForm.css")
-        
 class ProfileForm extends FormLayout
 {
     private ProfileController profileController;
@@ -68,8 +67,6 @@ class ProfileForm extends FormLayout
         rowTwo.addClassNames("w3-large", "w3-animate-top");
         rowThree.addClassNames("w3-large", "w3-animate-top");
         buttonRow.addClassNames("w3-large", "w3-center", "w3-animate-top");
-        
-        
 
         //Component ordering
         formLayout.add(rowOne, rowTwo, rowThree, buttonRow);

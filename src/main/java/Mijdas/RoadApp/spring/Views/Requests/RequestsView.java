@@ -8,23 +8,21 @@ import Mijdas.RoadApp.spring.Controllers.SessionController;
 import Mijdas.RoadApp.spring.Models.RequestModels.RequestService;
 import Mijdas.RoadApp.spring.Models.RequestModels.Requests;
 import Mijdas.RoadApp.spring.Models.UserModels.User;
+import Mijdas.RoadApp.spring.Views.Footer;
 import Mijdas.RoadApp.spring.Views.MainLayout;
 import Mijdas.RoadApp.spring.Views.Messaging.MessagingView;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.grid.Grid.Column;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.renderer.TemplateRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@StyleSheet("frontend://styles/w3.css")
+
 @Route(value = "requests", layout = MainLayout.class)
 @PageTitle("Requests")
 
@@ -82,6 +80,10 @@ public class RequestsView extends Div
        })).setHeader("Actions");
        
        
+       
+       setId("baclground");
+       //Adds Footer
+       add(new Footer());
     }
     
 //    private void handleClick(){

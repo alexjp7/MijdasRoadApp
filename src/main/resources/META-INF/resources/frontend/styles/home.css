@@ -21,21 +21,59 @@ and open the template in the editor.
 #textSpace
 {
     display: inline-block;
-    background-color: hsla(211, 70%, 50%, 0.37);
+    background-color: #33404fb0;
 
 }
 
-h1
+#homePageText1
 {
     font: italic 7.2em "Fira Sans", serif;
     color: white;
 }
 
 
-h3
+#homePageText2
 {
     
     font: italic 4.2em "Fira Sans", serif;
     color:white;
 }
 
+#f_icon
+{
+    color: #395599;
+}
+#t_icon
+{
+    color:#1c9deb;
+   
+}
+
+#y_icon
+{
+    color: hsl(0, 100%, 50%);
+    
+}
+
+.m_icons
+{
+    padding:29px;
+    opacity: 1;
+}
+
+#iconGroup
+{
+     background-color: #33404fb0;;
+    display: inline-table;
+    width: 20%;
+
+}
+
+#footer
+{
+      background-color: #191a1d;
+    position: fixed;
+    top: 92% !important;
+    width: 100%;
+    color:white;
+}
