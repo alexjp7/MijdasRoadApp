@@ -20,7 +20,7 @@ import com.vaadin.flow.router.Route;
 
 public class RequestsView extends Div
 {
-    private RegoController regoController;
+    private RegoController regoController = new RegoController();
     private RequestService service = RequestService.getInstance();
     Grid<Requests> grid = new Grid<>(Requests.class);
     TextField searchField = new TextField();
@@ -41,7 +41,7 @@ public class RequestsView extends Div
        updateList();
        
        //This line below breaks the view:
-//       grid.addComponentColumn(car -> new Label(regoController.getRego("5225").getModel())).setHeader("Car Model");
+       grid.addComponentColumn(car -> new Label(regoController.getRego("5225").getModel())).setHeader("Car Model");
        grid.addComponentColumn(button -> new Button("Message",clickEvent ->{System.out.println("Message");})).setHeader("Actions");
     }
     
