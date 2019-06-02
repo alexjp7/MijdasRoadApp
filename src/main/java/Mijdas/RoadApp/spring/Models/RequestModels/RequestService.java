@@ -43,7 +43,7 @@ public class RequestService {
         ArrayList<Requests> arrayList = new ArrayList<>();
         for(Requests re : allReq.values()){
             boolean passesFilter = (stringFilter == null || stringFilter.isEmpty()) || re.getMotoristUsername().toLowerCase().contains(stringFilter.toLowerCase());
-            if (passesFilter) {
+            if (passesFilter && re.isIsComplete() == false) {
                     arrayList.add(re);
                     //System.out.println(re.getRequestNum());
             }
@@ -57,7 +57,7 @@ public class RequestService {
         for(Requests re : allReq.values()){
             boolean passesFilter = (stringFilter == null || stringFilter.isEmpty()) || re.getNearestAddress().toLowerCase().contains(stringFilter.toLowerCase());
             System.out.println(passesFilter);
-            if (passesFilter) {
+            if (passesFilter && re.isIsComplete() == false) {
                     arrayList.add(re);
                    // System.out.println(re.getRequestNum());
             }

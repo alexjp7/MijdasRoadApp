@@ -15,8 +15,9 @@ and open the template in the editor.
 
 #navbar
 {
-
-   background-color: hsla(211, 100%, 50%, 0.86);
+    /*thought this was a bit too bright*/
+   /*background-color: hsla(211, 100%, 50%, 0.86);*/
+   background-color: hsla(211, 70%, 50%, 0.86);
    text-align: center;
    padding:10px;
 }

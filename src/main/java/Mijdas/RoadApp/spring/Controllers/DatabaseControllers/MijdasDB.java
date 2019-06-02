@@ -17,8 +17,9 @@ public class MijdasDB
         MECHANICS("MECHANIC",mechanicFields),
         SERVICE_REQUESTS("SERVICE_REQUEST",serviceRequestFields),
         TRANSACTIONS("TRANSACTIONS",transactionFields),
-        VECHILE("VEHICLE",vehicleFields),
-        MESSAGE("MESSAGE",messageFields);
+        MESSAGE("MESSAGE",messageFields),
+        VEHICLE("VEHICLE",vehicleFields);
+
 
         private final String name;
         private boolean[] isFieldLiteral;
@@ -177,6 +178,35 @@ public class MijdasDB
            return isLiteral;
         }
     }
+    
+    public enum Vehicle implements Insertable
+    {
+        LICENSE("license",false),
+	REGPLATE("regPlate",true),
+	MANUFACTURER("manufacturer",true),
+	MODEL("model",true),
+	COLOR("color",true);
+
+        private final String value;
+        private final boolean isLiteral;
+        private Vehicle(String value, boolean isLiteral)
+        {
+            this.value = value;
+            this.isLiteral = isLiteral;
+        }
+
+        @Override
+        public String getValue()
+        {
+            return value;
+        }
+
+        @Override
+        public boolean isLiteral()
+        {
+           return isLiteral;
+        }
+    }
 
     public enum Function
     {
@@ -199,6 +229,7 @@ public class MijdasDB
     {
         GET_MOTORIST("getMotorist"),
         GET_MECHANIC("getMechanic"),
+        GET_VEHICLE("getVehicle"),
         GET_REQUEST("getRequest"),
         GET_MESSAGE("getMessage"),
         COUNT_REQUESTS("countRequests"),
@@ -222,7 +253,7 @@ public class MijdasDB
     private static final boolean[] mechanicFields     = new boolean[]{true,false,false};
     private static final boolean[] serviceRequestFields  = new boolean[]{false,true,true,true,false};
     private static final boolean[] messageFields      = new boolean[]{false,true,true,true,false};
+    private static final boolean[] vehicleFields     = new boolean[]{false,true,true,true,true};
     //Not yet implemented.
     private static  boolean[] transactionFields;
-    private static  boolean[] vehicleFields;
 }

@@ -6,3 +6,4 @@ DROP PROCEDURE getRequest;
 DROP PROCEDURE getMessage;
 DROP PROCEDURE countRequests;
 DROP PROCEDURE countMessage;
+DROP PROCEDURE getVehicle;

@@ -7,6 +7,7 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+@StyleSheet("frontend://styles/w3.css")
 @Route(value = "profile", layout = MainLayout.class)
 @PageTitle("Profile")
 

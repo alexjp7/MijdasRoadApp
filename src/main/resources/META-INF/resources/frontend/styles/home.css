@@ -11,6 +11,8 @@ and open the template in the editor.
 #imgBkg
 {
     background: url(../img/road2.jpg)no-repeat;
-    height:40% !important;
+    min-height:100% !important;
     background-size: cover;
+    background-color: lightgrey;
+    background-position: center;
 }

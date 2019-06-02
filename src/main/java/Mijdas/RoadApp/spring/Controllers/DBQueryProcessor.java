@@ -8,6 +8,7 @@ import Mijdas.RoadApp.spring.Models.MessageModels.Message;
 import Mijdas.RoadApp.spring.Models.RequestModels.Requests;
 import Mijdas.RoadApp.spring.Models.UserModels.Mechanic;
 import Mijdas.RoadApp.spring.Models.UserModels.Motorist;
+import Mijdas.RoadApp.spring.Models.UserModels.Vehicle;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -301,6 +302,41 @@ public class DBQueryProcessor
         }
         catch (SQLException e){e.printStackTrace();}
         return mechanic;
+    }
+    
+    public Vehicle getVehicle(String lNum)
+    {
+        Vehicle vehicle = null;
+        int license = 0;
+        String registration = "";
+        String manufacturer = "";
+        String model = "";
+        String color = "";
+        
+
+        ResultSet rs = null;
+        try
+        {
+           if(!database.open()){return null;}
+           else
+           {
+               rs = database.executeProcedure(MijdasDB.Procedure.GET_VEHICLE, lNum);
+
+               while(rs.next())
+               {
+                    license = rs.getInt(1);
+                    registration = rs.getString(2);
+                    manufacturer = rs.getString(3);
+                    model = rs.getString(4);
+                    color = rs.getString(5);
+               }
+                database.close();
+                vehicle = new Vehicle(registration, manufacturer, model, color);
+           }
+
+        }
+        catch (SQLException e){e.printStackTrace();}
+        return vehicle;
     }
 
     public Motorist getMotorist(String user)
