@@ -5,10 +5,12 @@ INSERT INTO USER VALUES("testmechanic","1234","Mike","Mechanic","testmek@hotmail
 INSERT INTO USER VALUES("isThisTaken","1234","Test1FName", "Test1LName","alnerdo@hotmail.com");
 INSERT INTO USER VALUES("john","1234","John","Barlow","Jb@hotmail.com");
 
-
+insert into USER (username, password, fName, lName, email) values ('doliverasf', 'ukdBKLNOQLr6', 'Dickie', 'Oliveras', 'doliverasf@uiuc.edu');
 INSERT INTO MECHANIC(username, qualityInStars, license) VALUES("alex",5,12325);
-INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("stevejp",false,5225);
-INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("testmechanic",false,7849);
+INSERT INTO MOTORIST(username,hasMembership,license) VALUES ("stevejp",false,5225);
+INSERT INTO MECHANIC(username, qualityInStars, license) VALUES("testuser",1,11235);
+INSERT INTO MOTORIST(username,hasMembership,license) VALUES ("doliverasf",false,1432);
+
 
 INSERT INTO REGO VALUES(5225, "ST3VEJ", "Subaru", "2002 WRX Impreza", "Blue");
 INSERT INTO REGO VALUES(7849, "TESTMK", "Nissan", "1994 R32 Skyline", "Black");

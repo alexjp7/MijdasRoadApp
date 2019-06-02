@@ -6,7 +6,7 @@ import Mijdas.RoadApp.spring.Views.Login.LoginView;
 import Mijdas.RoadApp.spring.Views.Register.RegisterView;
 import Mijdas.RoadApp.spring.Views.Membership.MemberView;
 import Mijdas.RoadApp.spring.Views.Service.ServiceView;
-
+import Mijdas.RoadApp.spring.Views.Messaging.MessagingView;
 import Mijdas.RoadApp.spring.Views.Profile.ProfileView;
 import Mijdas.RoadApp.spring.Views.Requests.RequestsView;
 import com.vaadin.flow.router.RouterLink;
@@ -85,7 +85,7 @@ public class NavigationController
             {
                 links.add(new RouterLink(null, ProfileView.class));
                 links.add(new RouterLink(null, RequestsView.class));
-                
+                links.add(new RouterLink(null, MessagingView.class));
 
             }
             //Login links (my profile, check balance, subscription, make a service request etc.

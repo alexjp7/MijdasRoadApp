@@ -5,6 +5,7 @@ INSERT INTO USER VALUES("testmechanic","1234","Mike","Mechanic","testmek@hotmail
 INSERT INTO USER VALUES("isThisTaken","1234","Test1FName", "Test1LName","alnerdo@hotmail.com");
 INSERT INTO USER VALUES("john","1234","John","Barlow","Jb@hotmail.com");
 INSERT INTO MECHANIC(username, qualityInStars, license) VALUES("alex",5,12325);
+INSERT INTO MECHANIC(username, qualityInStars, license) VALUES("testuser",1,11235);
 INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("stevejp",false,5225);
 INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("testmechanic",false,7849);
 
