@@ -1,0 +1,39 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 03/06/2019, 2:15:31 AM
+    Author     : Alex
+*/
+
+.v-accordion {
+    color:red;
+}
+  .v-accordion-item,
+  .v-accordion-item-open,
+  .v-accordion-item-first {
+      
+  }
+  .v-accordion-item-caption {
+      
+  }
+  .v-caption {
+      
+  }
+  .v-accordion-item-content {
+      
+  }
+  .v-scollable {
+      
+  }
+  
+  #accordion
+  {
+      color:red;
+      display:inline-block;width:auto
+  }
+  
+  .w3-large{font-size:18px!important}
+  .w3-center .w3-bar{display:inline-block;width:auto}
