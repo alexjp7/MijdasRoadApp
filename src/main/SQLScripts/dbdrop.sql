@@ -1,5 +1,5 @@
-drop table SERVICE_REQUEST;
-drop table MESSAGE;
-drop table MOTORIST;
-drop table MECHANIC;
-drop table USER;
+drop table if exists SERVICE_REQUEST;
+drop table if exists MESSAGE;
+drop table if exists MOTORIST;
+drop table if exists MECHANIC;
+drop table if exists USER;

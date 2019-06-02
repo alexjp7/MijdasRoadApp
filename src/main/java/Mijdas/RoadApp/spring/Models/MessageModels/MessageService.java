@@ -44,8 +44,31 @@ public class MessageService {
         for(Message re : allMessages.values()){
             boolean passesFilter = (stringFilter == null || stringFilter.isEmpty()) || (re.getMotoristUsername().toLowerCase().contains(stringFilter.toLowerCase())|| re.getMechanicUsername().toLowerCase().contains(stringFilter.toLowerCase()));
             if (passesFilter) {
+                arrayList.add(re);
+            }
+        }
+        
+        return arrayList;
+    }
+    public List<Message> findOnce(String stringFilter){//USE THIS TO FIND ALL REQUESTS FROM A USERNAME
+        updateTable();//compare whats in the singleton to whats in the db note::only checks for rowcounts, updatse to data need to be refreshed
+        ArrayList<Message> arrayList = new ArrayList<>();
+        List<String> otherUsers = new ArrayList<>();
+        for(Message re : allMessages.values()){
+            boolean passesFilter = (stringFilter == null || stringFilter.isEmpty()) || (re.getMotoristUsername().toLowerCase().contains(stringFilter.toLowerCase())|| re.getMechanicUsername().toLowerCase().contains(stringFilter.toLowerCase()));
+            if (passesFilter) {
+                if(!(otherUsers.contains(re.getMechanicUsername()) || otherUsers.contains(re.getMotoristUsername()))){
+                    if(re.getMotoristUsername().toLowerCase().contains(stringFilter.toLowerCase())){
+                        otherUsers.add(re.getMechanicUsername());
+                        System.out.println("mechanic added");
+                    }
+                    else{
+                        otherUsers.add(re.getMotoristUsername());
+                        System.out.println("motorist added");
+                    }
                     arrayList.add(re);
                     System.out.println(re.getMessageText());
+                }
             }
         }
         
@@ -54,16 +77,19 @@ public class MessageService {
     public List<Message> findFromUser(String myUser,String otherUser){
         List<Message> arrayList = new ArrayList<>();
         arrayList = findAll(myUser);
-        
+        ArrayList<Message> finalList = new ArrayList<>();
         for(Message me : arrayList){
             boolean passesFilter = (otherUser == null || otherUser.isEmpty()) || (me.getMotoristUsername().toLowerCase().contains(otherUser.toLowerCase())|| me.getMechanicUsername().toLowerCase().contains(otherUser.toLowerCase()));
+            System.out.println("bbbA");
             if (passesFilter) {
-                    arrayList.add(me);
-                    System.out.println(me.getMessageText());
+                    finalList.add(me);
+                    System.out.println("AAAAAAAAAAAAAAAA"+me.getMessageText());
+            }else{
+               
             }
         }
         
-        return arrayList;
+        return finalList;
     }
     public boolean checkReq(Message req){//check requirement is already in table
         
