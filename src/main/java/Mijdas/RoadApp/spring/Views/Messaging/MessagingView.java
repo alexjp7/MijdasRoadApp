@@ -60,17 +60,17 @@ public class MessagingView extends Div
        if(messages.getInstance().getMe()!=null){
            updateListPrivate(messages.getInstance().getMe(),messages.getInstance().getThem());
        }
-       
-//       horizontal2.add(messageText);
-//       horizontal2.add(messageButton);
-//       horizontal2.setWidth("50%");
-      // vertical.add(gridDetails);
-         vertical.add(messageText);
+        horizontal2.add(messageText);
+        horizontal2.add(messageButton);
+        horizontal2.setWidth("50%");
+        vertical.add(gridDetails);
+        vertical.add(horizontal2);
+        vertical.setWidth("50%");
       // vertical.add(messageButton);
-      // horizontal.setWidth("100%");
-       horizontal.add(vertical,grid);
+        horizontal.setWidth("100%");
+        horizontal.add(grid,vertical);
        
-       add(horizontal);
+        add(horizontal);
        
     }
     
