@@ -13,7 +13,6 @@ INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("apenrittb",false,1902
 INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("jkaasc",false,16666);
 INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("dlittond",false,8485);
 INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("cmaccarrolle",false,1937);
-INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("doliverasf",false,1432);
 INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("wrabbittg",false,26835);
 INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("kgrettonh",false,5024);
 INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("hmargachi",false,4205);
