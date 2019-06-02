@@ -5,3 +5,4 @@ source ./test data/userTest.sql
 source ./test data/motorists.sql
 source ./test data/inserts.sql
 source procedures.sql
+source messages.sql

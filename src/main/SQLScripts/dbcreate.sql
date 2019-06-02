@@ -56,5 +56,16 @@ CREATE TABLE SERVICE_REQUEST
 	CONSTRAINT pk1_service_requests PRIMARY KEY (requestNum),
 	CONSTRAINT fk1_service_requests FOREIGN KEY (motoristUsername) REFERENCES MOTORIST(username)  ON UPDATE CASCADE
 );
-
-
+                                  
+CREATE TABLE MESSAGE
+(
+	id 					BIGINT NOT NULL AUTO_INCREMENT,
+	motoristUsername 	VARCHAR (20) NOT NULL,
+	mechanicUsername	VARCHAR (20) NOT NULL,
+	messageText			VARCHAR (280), /*new tweet length */
+	motoristSent		BOOLEAN NOT NULL,
+	
+	CONSTRAINT pk1_message PRIMARY KEY (id),
+	CONSTRAINT fk1_message FOREIGN KEY (motoristUsername) REFERENCES MOTORIST(username)  ON UPDATE CASCADE,
+	CONSTRAINT fk2_message FOREIGN KEY (mechanicUsername) REFERENCES MECHANIC(username)  ON UPDATE CASCADE
+);
