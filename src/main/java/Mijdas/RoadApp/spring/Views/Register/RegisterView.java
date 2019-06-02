@@ -35,11 +35,8 @@ public class RegisterView extends Div
     {
         headerLayout.setSizeFull();
         header.setText("Welcome to Assistr!");
-       
-             
-        
+      
         setDefaultSetUp();
-        
         sethandlers();
         
     }

@@ -12,6 +12,7 @@ import com.vaadin.flow.component.grid.Grid.Column;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.renderer.TemplateRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
@@ -37,6 +38,13 @@ public class RequestsView extends Div
        grid.setHeightFull();
        grid.setColumns("motoristUsername","nearestAddress","details");
        
+          grid.setSelectionMode(Grid.SelectionMode.NONE);
+      grid.setItemDetailsRenderer(TemplateRenderer.<Requests> of(
+            "button on-click='handleClick'< Button </button>")
+             .withEventHandler("handleClick", c -> {
+                 grid.getDataProvider().refreshItem(c);
+                 System.out.println("TESTTTTT");              }));
+           grid.setDetailsVisibleOnClick(false);
        
        
        add(grid);

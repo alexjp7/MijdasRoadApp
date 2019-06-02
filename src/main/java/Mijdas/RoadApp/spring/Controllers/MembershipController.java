@@ -1,8 +1,5 @@
 package Mijdas.RoadApp.spring.Controllers;
 
-import Mijdas.RoadApp.spring.Models.UserModels.Membership;
-import Mijdas.RoadApp.spring.Models.UserModels.Vehicle;
-
 public class MembershipController
 {
     //private Membership membership;

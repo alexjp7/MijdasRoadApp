@@ -84,6 +84,18 @@
             <version>2.7.0.vaadin7</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin.componentfactory</groupId>
+            <artifactId>popup-demo</artifactId>
+            <version>1.1.0</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-server</artifactId>
+            <version>8.8.0.beta1</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 
     <build>

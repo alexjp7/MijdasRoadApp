@@ -15,4 +15,27 @@ and open the template in the editor.
     background-size: cover;
     background-color: lightgrey;
     background-position: center;
+    z-index: -999;
 }
+
+#textSpace
+{
+    display: inline-block;
+    background-color: hsla(211, 70%, 50%, 0.37);
+
+}
+
+h1
+{
+    font: italic 7.2em "Fira Sans", serif;
+    color: white;
+}
+
+
+h3
+{
+    
+    font: italic 4.2em "Fira Sans", serif;
+    color:white;
+}
+
