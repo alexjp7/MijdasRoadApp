@@ -45,6 +45,9 @@ public class RequestsView extends Div
        //This line below breaks the view:
        grid.addComponentColumn(car -> new Label(regoController.getRego(profileController.getUser(car.getMotoristUsername()).getLicenseNum().toString()).getModel())).setHeader("Car Model");
        grid.addComponentColumn(button -> new Button("Message",clickEvent ->{System.out.println("Message");})).setHeader("Actions");
+       
+       
+       
     }
     
     private void updateList(){
