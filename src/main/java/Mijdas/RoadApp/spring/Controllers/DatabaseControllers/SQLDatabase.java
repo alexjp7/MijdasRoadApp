@@ -138,7 +138,7 @@ public class SQLDatabase
         sqlString  += " SET "+field.getValue();
         sqlString  += "=" + value+" WHERE "+ whereClause;
 
-        System.out.println(sqlString);
+//        System.out.println(sqlString);
         
         stmt = connection.createStatement();
         stmt.executeUpdate(sqlString);
@@ -151,7 +151,7 @@ public class SQLDatabase
         
         query = "DELETE FROM " + table.getTableName() + " WHERE " + whereClause;
         
-        System.out.println(query);
+//        System.out.println(query);
         
         stmt = connection.createStatement();
         stmt.executeUpdate(query);

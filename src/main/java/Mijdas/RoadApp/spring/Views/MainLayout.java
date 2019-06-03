@@ -8,6 +8,8 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.server.PWA;
+//import com.vaadin.flow.theme.Theme;
+//import com.vaadin.flow.theme.lumo.Lumo;
 
 /*********************************************
  * PWA: Progressive Web Applications
@@ -15,6 +17,7 @@ import com.vaadin.flow.server.PWA;
  *******************************************/
 @StyleSheet("frontend://styles/common-styles.css")
 @PWA(name = "Project Base for Vaadin Flow with Spring", shortName = "Project Base")
+//@Theme(value=Lumo.class, variant = Lumo.DARK)
 
 public class MainLayout extends Div implements RouterLayout
 {
