@@ -7,7 +7,7 @@ import Mijdas.RoadApp.spring.Models.UserModels.Motorist;
  *
  * @author Mitch
  */
-public class ProfileController {
+public class ProfileController implements abstractController {
     
     public ProfileController()
     {
