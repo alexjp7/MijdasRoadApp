@@ -33,44 +33,55 @@ public class MessagingView extends Div
     VerticalLayout vertical = new VerticalLayout();
     TextField messageText = new TextField();
     
-    Button messageButton = new Button("Message", clickEvent->{SendMessage();});
+    Button messageButton = new Button("Message", clickEvent->{
+        SendMessage(messageText.getValue());
+        messageText.clear();
+    });
     
     //SESSION stuff for motorist or mechanic
     public MessagingView()
     {
        
-       boolean isMech;
-       setSizeFull();
-       //grid.setHeightFull();
-       
-       grid.setSelectionMode(Grid.SelectionMode.NONE);
-       gridDetails.setColumns("messageText");
-       if(session.getUserType() == UserType.MECHANIC){
-           grid.setColumns("motoristUsername");
-           grid.addItemClickListener(
-                event -> updateListPrivate(session.getUser().getUsername(), event.getItem().getMotoristUsername()));
-       }
-       else{
-           grid.setColumns("mechanicUsername");
-           grid.addItemClickListener(
-               event -> updateListPrivate(session.getUser().getUsername(), event.getItem().getMechanicUsername()));
-       }
+        boolean isMech;
+        setSizeFull();
+        //grid.setHeightFull();
+
+
+        grid.setHeight("100%");
+        gridDetails.setColumns("messageText");
+        if(session.getUserType() == UserType.MECHANIC){
+            grid.setColumns("motoristUsername");
+            grid.addItemClickListener(
+                event -> {updateListPrivate(session.getUser().getUsername(), event.getItem().getMotoristUsername());
+                });
+        }
+        else{
+            grid.setColumns("mechanicUsername");
+            grid.addItemClickListener(
+                event -> {updateListPrivate(session.getUser().getUsername(), event.getItem().getMechanicUsername());
+                });
+        }
         
-       updateList(session.getUser().getUsername());
+        updateList(session.getUser().getUsername());
        
-       if(messages.getInstance().getMe()!=null){
-           updateListPrivate(messages.getInstance().getMe(),messages.getInstance().getThem());
-       }
+        if(messages.getInstance().getMe()!=null){
+            updateListPrivate(messages.getInstance().getMe(),messages.getInstance().getThem());
+        }
+        else updateListPrivate();
+        
+        
+        messageText.setWidth("85%");
+        messageButton.setWidth("15%");
         horizontal2.add(messageText);
         horizontal2.add(messageButton);
-        horizontal2.setWidth("50%");
+        horizontal2.setWidth("90%");
         vertical.add(gridDetails);
         vertical.add(horizontal2);
         vertical.setWidth("50%");
       // vertical.add(messageButton);
-        horizontal.setWidth("100%");
+        horizontal.setWidth("90%");
         horizontal.add(grid,vertical);
-       
+        horizontal.setHeight("80%");
         add(horizontal);
         setId("background");
         add(new Footer());
@@ -88,14 +99,17 @@ public class MessagingView extends Div
         gridDetails.setItems(service.findFromUser(me,them,(session.getUserType() == UserType.MECHANIC)));
         
     }
-    
+    private void updateListPrivate(){
+        Message fake = new Message(1, "", "", "Click on a profile to the left to see your messages", true);
+        gridDetails.setItems(fake);
+    }
     public void jumpToMsgs(String from, String to){
         getUI().ifPresent(ui-> ui.getPage().executeJavaScript("window.location.href = 'messaging' "));
         updateListPrivate(from, to);
     }
 
-    private void SendMessage() {
-        System.out.println("MESSAGE SENT"); //To change body of generated methods, choose Tools | Templates.
+    private void SendMessage(String s) {
+        System.out.println("MESSAGE SENT: "+s); //To change body of generated methods, choose Tools | Templates.
     }
    
 }
