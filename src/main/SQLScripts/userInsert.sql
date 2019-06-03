@@ -22,14 +22,14 @@ SELECT * FROM USER JOIN MECHANIC WHERE USER.USERNAME='alex';
 
 SELECT * FROM USER JOIN MOTORIST WHERE USER.USERNAME='stevejp';
 
-INSERT INTO SERVICE_REQUEST VALUES("1","stevejp","123 fake st","cars broke",false, NULL);
-INSERT INTO SERVICE_REQUEST VALUES("2","stevejp","123 fake st","cars still broke",false, NULL);
-INSERT INTO SERVICE_REQUEST VALUES("3","stevejp","123 fake st","please send someone",false, NULL);
-INSERT INTO SERVICE_REQUEST VALUES("4","stevejp","123 fake st","cars all fixed now lol",true, NULL);
+INSERT INTO SERVICE_REQUEST VALUES("1","stevejp","123 fake st","cars broke",false, NULL, false);
+INSERT INTO SERVICE_REQUEST VALUES("2","stevejp","123 fake st","cars still broke",false, NULL, false);
+INSERT INTO SERVICE_REQUEST VALUES("3","stevejp","123 fake st","please send someone",false, NULL, false);
+INSERT INTO SERVICE_REQUEST VALUES("4","stevejp","123 fake st","cars all fixed now lol",true, NULL, false);
 
-INSERT INTO SERVICE_REQUEST VALUES("5","testmechanic","456 meme rd","pls help",false, NULL);
-INSERT INTO SERVICE_REQUEST VALUES("6","testmechanic","456 meme rd","engine smoking",false, NULL);
-INSERT INTO SERVICE_REQUEST VALUES("7","testmechanic","456 meme rd","all fixed",true, NULL);
+INSERT INTO SERVICE_REQUEST VALUES("5","testmechanic","456 meme rd","pls help",false, NULL, false);
+INSERT INTO SERVICE_REQUEST VALUES("6","testmechanic","456 meme rd","engine smoking",false, NULL, false);
+INSERT INTO SERVICE_REQUEST VALUES("7","testmechanic","456 meme rd","all fixed",true, NULL, false);
 
 
 SELECT * FROM SERVICE_REQUEST;

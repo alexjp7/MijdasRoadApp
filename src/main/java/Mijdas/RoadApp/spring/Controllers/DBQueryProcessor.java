@@ -412,7 +412,7 @@ public class DBQueryProcessor
         Requests request =null;
         int requestNum=0;
         String nearestAddress="",motoristUsername="",details="", mechanicUsername = "";
-        boolean isComplete=false;
+        boolean isComplete=false, isAccepted = false;
 
         ResultSet rs = null;
         ArrayList<Requests> requests = new ArrayList<Requests>();
@@ -431,7 +431,8 @@ public class DBQueryProcessor
                     details  = rs.getString(4);
                     isComplete     = rs.getBoolean(5);
                     mechanicUsername = rs.getString(6);
-                    request = new Requests(requestNum, nearestAddress,motoristUsername, details,isComplete, mechanicUsername);
+                    isAccepted = rs.getBoolean(7);
+                    request = new Requests(requestNum, nearestAddress,motoristUsername, details,isComplete, mechanicUsername, isAccepted);
                     requests.add(request);
                }
                 database.close();
@@ -446,7 +447,7 @@ public class DBQueryProcessor
         Requests request =null;
         int requestNum=0;
         String nearestAddress="",motoristUsername="",details="", mechanicUsername = "";
-        boolean isComplete=false;
+        boolean isComplete=false, isAccepted = false;
 
         ResultSet rs = null;
         try
@@ -464,10 +465,10 @@ public class DBQueryProcessor
                     details  = rs.getString(4);
                     isComplete     = rs.getBoolean(5);
                     mechanicUsername = rs.getString(6);
-                    
+                    isAccepted = rs.getBoolean(7);
                }
                 database.close();
-                request = new Requests(requestNum, nearestAddress,motoristUsername, details,isComplete, mechanicUsername);
+                request = new Requests(requestNum, nearestAddress,motoristUsername, details,isComplete, mechanicUsername, isAccepted);
            }
         }
         catch (SQLException e){e.printStackTrace();}
@@ -573,6 +574,34 @@ public class DBQueryProcessor
                 //int req = Integer.parseInt(requestNum);
                 String whereClause = "requestNum = " + requestNum;
                 database.deleteData(MijdasDB.Tables.SERVICE_REQUESTS, whereClause);
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void updateServiceMechanic(String requestNum, String mechanic) {
+        try {
+            if( !database.open() ) {
+                throw new SQLException("Error updating mechanic in service_request table");
+            } else {
+                
+                String whereClause = "requestNum = " + requestNum;
+                database.updateData(MijdasDB.Tables.SERVICE_REQUESTS, whereClause, MijdasDB.Service_Requests.MECHANICUSERNAME, mechanic);
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void updateServiceAccepted(String requestNum, String isAccepted) {
+        try {
+            if( !database.open() ) {
+                throw new SQLException("Error updating isAccepted in service_request table");
+            } else {
+                
+                String whereClause = "requestNum = " + requestNum;
+                database.updateData(MijdasDB.Tables.SERVICE_REQUESTS, whereClause, MijdasDB.Service_Requests.ISACCEPTED, isAccepted);
             }
         } catch(SQLException e) {
             e.printStackTrace();

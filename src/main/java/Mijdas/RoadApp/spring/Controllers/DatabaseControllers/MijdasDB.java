@@ -156,7 +156,9 @@ public class MijdasDB
 	ADDRESS("nearestAddress",true),
 	DETAILS("details",true),
 	LATITUDE("latitude",false),
-	LONGITUDE("longitude",false);
+	LONGITUDE("longitude",false),
+        MECHANICUSERNAME("mechanicUsername", false),
+        ISACCEPTED("isAccepted", false);
 
         private final String value;
         private final boolean isLiteral;

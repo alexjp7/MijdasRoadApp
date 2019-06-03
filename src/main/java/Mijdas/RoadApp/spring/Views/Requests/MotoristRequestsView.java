@@ -1,6 +1,7 @@
 package Mijdas.RoadApp.spring.Views.Requests;
 
 import Mijdas.RoadApp.spring.Controllers.ProfileController;
+import Mijdas.RoadApp.spring.Controllers.SessionController;
 import Mijdas.RoadApp.spring.Controllers.RegoController;
 import Mijdas.RoadApp.spring.Models.RequestModels.RequestService;
 import Mijdas.RoadApp.spring.Models.RequestModels.Requests;
@@ -23,14 +24,21 @@ public class MotoristRequestsView extends Div {
     private RequestService service = RequestService.getInstance();
     Grid<Requests> grid = new Grid<>(Requests.class);
     TextField searchField = new TextField();
+    SessionController session = SessionController.getInstance();
+    String username = "";
     public MotoristRequestsView()
     {
+        if(session.isLogin()) {
+            username = SessionController.getInstance().getUser().getUsername();
+        }
+        
         Button searchButton = new Button("Search", clickEvent->{updateList(searchField.getValue());});
         searchField.setPlaceholder("Street Name, City, or Postcode..");
         searchField.setWidth("260px"); //fit in placeholder text
         add(searchField);
         add(searchButton);
-        setSizeFull();
+        //setSizeFull();
+        setHeight("50%");
         grid.setHeightFull();
         grid.setColumns("nearestAddress","details");
        
@@ -39,6 +47,13 @@ public class MotoristRequestsView extends Div {
         add(grid);
         updateList();
         addActionColumn();
+        
+        Button refresh = new Button("Refresh");
+        refresh.addClickListener( clickEvent -> {
+            service.refreshData();
+            updateList(); 
+        });
+        add(refresh);
         //This line below breaks the view:
 
         //grid.addComponentColumn(button -> new Button("Cancel",clickEvent ->{System.out.println("Cancel");}));
@@ -47,7 +62,7 @@ public class MotoristRequestsView extends Div {
     }
     
     private void updateList(){
-        grid.setItems(service.findAll());
+        grid.setItems(service.findAll(username));
     }
     private void updateList(String s){
         grid.setItems(service.findAllPostCode(s));
@@ -60,10 +75,10 @@ public class MotoristRequestsView extends Div {
                 
             });
             Button cancel = new Button("Cancel");
-            System.out.print("Req #: " + request.getRequestNum());
             String requestNum = Integer.toString(request.getRequestNum());
             System.out.println(" Req #: " + requestNum);
-            System.out.println("Request to be deleted: " + requestNum);
+            String mechanic = request.getMechanicUsername();
+            System.out.println("Mechanic: " + mechanic);
             cancel.addClickListener( clickEvent ->{
                 service.deleteData(requestNum);
                 updateList();
@@ -72,6 +87,15 @@ public class MotoristRequestsView extends Div {
             message.setWidth("100%");
             cancel.setWidth("100%");
             layout.add(message, cancel);
+            if(mechanic != null && !request.getIsAccepted()) {
+                Button accept = new Button("Accept");
+                accept.addClickListener(clickEvent -> {
+                    service.setIsAccepted(requestNum, "true");
+                    updateList();
+                });
+                accept.setWidth("100%");
+                layout.add(accept);
+            }
             return layout;
         }).setHeader("Actions");
     }
