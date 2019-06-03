@@ -28,6 +28,12 @@ public class MainLayout extends Div implements RouterLayout
     //Components
     private Div header;
     private static Navbar navigation;
+    
+    private static Navbar getNavbar()
+    {
+        return  navigation = new Navbar();
+    }
+
 
     public MainLayout()
     {
@@ -35,32 +41,35 @@ public class MainLayout extends Div implements RouterLayout
         setSizeFull();
         setId("main-layout"); //Common layout themes
         //Info Prompt
-        infoPrompt = new Notification();
-        infoPrompt.setId("infoPrompt");
-        infoPrompt.setDuration(3000);
-        infoPrompt.setPosition(Notification.Position.TOP_CENTER);
-        
        
         //Navigation Bar
+        
         System.out.println("In home view constructor!");
-        navigation = new Navbar();
-        add(navigation);
-    }
+        add(getNavbar());
+    }   
+    
+    
 
     public static void reload()
     {
         //resets navigation for when relevant site navigations are made (login,logout etc).
+      
+        getNavbar().setNavigation();
         if(navigation == null)
         {   //TEST PRINT
             System.out.println("Navigation is set null ??? ?");
         }
-        navigation.setNavigation();
     }
 
     //TO-DO: Style this  based on error/prompt/etc.
     public static void displayInformationPrompt(String msg)
     {
-       infoPrompt.setText(msg);
-       infoPrompt.open();
+        infoPrompt = new Notification();
+        infoPrompt.setId("infoPrompt");
+        infoPrompt.setDuration(3000);
+        infoPrompt.setPosition(Notification.Position.TOP_CENTER);
+        
+        infoPrompt.setText(msg);
+        infoPrompt.open();
     }
 }

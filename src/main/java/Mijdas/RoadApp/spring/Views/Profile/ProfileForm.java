@@ -4,6 +4,7 @@ import Mijdas.RoadApp.spring.Controllers.ProfileController;
 import Mijdas.RoadApp.spring.Controllers.SessionController;
 import Mijdas.RoadApp.spring.Controllers.UserType;
 import Mijdas.RoadApp.spring.Models.UserModels.User;
+import Mijdas.RoadApp.spring.Views.MainLayout;
 import com.vaadin.flow.component.accordion.Accordion;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
@@ -44,6 +45,7 @@ class ProfileForm extends Div
     
     public ProfileForm()
     {
+     
         profileController = new ProfileController();
         setFieldProperties();
         setSizeFull();
@@ -52,6 +54,7 @@ class ProfileForm extends Div
         accordion.setId("accordion");
         fillFieldProperties();
         setEventListeners();
+   
       
     }
     
@@ -124,7 +127,7 @@ class ProfileForm extends Div
 
     private void setMechanicProfile()
     {
-        Div qualificationsComponents= new Div();
+        Div qualificationsComponents = new Div();
         accordion.add("Certificates", qualificationsComponents);
     }
 
@@ -152,13 +155,30 @@ class ProfileForm extends Div
         usernameText.setEnabled(false);
     }
     
-    private void fillFieldProperties()
+    private void fillFieldProperties() 
     {
+        //If user not set, i.e. session has been restarted, this is not accesible
+        if(loggedInUser == null)
+        {
+            MainLayout.reload();
+            MainLayout.displayInformationPrompt("Session Expired! Please Login again...");
+            getUI().ifPresent(ui-> ui.getPage().executeJavaScript("window.location.href = 'login' "));
+            return;
+        }
+        
         usernameText.setValue(loggedInUser.getUsername());
         firstNameText.setValue(loggedInUser.getFirstName());
         lastNameText.setValue(loggedInUser.getLastName());
         emailText.setValue(loggedInUser.getEmail());
         licenseText.setValue(loggedInUser.getLicenseNum().toString());
+
+       
+        
+        
+       
+      
+      
+  
     }
     
     private void setEventListeners()
