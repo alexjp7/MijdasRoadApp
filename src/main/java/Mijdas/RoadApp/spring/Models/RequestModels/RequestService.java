@@ -144,4 +144,17 @@ public class RequestService {
         db.deleteService(requestNum);
         refreshData();
     }
+    
+    public void setMechanic(String requestNum, String mechanic) {
+        DBQueryProcessor db = DBQueryProcessor.getInstance();
+        db.updateServiceMechanic(requestNum, mechanic);
+        refreshData();
+    }
+    
+    public void setIsAccepted(String requestNum, String isAccepted) {
+        DBQueryProcessor db = DBQueryProcessor.getInstance();
+        db.updateServiceAccepted(requestNum, isAccepted);
+        refreshData();
+    }
+    
 }

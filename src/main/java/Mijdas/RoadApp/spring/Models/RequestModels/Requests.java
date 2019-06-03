@@ -12,15 +12,16 @@ package Mijdas.RoadApp.spring.Models.RequestModels;
 public class Requests {
     private int requestNum;
     private String nearestAddress,motoristUsername,details, mechanicUsername;
-    private boolean isComplete;
+    private boolean isComplete, isAccepted;
 
-    public Requests(int requestNum, String nearestAddress, String motoristUsername, String details, boolean isComplete, String mechanicUsername) {
+    public Requests(int requestNum, String nearestAddress, String motoristUsername, String details, boolean isComplete, String mechanicUsername, boolean isAccepted) {
         this.requestNum = requestNum;
         this.nearestAddress = nearestAddress;
         this.motoristUsername = motoristUsername;
         this.details = details;
         this.isComplete = isComplete;
         this.mechanicUsername = mechanicUsername;
+        this.isAccepted = isAccepted;
     }
 
 
@@ -42,6 +43,10 @@ public class Requests {
     
     public String getMechanicUsername() {
         return mechanicUsername;
+    }
+    
+    public boolean getIsAccepted() {
+        return isAccepted;
     }
 
     public String getDetails() {
