@@ -21,9 +21,4 @@ public class MembershipController
     {
         //membership.Membership(registrationNumber, licenseNumber, creditCardType, creditCardName, creditCardNumber, creditCardCVV);
     }
-
-    public void vehicleForm(String licenseNumber, String manufacturer, String model, String color)
-    {
-        //vehicle.Vehicle(licenseNumber, manufacturer, model, color);
-    }
 }

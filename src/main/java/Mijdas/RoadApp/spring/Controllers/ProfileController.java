@@ -7,8 +7,8 @@ import Mijdas.RoadApp.spring.Models.UserModels.Motorist;
  *
  * @author Mitch
  */
-public class ProfileController {
-    
+public class ProfileController 
+{
     public ProfileController()
     {
 
@@ -23,5 +23,4 @@ public class ProfileController {
     {  
         return DBQueryProcessor.getInstance().getMotorist(user);
     }
-    
 }

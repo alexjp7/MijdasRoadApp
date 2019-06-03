@@ -1,6 +1,4 @@
-
 package Mijdas.RoadApp.spring.Models.UserModels;
-
 
 public class Vehicle
 {
@@ -57,5 +55,4 @@ public class Vehicle
     {
         return color;
     }
-    
 }

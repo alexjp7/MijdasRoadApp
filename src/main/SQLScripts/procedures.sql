@@ -52,7 +52,7 @@ DELIMITER $$
 CREATE PROCEDURE getVehicle(lNum VARCHAR(20)) 
 
 BEGIN
-	SELECT * FROM REGO WHERE license = lNum;
+	SELECT * FROM VEHICLE WHERE license = lNum;
 
 
 END$$

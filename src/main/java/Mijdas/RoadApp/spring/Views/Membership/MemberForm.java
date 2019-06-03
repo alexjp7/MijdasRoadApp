@@ -70,18 +70,16 @@ class MemberForm extends FormLayout
     {
         VerticalLayout formLayout = new VerticalLayout();
         HorizontalLayout layerOne = new HorizontalLayout(registrationNumber, licenseNumber);
-        HorizontalLayout layerTwo = new HorizontalLayout(manufacturer);
-        HorizontalLayout layerThree = new HorizontalLayout(model);
-        HorizontalLayout layerFour = new HorizontalLayout(color);
-        HorizontalLayout layerFive = new HorizontalLayout(creditCardName);
-        HorizontalLayout layerSix = new HorizontalLayout(creditCardNumber);
-        HorizontalLayout layerSeven = new HorizontalLayout(creditCardCVV, creditCardType);
+        HorizontalLayout layerTwo = new HorizontalLayout(manufacturer, model);   
+        HorizontalLayout layerThree = new HorizontalLayout(color);
+        HorizontalLayout layerFour = new HorizontalLayout(creditCardName, creditCardNumber);
+        HorizontalLayout layerFive = new HorizontalLayout(creditCardCVV, creditCardType);
         HorizontalLayout buttonGroup = new HorizontalLayout(submitPayment, clear);
 
         buttonGroup.setJustifyContentMode(FlexComponent.JustifyContentMode.START);
         buttonGroup.setWidthFull();
 
-        formLayout.add(layerOne, layerTwo, layerThree, layerFour, layerFive, layerSix, layerSeven, buttonGroup);
+        formLayout.add(layerOne, layerTwo, layerThree, layerFour, layerFive, buttonGroup);
         add(formLayout);
     }
 

@@ -20,7 +20,6 @@ public class MijdasDB
         MESSAGE("MESSAGE",messageFields),
         VEHICLE("VEHICLE",vehicleFields);
 
-
         private final String name;
         private boolean[] isFieldLiteral;
         private Tables(String name, boolean[] isFieldLiteral)
@@ -207,7 +206,7 @@ public class MijdasDB
            return isLiteral;
         }
     }
-
+    
     public enum Function
     {
         CHECK_MOTORIST("checkMotorist"),
