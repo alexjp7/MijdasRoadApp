@@ -1,4 +1,3 @@
-
 package Mijdas.RoadApp.spring.Controllers;
 
 import Mijdas.RoadApp.spring.Controllers.DatabaseControllers.Insertable;
@@ -69,7 +68,6 @@ public class DBQueryProcessor
      ********************************************************/
     public String [] makeLoginRequest(String username, String password)
     {
-
         ResultSet rs = null;
         String [] loginInfo = new String[2];
 
@@ -99,7 +97,6 @@ public class DBQueryProcessor
             database.close();
         }
         catch(SQLException e){e.printStackTrace();}
-
         return loginInfo;
     }
 
@@ -108,7 +105,6 @@ public class DBQueryProcessor
         ResultSet rs = null;
         String queryReturn = null;
         String whereClase = "username = '" + username +"';";
-
         try
         {
             if(!database.open())
@@ -208,6 +204,29 @@ public class DBQueryProcessor
         return false;
     }
     
+    public boolean writeVehicleUpdate(String licenseNumber, String registrationNumber, String manufacturer, String model, String color)
+    {
+        String profileWhereClause = "license = '" + licenseNumber + "';";
+        try
+        {
+            if(!database.open()){return false;}
+            else
+            {
+                //Update User information to User SQL table.
+                database.updateData(MijdasDB.Tables.VEHICLE, profileWhereClause, MijdasDB.Vehicle.REGPLATE, registrationNumber);    
+                database.updateData(MijdasDB.Tables.VEHICLE, profileWhereClause, MijdasDB.Vehicle.MANUFACTURER, manufacturer);
+                database.updateData(MijdasDB.Tables.VEHICLE, profileWhereClause, MijdasDB.Vehicle.MODEL, model);
+                database.updateData(MijdasDB.Tables.VEHICLE, profileWhereClause, MijdasDB.Vehicle.COLOR, color);
+                
+                //Close database session
+                database.close();
+                return true;
+            }
+        }
+        catch(SQLException e){e.printStackTrace();}
+        return false;
+    }
+    
     //args = (username, firstname, lastname, email, lnumber)
     public boolean writeMessage(String motorist, String mechanic, String messageTxt)
     {   //Insertable interface to enable a polymorphic behaviour for the table enums
@@ -245,8 +264,6 @@ public class DBQueryProcessor
         return false;
     }
     
-    
-
     /*******************************************************************
      * @param username - the username entered into login screen
      * @return - whether the user has data entered into motorist table
@@ -255,7 +272,6 @@ public class DBQueryProcessor
     {
         ResultSet rs;
         boolean userIsMotorist = false;
-
         try
         {
             if(!database.open()){return false;}
@@ -274,7 +290,6 @@ public class DBQueryProcessor
             }
         }
         catch (SQLException ex) {ex.printStackTrace(); }
-
         return userIsMotorist;
     }
     /*******************************************************************
@@ -315,7 +330,6 @@ public class DBQueryProcessor
         String email = "";
         Integer quality = null;
         Integer lNum = null;
-
         ResultSet rs = null;
         try
         {
@@ -336,7 +350,6 @@ public class DBQueryProcessor
                 database.close();
                 mechanic = new Mechanic(username, firstName, lastName, email, quality, lNum);
            }
-
         }
         catch (SQLException e){e.printStackTrace();}
         return mechanic;
@@ -351,7 +364,6 @@ public class DBQueryProcessor
         String model = "";
         String color = "";
         
-
         ResultSet rs = null;
         try
         {
@@ -371,7 +383,6 @@ public class DBQueryProcessor
                 database.close();
                 vehicle = new Vehicle(registration, manufacturer, model, color);
            }
-
         }
         catch (SQLException e){e.printStackTrace();}
         return vehicle;
@@ -410,7 +421,9 @@ public class DBQueryProcessor
         catch (SQLException e){e.printStackTrace();}
         return mechanic;
     }
-    public Requests getRequest(String rNum){
+    
+    public Requests getRequest(String rNum)
+    {
         Requests request =null;
         int requestNum=0;
         String nearestAddress="",motoristUsername="",details="";
@@ -441,7 +454,9 @@ public class DBQueryProcessor
         
         return request;
     }
-    public Message getMessage(String mNum){
+    
+    public Message getMessage(String mNum)
+    {
         Message message =null;
         int messageNum=0;
         String mechanicUsername="",motoristUsername="",userText="";
@@ -472,6 +487,7 @@ public class DBQueryProcessor
         
         return message;
     }
+    
     public int countRequest()
     {
         ResultSet rs;
@@ -494,6 +510,7 @@ public class DBQueryProcessor
         catch (SQLException ex) {ex.printStackTrace(); }
         return reqCount;
     }
+    
     public int countMessage()
     {
         ResultSet rs;
@@ -516,6 +533,7 @@ public class DBQueryProcessor
         catch (SQLException ex) {ex.printStackTrace(); }
         return mesCount;
     }
+    
     public boolean writeService(String...formData) {
         Insertable[] fields;
         try {
