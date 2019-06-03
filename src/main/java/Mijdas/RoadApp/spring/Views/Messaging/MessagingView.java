@@ -96,6 +96,7 @@ public class MessagingView extends Div
     }
     //DO STUFF WITH service.findFromUser(me,them)
     private void updateListPrivate(String me, String them){
+        messages.setBoth(me, them);
         gridDetails.setItems(service.findFromUser(me,them,(session.getUserType() == UserType.MECHANIC)));
         
     }
@@ -109,13 +110,15 @@ public class MessagingView extends Div
     }
 
     private void SendMessage(String s) {
-        System.out.println("MESSAGE: To["+messages.getThem()+"] From["+messages.getMe()+"]."); //To change body of generated methods, choose Tools | Templates.
+//        System.out.println("MESSAGE: To["+messages.getThem()+"] From["+messages.getMe()+"]."); //To change body of generated methods, choose Tools | Templates.
         
         if(SessionController.getInstance().getUserType() == UserType.MOTORIST){
             messages.sendMsg(messages.getMe(), messages.getThem(), s);
         }else if(SessionController.getInstance().getUserType() == UserType.MECHANIC){
             messages.sendMsg(messages.getThem(), messages.getMe(), s);
         }
+        updateList();
+        updateListPrivate(messages.getMe(), messages.getThem());
     }
    
 }

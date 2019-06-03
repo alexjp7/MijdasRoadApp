@@ -171,14 +171,6 @@ class ProfileForm extends Div
         lastNameText.setValue(loggedInUser.getLastName());
         emailText.setValue(loggedInUser.getEmail());
         licenseText.setValue(loggedInUser.getLicenseNum().toString());
-
-       
-        
-        
-       
-      
-      
-  
     }
     
     private void setEventListeners()

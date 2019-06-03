@@ -62,23 +62,23 @@ public class Navbar extends Div
             {
                 //Profile Page
                 links.get(1).add(new Icon(VaadinIcon.COGS), new Text("Profile"));
-                //Membership Page
-                links.get(2).add(new Icon(VaadinIcon.GROUP), new Text("Membership"));
-                //Service request page
-                links.get(3).add(new Icon(VaadinIcon.COGS), new Text("Service"));
-                
-                links.get(4).add(new Icon(VaadinIcon.CHAT), new Text("Messages"));
                 //View service requests
-                links.get(5).add(new Icon(VaadinIcon.CHAT), new Text("Requests"));
-
+                links.get(2).add(new Icon(VaadinIcon.TOOLBOX), new Text("Requests"));
+                //View Messages
+                links.get(3).add(new Icon(VaadinIcon.CHAT), new Text("Messages"));
+                //Membership Page
+                links.get(4).add(new Icon(VaadinIcon.GROUP), new Text("Membership"));
+                //Service request page
+                links.get(5).add(new Icon(VaadinIcon.PLUS), new Text("Service"));
+                
             }
             else if(SessionController.getInstance().getUserType() == UserType.MECHANIC)
             {
                 //Profile Page
                 links.get(1).add(new Icon(VaadinIcon.COGS), new Text("Profile"));
                 //View requests
-                links.get(2).add(new Icon(VaadinIcon.TOOLBOX), new Text("View Requests"));
-                
+                links.get(2).add(new Icon(VaadinIcon.TOOLBOX), new Text("Requests"));
+                //View Messages
                 links.get(3).add(new Icon(VaadinIcon.CHAT), new Text("Messages"));
             }
             add(logOut);
