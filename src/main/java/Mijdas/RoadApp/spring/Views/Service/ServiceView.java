@@ -8,7 +8,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 @Route(value="service", layout=MainLayout.class)
-@StyleSheet("frontend://styles/registerForm.css")
+@StyleSheet("frontend://styles/common-styles.css")
 @PageTitle("Service")
 
 /**
