@@ -56,7 +56,7 @@ public class RequestService {
         ArrayList<Requests> arrayList = new ArrayList<>();
         for(Requests re : allReq.values()){
             boolean passesFilter = (stringFilter == null || stringFilter.isEmpty()) || re.getNearestAddress().toLowerCase().contains(stringFilter.toLowerCase());
-            System.out.println(passesFilter);
+//            System.out.println(passesFilter);
             if (passesFilter && re.isIsComplete() == false) {
                     arrayList.add(re);
                    // System.out.println(re.getRequestNum());
@@ -108,7 +108,7 @@ public class RequestService {
     public void updateTable(){
         Requests r;
         int tableCount=DBQueryProcessor.getInstance().countRequest();
-        System.out.println(tableCount+" number of rows");
+//        System.out.println(tableCount+" number of rows");
         if(tableCount==allReq.size()){
             return;
         }

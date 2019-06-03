@@ -121,7 +121,7 @@ public class MessageService {
     public void updateTable(){
         Message r;
         int tableCount=DBQueryProcessor.getInstance().countMessage();
-        System.out.println(tableCount+" number of rows");
+//        System.out.println(tableCount+" number of rows");
         if(tableCount==allMessages.size()){
             return;
         }

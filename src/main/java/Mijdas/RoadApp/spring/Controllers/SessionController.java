@@ -100,7 +100,7 @@ public class SessionController
             System.out.println("not motorist/mechanic");
         }
        //TEST PRINT
-       System.out.println(loggedinUser.toString());
+//       System.out.println(loggedinUser.toString());
     }
 
     public UserType getUserType()
