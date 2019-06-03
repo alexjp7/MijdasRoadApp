@@ -52,6 +52,7 @@ class ProfileForm extends Div
         setFormLayout();
 //        accordion.setSizeFull();
         accordion.setId("accordion");
+        accordion.setSizeUndefined();
         fillFieldProperties();
         setEventListeners();
    
