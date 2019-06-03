@@ -212,28 +212,23 @@ public class DBQueryProcessor
     public boolean writeMessage(String motorist, String mechanic, String messageTxt)
     {   //Insertable interface to enable a polymorphic behaviour for the table enums
 //        String profileWhereClause = "username = '" + username + "';";
-        String storageFieldsClause = "motoristUsername, mechanicUsername, messageText, motoristSent";
-        String storageValuesClause = "\""+motorist+"\",\""+mechanic+"\",\""+messageTxt+"\",";
+//        String storageFieldsClause = "motoristUsername, mechanicUsername, messageText, motoristSent";
+        Insertable[] storageFieldsClause = new  MijdasDB.Message[]{MijdasDB.Message.MOTORISTUSERNAME, MijdasDB.Message.MECHANICUSERNAME, MijdasDB.Message.MESSAGETEXT, MijdasDB.Message.MOTORISTSENT};
+        String[] storageValuesClause = {motorist, mechanic, messageTxt, "null"};
         try
         {
             if(!database.open()){return false;}
             else
             {
                 //Update User information to User SQL table.
-//                database.writeToStorage(MijdasDB.Tables.MESSAGE, storageFieldsClause, storageValuesClause);
-//                database.updateData(MijdasDB.Tables.USER, profileWhereClause, MijdasDB.User.FNAME, fName);
-//                database.updateData(MijdasDB.Tables.USER, profileWhereClause, MijdasDB.User.LNAME, lName);
-//                database.updateData(MijdasDB.Tables.USER, profileWhereClause, MijdasDB.User.EMAIL, email);
-                
                 //check current session if sender is a motorist or mechanic
                 if(SessionController.getInstance().getUserType() == UserType.MECHANIC){
-                    storageValuesClause = storageValuesClause + "false";
+                    storageValuesClause[3] = "false";
                     database.writeToStorage(MijdasDB.Tables.MESSAGE, storageFieldsClause, storageValuesClause);
                 }
                 else if(SessionController.getInstance().getUserType() == UserType.MOTORIST){
-                    storageValuesClause = storageValuesClause + "true";
+                    storageValuesClause[3] = "true";
                     database.writeToStorage(MijdasDB.Tables.MESSAGE, storageFieldsClause, storageValuesClause);
-//                    database.updateData(MijdasDB.Tables.MOTORISTS, profileWhereClause, MijdasDB.Motorist.LICENSE, lnum);
                 }
 
                 //Close database session

@@ -92,6 +92,7 @@ public class SQLDatabase
         sqlString += table.getTableName();
         sqlString +="("+sqlFields+") ";
         sqlString +="VALUES (" + sqlValues +")";
+        System.out.println("SQLSTRING: "+sqlString);
         stmt = connection.createStatement();
         stmt.executeUpdate(sqlString);
     }

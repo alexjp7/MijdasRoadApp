@@ -123,7 +123,7 @@ public class MijdasDB
     }
     public enum Message implements Insertable
     {
-        ID("Id",false),
+        ID("id",false),
 	MOTORISTUSERNAME("motoristUsername",true),
 	MECHANICUSERNAME("mechanicUsername",true),
 	MESSAGETEXT("messageText",true),
