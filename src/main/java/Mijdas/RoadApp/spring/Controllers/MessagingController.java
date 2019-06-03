@@ -5,12 +5,14 @@
  */
 package Mijdas.RoadApp.spring.Controllers;
 
+
 /**
  *
  * @author Joel
  */
 public class MessagingController {
     private static MessagingController instance;
+    
     
     private String me,them;
 
@@ -39,6 +41,11 @@ public class MessagingController {
     public void setBoth(String me, String them){
         this.them = them;
         this.me= me;
+    }
+    
+    public boolean sendMsg(String motorist, String mechanic, String messageTxt){
+//        System.out.println("sendMsg("+motorist+", "+mechanic+", "+messageTxt+") called.");
+        return DBQueryProcessor.getInstance().writeMessage(motorist, mechanic, messageTxt);
     }
     
 }

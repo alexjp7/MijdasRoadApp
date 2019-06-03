@@ -12,6 +12,8 @@ import Mijdas.RoadApp.spring.Models.UserModels.Vehicle;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.util.ArrayList;
+
 /**********************************************************************8
  *
  * This class acts a service provider for the main
@@ -231,28 +233,23 @@ public class DBQueryProcessor
     public boolean writeMessage(String motorist, String mechanic, String messageTxt)
     {   //Insertable interface to enable a polymorphic behaviour for the table enums
 //        String profileWhereClause = "username = '" + username + "';";
-        String storageFieldsClause = "motoristUsername, mechanicUsername, messageText, motoristSent";
-        String storageValuesClause = "\""+motorist+"\",\""+mechanic+"\",\""+messageTxt+"\",";
+//        String storageFieldsClause = "motoristUsername, mechanicUsername, messageText, motoristSent";
+        Insertable[] storageFieldsClause = new  MijdasDB.Message[]{MijdasDB.Message.MOTORISTUSERNAME, MijdasDB.Message.MECHANICUSERNAME, MijdasDB.Message.MESSAGETEXT, MijdasDB.Message.MOTORISTSENT};
+        String[] storageValuesClause = {motorist, mechanic, messageTxt, "null"};
         try
         {
             if(!database.open()){return false;}
             else
             {
                 //Update User information to User SQL table.
-//                database.writeToStorage(MijdasDB.Tables.MESSAGE, storageFieldsClause, storageValuesClause);
-//                database.updateData(MijdasDB.Tables.USER, profileWhereClause, MijdasDB.User.FNAME, fName);
-//                database.updateData(MijdasDB.Tables.USER, profileWhereClause, MijdasDB.User.LNAME, lName);
-//                database.updateData(MijdasDB.Tables.USER, profileWhereClause, MijdasDB.User.EMAIL, email);
-                
                 //check current session if sender is a motorist or mechanic
                 if(SessionController.getInstance().getUserType() == UserType.MECHANIC){
-                    storageValuesClause = storageValuesClause + "false";
+                    storageValuesClause[3] = "false";
                     database.writeToStorage(MijdasDB.Tables.MESSAGE, storageFieldsClause, storageValuesClause);
                 }
                 else if(SessionController.getInstance().getUserType() == UserType.MOTORIST){
-                    storageValuesClause = storageValuesClause + "true";
+                    storageValuesClause[3] = "true";
                     database.writeToStorage(MijdasDB.Tables.MESSAGE, storageFieldsClause, storageValuesClause);
-//                    database.updateData(MijdasDB.Tables.MOTORISTS, profileWhereClause, MijdasDB.Motorist.LICENSE, lnum);
                 }
 
                 //Close database session
@@ -423,12 +420,46 @@ public class DBQueryProcessor
         return mechanic;
     }
     
-    public Requests getRequest(String rNum)
-    {
+    public ArrayList<Requests> getRequest(){
         Requests request =null;
         int requestNum=0;
-        String nearestAddress="",motoristUsername="",details="";
-        boolean isComplete=false;
+        String nearestAddress="",motoristUsername="",details="", mechanicUsername = "";
+        boolean isComplete=false, isAccepted = false;
+
+        ResultSet rs = null;
+        ArrayList<Requests> requests = new ArrayList<Requests>();
+        try
+        {
+           if(!database.open()){return null;}
+           else
+           {
+               rs = database.executeProcedure(MijdasDB.Procedure.GET_ALL_REQUEST, "");
+
+               while(rs.next())
+               {
+                    requestNum  = rs.getInt(1);
+                    motoristUsername = rs.getString(2);
+                    nearestAddress = rs.getString(3);
+                    details  = rs.getString(4);
+                    isComplete     = rs.getBoolean(5);
+                    mechanicUsername = rs.getString(6);
+                    isAccepted = rs.getBoolean(7);
+                    request = new Requests(requestNum, nearestAddress,motoristUsername, details,isComplete, mechanicUsername, isAccepted);
+                    requests.add(request);
+               }
+                database.close();
+           }
+        }
+        catch (SQLException e){e.printStackTrace();}
+        
+        return requests;
+    }
+    
+    public Requests getRequest(String rNum){
+        Requests request =null;
+        int requestNum=0;
+        String nearestAddress="",motoristUsername="",details="", mechanicUsername = "";
+        boolean isComplete=false, isAccepted = false;
 
         ResultSet rs = null;
         try
@@ -445,10 +476,11 @@ public class DBQueryProcessor
                     nearestAddress = rs.getString(3);
                     details  = rs.getString(4);
                     isComplete     = rs.getBoolean(5);
-                    
+                    mechanicUsername = rs.getString(6);
+                    isAccepted = rs.getBoolean(7);
                }
                 database.close();
-                request = new Requests(requestNum, nearestAddress,motoristUsername, details,isComplete);
+                request = new Requests(requestNum, nearestAddress,motoristUsername, details,isComplete, mechanicUsername, isAccepted);
            }
         }
         catch (SQLException e){e.printStackTrace();}
@@ -549,5 +581,61 @@ public class DBQueryProcessor
             e.printStackTrace();
         }
         return false;
+    }
+    
+    public void deleteService(String requestNum) {
+        try {
+            if( !database.open() ) {
+                throw new SQLException("Error deleting service request from database");
+            } else {
+                //int req = Integer.parseInt(requestNum);
+                String whereClause = "requestNum = " + requestNum;
+                database.deleteData(MijdasDB.Tables.SERVICE_REQUESTS, whereClause);
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void updateServiceMechanic(String requestNum, String mechanic) {
+        try {
+            if( !database.open() ) {
+                throw new SQLException("Error updating mechanic in service_request table");
+            } else {
+                
+                String whereClause = "requestNum = " + requestNum;
+                database.updateData(MijdasDB.Tables.SERVICE_REQUESTS, whereClause, MijdasDB.Service_Requests.MECHANICUSERNAME, mechanic);
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void updateServiceAccepted(String requestNum, String isAccepted) {
+        try {
+            if( !database.open() ) {
+                throw new SQLException("Error updating isAccepted in service_request table");
+            } else {
+                
+                String whereClause = "requestNum = " + requestNum;
+                database.updateData(MijdasDB.Tables.SERVICE_REQUESTS, whereClause, MijdasDB.Service_Requests.ISACCEPTED, isAccepted);
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void updateServiceComplete(String requestNum, String isComplete) {
+        try {
+            if( !database.open() ) {
+                throw new SQLException("Error updating isCompleted in service_request table");
+            } else {
+                
+                String whereClause = "requestNum = " + requestNum;
+                database.updateData(MijdasDB.Tables.SERVICE_REQUESTS, whereClause, MijdasDB.Service_Requests.ISCOMPLETE, isComplete);
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

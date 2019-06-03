@@ -9,6 +9,7 @@ import Mijdas.RoadApp.spring.Views.Service.ServiceView;
 import Mijdas.RoadApp.spring.Views.Messaging.MessagingView;
 import Mijdas.RoadApp.spring.Views.Profile.ProfileView;
 import Mijdas.RoadApp.spring.Views.Requests.RequestsView;
+import Mijdas.RoadApp.spring.Views.Requests.MotoristRequestsView;
 import com.vaadin.flow.router.RouterLink;
 import java.util.ArrayList;
 
@@ -17,7 +18,7 @@ import java.util.ArrayList;
  *  Provides the sites Navigation links
  *  to the views of the system
  */
-public class NavigationController
+public class NavigationController implements abstractController
 {
    //Singleton controller
     private static class ControllerInstance
@@ -78,9 +79,10 @@ public class NavigationController
             if(SessionController.getInstance().getUserType() == UserType.MOTORIST)
             {
                 links.add(new RouterLink(null, ProfileView.class));
+                links.add(new RouterLink(null, MotoristRequestsView.class));
+                links.add(new RouterLink(null, MessagingView.class));
                 links.add(new RouterLink(null, MemberView.class));
                 links.add(new RouterLink(null, ServiceView.class));
-                
             }
             else if(SessionController.getInstance().getUserType() == UserType.MECHANIC)
             {

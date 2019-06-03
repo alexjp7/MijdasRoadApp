@@ -92,6 +92,7 @@ public class SQLDatabase
         sqlString += table.getTableName();
         sqlString +="("+sqlFields+") ";
         sqlString +="VALUES (" + sqlValues +")";
+//        System.out.println("SQLSTRING: "+sqlString);
         stmt = connection.createStatement();
         stmt.executeUpdate(sqlString);
     }
@@ -137,10 +138,23 @@ public class SQLDatabase
         sqlString  += " SET "+field.getValue();
         sqlString  += "=" + value+" WHERE "+ whereClause;
 
-        System.out.println(sqlString);
+//        System.out.println(sqlString);
         
         stmt = connection.createStatement();
         stmt.executeUpdate(sqlString);
+    }
+    
+    public void deleteData(MijdasDB.Tables table, String whereClause) throws SQLException {
+        String query = "";
+        
+        if(whereClause.isEmpty()) return;
+        
+        query = "DELETE FROM " + table.getTableName() + " WHERE " + whereClause;
+        
+//        System.out.println(query);
+        
+        stmt = connection.createStatement();
+        stmt.executeUpdate(query);
     }
 
     /******************************************************

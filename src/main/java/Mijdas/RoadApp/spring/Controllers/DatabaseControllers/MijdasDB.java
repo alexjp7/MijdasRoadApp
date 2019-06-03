@@ -122,7 +122,7 @@ public class MijdasDB
     }
     public enum Message implements Insertable
     {
-        ID("Id",false),
+        ID("id",false),
 	MOTORISTUSERNAME("motoristUsername",true),
 	MECHANICUSERNAME("mechanicUsername",true),
 	MESSAGETEXT("messageText",true),
@@ -155,7 +155,10 @@ public class MijdasDB
 	ADDRESS("nearestAddress",true),
 	DETAILS("details",true),
 	LATITUDE("latitude",false),
-	LONGITUDE("longitude",false);
+	LONGITUDE("longitude",false),
+        MECHANICUSERNAME("mechanicUsername", false),
+        ISACCEPTED("isAccepted", false),
+        ISCOMPLETE("isComplete", false);
 
         private final String value;
         private final boolean isLiteral;
@@ -230,6 +233,7 @@ public class MijdasDB
         GET_MECHANIC("getMechanic"),
         GET_VEHICLE("getVehicle"),
         GET_REQUEST("getRequest"),
+        GET_ALL_REQUEST("getAllRequest"),
         GET_MESSAGE("getMessage"),
         COUNT_REQUESTS("countRequests"),
         COUNT_MESSAGE("countMessage");

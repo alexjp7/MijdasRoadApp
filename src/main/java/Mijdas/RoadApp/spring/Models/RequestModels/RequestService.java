@@ -9,6 +9,8 @@ import Mijdas.RoadApp.spring.Controllers.DBQueryProcessor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -56,7 +58,7 @@ public class RequestService {
         ArrayList<Requests> arrayList = new ArrayList<>();
         for(Requests re : allReq.values()){
             boolean passesFilter = (stringFilter == null || stringFilter.isEmpty()) || re.getNearestAddress().toLowerCase().contains(stringFilter.toLowerCase());
-            System.out.println(passesFilter);
+//            System.out.println(passesFilter);
             if (passesFilter && re.isIsComplete() == false) {
                     arrayList.add(re);
                    // System.out.println(re.getRequestNum());
@@ -105,10 +107,10 @@ public class RequestService {
             }
         }
     }
-    public void updateTable(){
+    public void updateTable() {
         Requests r;
         int tableCount=DBQueryProcessor.getInstance().countRequest();
-        System.out.println(tableCount+" number of rows");
+//        System.out.println(tableCount+" number of rows");
         if(tableCount==allReq.size()){
             return;
         }
@@ -116,16 +118,43 @@ public class RequestService {
             refreshData();
             return;
         }
-        for (int i = 1; i <=tableCount; i++) {
-            r=DBQueryProcessor.getInstance().getRequest(Integer.toString(i));
-            if(!checkReq(r)){
-                save(r);//if it doesnt exist save it as a new
+//        for (int i = 1; i <=tableCount; i++) {
+//            r=DBQueryProcessor.getInstance().getRequest(Integer.toString(i));
+//            if(!checkReq(r)){
+//                save(r);//if it doesnt exist save it as a new
+//            }
+//        }
+        ArrayList<Requests> requests = DBQueryProcessor.getInstance().getRequest();
+//        System.out.println("array size: " + requests.size());
+        for(int i = 0; i < requests.size(); i++) {
+            if( !checkReq(requests.get(i)) ) {
+                save(requests.get(i));
+//                System.out.println("req #: " + requests.get(i).getRequestNum());
             }
-            
         }
+
     }
     public void refreshData(){
         allReq.clear();
         updateTable();
     }
+    
+    public void deleteData(String requestNum) {
+        DBQueryProcessor db = DBQueryProcessor.getInstance();
+        db.deleteService(requestNum);
+        refreshData();
+    }
+    
+    public void setMechanic(String requestNum, String mechanic) {
+        DBQueryProcessor db = DBQueryProcessor.getInstance();
+        db.updateServiceMechanic(requestNum, mechanic);
+        refreshData();
+    }
+    
+    public void setIsAccepted(String requestNum, String isAccepted) {
+        DBQueryProcessor db = DBQueryProcessor.getInstance();
+        db.updateServiceAccepted(requestNum, isAccepted);
+        refreshData();
+    }
+    
 }
