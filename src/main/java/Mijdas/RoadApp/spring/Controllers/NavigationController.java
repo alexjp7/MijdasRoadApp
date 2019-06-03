@@ -77,9 +77,9 @@ public class NavigationController
         {
             if(SessionController.getInstance().getUserType() == UserType.MOTORIST)
             {
+                links.add(new RouterLink(null, ProfileView.class));
                 links.add(new RouterLink(null, MemberView.class));
                 links.add(new RouterLink(null, ServiceView.class));
-                links.add(new RouterLink(null, ProfileView.class));
                 links.add(new RouterLink(null, MessagingView.class));
             }
             else if(SessionController.getInstance().getUserType() == UserType.MECHANIC)

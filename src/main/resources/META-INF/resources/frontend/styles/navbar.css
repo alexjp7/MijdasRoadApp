@@ -20,12 +20,19 @@ and open the template in the editor.
    background-color: hsla(211, 70%, 50%, 0.86);
    text-align: center;
    padding:10px;
+   
 }
 .navElement
 {
     color:white;
     padding:10px;
 }
+.logoutElement
+{
+    color:white;
+    /*padding:10px;*/
+}
+.logoutElement:hover{background-color:#0067C6!important}
 
 #logo
 {

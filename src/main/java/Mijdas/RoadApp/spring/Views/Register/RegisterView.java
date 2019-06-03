@@ -41,8 +41,10 @@ public class RegisterView extends Div
         setSizeFull();
         bodyDiv.setSizeFull();
         header.setText("Welcome to Assistr!");
-        setId("registerView");
-        bodyDiv.setId("background");
+//        setId("registerView");
+//        bodyDiv.setId("background");
+        this.addClassNames("registerView");
+        bodyDiv.addClassNames("background");
         bodyDiv.addClassNames("w3-display-container", "w3-animate-opacity");
         add(new Footer());
         
@@ -62,11 +64,14 @@ public class RegisterView extends Div
         headerLayout.removeAll();
         contentDiv.removeAll();
         //Styles
-        directive1.setId("directiveText");
+//        directive1.setId("directiveText");
+        directive1.addClassNames("directiveText");
         directive1.setText("Fill in your details!");
         backButton.setText("Back");
-        backButton.setId("backButton");
-        form.setId("registerForm");
+        backButton.addClassNames("backButton");
+//        backButton.setId("backButton");
+        form.addClassNames("registerForm");
+//        form.setId("registerForm");
         
         backButton.setIcon(new Icon(VaadinIcon.ARROW_LEFT));
         backButton = new Button();
@@ -83,11 +88,14 @@ public class RegisterView extends Div
         headerLayout.removeAll();
         contentDiv.removeAll();
         //Styles
-        directive1.setId("directiveText");
+//        directive1.setId("directiveText");
+        directive1.addClassNames("directiveText");
         directive1.setText("Fill in your details!");
         backButton.setText("Back");
-        backButton.setId("backButton");
-        form.setId("registerForm");
+        backButton.addClassNames("backButton");
+        form.addClassNames("registerForm");
+//        backButton.setId("backButton");
+//        form.setId("registerForm");
         backButton.setIcon(new Icon(VaadinIcon.ARROW_LEFT));
     
         //add(backButton);
@@ -108,7 +116,8 @@ public class RegisterView extends Div
         introText.setText("Lets get you started with your account..");
         directive1.setText("I am a...");
         headerLayout.add(header,introText, directive1);
-        directive1.setId("directive1");
+        directive1.addClassNames("directive1");
+//        directive1.setId("directive1");
 
        
         contentDiv.setAlignItems(FlexComponent.Alignment.CENTER);;
@@ -117,8 +126,10 @@ public class RegisterView extends Div
 
         motoristButton.setClassName("userButton");
         mechanicButton.setClassName("userButton");
-        motoristButton.setId("motoristButton");
-        mechanicButton.setId("mechanicButton");
+        motoristButton.addClassNames("motoristButton");
+        mechanicButton.addClassNames("mechanicButton");
+//        motoristButton.setId("motoristButton");
+//        mechanicButton.setId("mechanicButton");
 
         motoristButton.setIcon(new Icon((VaadinIcon.CAR)));
         mechanicButton.setIcon(new Icon((VaadinIcon.WRENCH)));

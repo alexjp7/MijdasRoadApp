@@ -8,34 +8,23 @@ and open the template in the editor.
     Author     : Alex
 */
 
-#registerView
-{
-    
-}
+/*#registerView{}
 
 
-#registerForm
-{
-   display:inherit;
-}
+#registerForm{display:inherit;}
 
-#profileForm
-{
-   display:-webkit-inline-box;
-}
+#profileForm{display:-webkit-inline-box;}
 
-#passwordMatch
-{
-
-}
-
+#passwordMatch{}*/
+.registerView{}
+.registerForm{display:inherit;}
+.profileForm{display:-webkit-inline-box;}
+.passwordMatch{}
 .v-textfield
 {
   border: dashed green;
   border:     thin dashed;
 }
-
-
 .userButton
 {
     padding:50px;
@@ -44,23 +33,14 @@ and open the template in the editor.
     width: 50%;
     background-color: #7ac2ff38  !important;
 }
-
-
+.directive1{width: 56%;align-self: end;}
  
- #directive1
- {
-        width: 56%;
-        align-self: end;
- }
+.backButton1{}
  
- #backButton1
- {
-
- }
+.directiveText{display:-webkit-inline-box;width:26%;}
+/* #directive1{width: 56%;align-self: end;}
  
- #directiveText
- {
-      display:-webkit-inline-box;
-      width:26%;
- }
+ #backButton1{}
+ 
+ #directiveText{display:-webkit-inline-box;width:26%;}*/
     
