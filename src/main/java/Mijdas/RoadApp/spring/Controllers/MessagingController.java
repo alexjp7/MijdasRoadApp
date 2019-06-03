@@ -44,7 +44,7 @@ public class MessagingController {
     }
     
     public boolean sendMsg(String motorist, String mechanic, String messageTxt){
-        System.out.println("sendMsg("+motorist+", "+mechanic+", "+messageTxt+") called.");
+//        System.out.println("sendMsg("+motorist+", "+mechanic+", "+messageTxt+") called.");
         return DBQueryProcessor.getInstance().writeMessage(motorist, mechanic, messageTxt);
     }
     
