@@ -110,7 +110,7 @@ public class MessagingView extends Div
     }
 
     private void SendMessage(String s) {
-        System.out.println("MESSAGE: To["+messages.getThem()+"] From["+messages.getMe()+"]."); //To change body of generated methods, choose Tools | Templates.
+//        System.out.println("MESSAGE: To["+messages.getThem()+"] From["+messages.getMe()+"]."); //To change body of generated methods, choose Tools | Templates.
         
         if(SessionController.getInstance().getUserType() == UserType.MOTORIST){
             messages.sendMsg(messages.getMe(), messages.getThem(), s);

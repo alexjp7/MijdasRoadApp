@@ -125,11 +125,11 @@ public class RequestService {
 //            }
 //        }
         ArrayList<Requests> requests = DBQueryProcessor.getInstance().getRequest();
-        System.out.println("array size: " + requests.size());
+//        System.out.println("array size: " + requests.size());
         for(int i = 0; i < requests.size(); i++) {
             if( !checkReq(requests.get(i)) ) {
                 save(requests.get(i));
-                System.out.println("req #: " + requests.get(i).getRequestNum());
+//                System.out.println("req #: " + requests.get(i).getRequestNum());
             }
         }
 

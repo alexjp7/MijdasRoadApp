@@ -60,14 +60,14 @@ public class MessageService {
                 if(!(otherUsers.contains(re.getMechanicUsername()) || otherUsers.contains(re.getMotoristUsername()))){
                     if(re.getMotoristUsername().toLowerCase().contains(stringFilter.toLowerCase())){
                         otherUsers.add(re.getMechanicUsername());
-                        System.out.println("mechanic added");
+//                        System.out.println("mechanic added");
                     }
                     else{
                         otherUsers.add(re.getMotoristUsername());
-                        System.out.println("motorist added");
+//                        System.out.println("motorist added");
                     }
                     arrayList.add(re);
-                    System.out.println(re.getMessageText());
+//                    System.out.println(re.getMessageText());
                 }
             }
         }
