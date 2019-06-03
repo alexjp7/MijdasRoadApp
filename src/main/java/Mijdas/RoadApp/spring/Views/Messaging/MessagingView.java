@@ -117,7 +117,7 @@ public class MessagingView extends Div
         }else if(SessionController.getInstance().getUserType() == UserType.MECHANIC){
             messages.sendMsg(messages.getThem(), messages.getMe(), s);
         }
-        updateList();
+        updateList(session.getUser().getUsername());
         updateListPrivate(messages.getMe(), messages.getThem());
     }
    
