@@ -33,7 +33,7 @@ public class Navbar extends Div
 
         setId("navbar");
         logOut.setId("logOut");
-        logOut.addClassName("navElement");
+        logOut.addClassName("logoutElement");
         logOut.addClickListener(e->handleLogout());
 
         setWidthFull();
