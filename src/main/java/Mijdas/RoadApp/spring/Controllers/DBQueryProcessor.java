@@ -421,7 +421,7 @@ public class DBQueryProcessor
            if(!database.open()){return null;}
            else
            {
-               rs = database.executeProcedure(MijdasDB.Procedure.GET_REQUEST, "");
+               rs = database.executeProcedure(MijdasDB.Procedure.GET_ALL_REQUEST, "");
 
                while(rs.next())
                {

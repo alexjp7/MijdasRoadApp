@@ -68,8 +68,8 @@ public class Navbar extends Div
                 links.get(3).add(new Icon(VaadinIcon.COGS), new Text("Service"));
                 
                 links.get(4).add(new Icon(VaadinIcon.CHAT), new Text("Messages"));
-
-
+                //View service requests
+                links.get(5).add(new Icon(VaadinIcon.CHAT), new Text("Requests"));
 
             }
             else if(SessionController.getInstance().getUserType() == UserType.MECHANIC)
