@@ -158,7 +158,8 @@ public class MijdasDB
 	LATITUDE("latitude",false),
 	LONGITUDE("longitude",false),
         MECHANICUSERNAME("mechanicUsername", false),
-        ISACCEPTED("isAccepted", false);
+        ISACCEPTED("isAccepted", false),
+        ISCOMPLETE("isComplete", false);
 
         private final String value;
         private final boolean isLiteral;

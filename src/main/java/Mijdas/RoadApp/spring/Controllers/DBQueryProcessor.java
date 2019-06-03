@@ -607,4 +607,18 @@ public class DBQueryProcessor
             e.printStackTrace();
         }
     }
+    
+    public void updateServiceComplete(String requestNum, String isComplete) {
+        try {
+            if( !database.open() ) {
+                throw new SQLException("Error updating isCompleted in service_request table");
+            } else {
+                
+                String whereClause = "requestNum = " + requestNum;
+                database.updateData(MijdasDB.Tables.SERVICE_REQUESTS, whereClause, MijdasDB.Service_Requests.ISCOMPLETE, isComplete);
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

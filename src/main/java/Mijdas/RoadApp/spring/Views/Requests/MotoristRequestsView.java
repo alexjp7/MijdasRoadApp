@@ -69,7 +69,7 @@ public class MotoristRequestsView extends Div {
     }
     
     private void addActionColumn() {
-        grid.addComponentColumn(car -> new Label(regoController.getRego(profileController.getUser(car.getMotoristUsername()).getLicenseNum().toString()).getModel())).setHeader("Car Model");
+        grid.addComponentColumn(request -> new Label(regoController.getRego(profileController.getUser(request.getMotoristUsername()).getLicenseNum().toString()).getModel())).setHeader("Car Model");
         grid.addComponentColumn(request -> {
             Button message = new Button("Message",clickEvent ->{
                 
@@ -93,8 +93,14 @@ public class MotoristRequestsView extends Div {
                     service.setIsAccepted(requestNum, "true");
                     updateList();
                 });
+                Button deny = new Button("Deny");
+                deny.addClickListener(clickEvent -> {
+                    service.setMechanic(requestNum, "null");
+                    updateList();
+                });
                 accept.setWidth("100%");
-                layout.add(accept);
+                deny.setWidth("100%");
+                layout.add(accept, deny);
             }
             return layout;
         }).setHeader("Actions");
