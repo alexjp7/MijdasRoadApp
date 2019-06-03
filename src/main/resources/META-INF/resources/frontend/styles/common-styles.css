@@ -25,6 +25,13 @@ v-Notification
     color:red !important;
     background-color: black;
 }
+
+#background
+{
+    background-color: #cac6c66e;
+}
  /*
     background-color:hsl(199, 4%, 30%);
  */
+
+.w3-animate-opacity{animation:opac 0.8s}@keyframes opac{from{opacity:0} to{opacity:1}}

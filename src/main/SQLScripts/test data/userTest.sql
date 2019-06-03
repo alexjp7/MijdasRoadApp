@@ -14,7 +14,7 @@ INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("doliverasf",false,143
 INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("testmechanic",false,1433);
 
 INSERT INTO REGO VALUES(5225, "ST3VEJ", "Subaru", "2002 WRX Impreza", "Blue");
-INSERT INTO REGO VALUES(7849, "TESTMK", "Nissan", "1994 R32 Skyline", "Black");
+INSERT INTO REGO VALUES(1433, "TESTMK", "Nissan", "1994 R32 Skyline", "Black");
 
 
 insert into USER (username, password, fName, lName, email) values ('rtomblin0', 'lxgpitnNnY', 'Rockie', 'Tomblin', 'rtomblin0@mtv.com');
@@ -32,7 +32,6 @@ insert into USER (username, password, fName, lName, email) values ('apenrittb', 
 insert into USER (username, password, fName, lName, email) values ('jkaasc', 'BxPoVoD7h7Du', 'Jemie', 'Kaas', 'jkaasc@dedecms.com');
 insert into USER (username, password, fName, lName, email) values ('dlittond', 'vnD57VQC7Qc', 'Deena', 'Litton', 'dlittond@businessweek.com');
 insert into USER (username, password, fName, lName, email) values ('cmaccarrolle', 'f9kUTox2QiO', 'Corina', 'MacCarroll', 'cmaccarrolle@topsy.com');
-insert into USER (username, password, fName, lName, email) values ('doliverasf', 'ukdBKLNOQLr6', 'Dickie', 'Oliveras', 'doliverasf@uiuc.edu');
 insert into USER (username, password, fName, lName, email) values ('wrabbittg', 'BBCw1NP', 'Willamina', 'Rabbitt', 'wrabbittg@hostgator.com');
 insert into USER (username, password, fName, lName, email) values ('kgrettonh', 'efsC73D', 'Keen', 'Gretton', 'kgrettonh@timesonline.co.uk');
 insert into USER (username, password, fName, lName, email) values ('hmargachi', 'eP1y3QMGdHgK', 'Heinrik', 'Margach', 'hmargachi@icq.com');

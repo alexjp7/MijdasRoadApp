@@ -33,10 +33,10 @@ public class Navbar extends Div
 
         setId("navbar");
         logOut.setId("logOut");
-        logOut.addClassName("navElement");
+        logOut.addClassName("logoutElement");
         logOut.addClickListener(e->handleLogout());
 
-        setSizeFull();
+        setWidthFull();
         setNavigation();
     }
 
@@ -60,21 +60,19 @@ public class Navbar extends Div
         {
             if(SessionController.getInstance().getUserType() == UserType.MOTORIST)
             {
-                //Membership Page
-                links.get(1).add(new Icon(VaadinIcon.GROUP), new Text("Membership"));
                 //Profile Page
-                links.get(3).add(new Icon(VaadinIcon.COGS), new Text("Profile"));
+                links.get(1).add(new Icon(VaadinIcon.COGS), new Text("Profile"));
+                //Membership Page
+                links.get(2).add(new Icon(VaadinIcon.GROUP), new Text("Membership"));
                 //Service request page
-                links.get(2).add(new Icon(VaadinIcon.COGS), new Text("Service"));
-                //View motorist requests
-                links.get(4).add(new Icon(VaadinIcon.COGS), new Text("View Requests"));
+                links.get(3).add(new Icon(VaadinIcon.COGS), new Text("Service"));
             }
             else if(SessionController.getInstance().getUserType() == UserType.MECHANIC)
             {
                 //Profile Page
                 links.get(1).add(new Icon(VaadinIcon.COGS), new Text("Profile"));
                 //View requests
-                links.get(2).add(new Icon(VaadinIcon.COGS), new Text("View Requests"));
+                links.get(2).add(new Icon(VaadinIcon.TOOLBOX), new Text("View Requests"));
                 
                 links.get(3).add(new Icon(VaadinIcon.CHAT), new Text("Messages"));
             }

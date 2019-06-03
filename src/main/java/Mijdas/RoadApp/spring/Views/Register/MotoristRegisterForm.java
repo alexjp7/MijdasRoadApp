@@ -38,7 +38,6 @@ class MotoristRegisterForm extends FormLayout
         //Assume invalid inputs on page construction
         isValidUsername = false;
         isValidPassword = false;
-
         setFieldProperties();
         setEventListeners();
         setFormLayout();
