@@ -13,6 +13,8 @@ import Mijdas.RoadApp.spring.Models.UserModels.Vehicle;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.util.ArrayList;
+
 /**********************************************************************8
  *
  * This class acts a service provider for the main
@@ -405,10 +407,45 @@ public class DBQueryProcessor
         catch (SQLException e){e.printStackTrace();}
         return mechanic;
     }
+    
+    public ArrayList<Requests> getRequest(){
+        Requests request =null;
+        int requestNum=0;
+        String nearestAddress="",motoristUsername="",details="", mechanicUsername = "";
+        boolean isComplete=false;
+
+        ResultSet rs = null;
+        ArrayList<Requests> requests = new ArrayList<Requests>();
+        try
+        {
+           if(!database.open()){return null;}
+           else
+           {
+               rs = database.executeProcedure(MijdasDB.Procedure.GET_ALL_REQUEST, "");
+
+               while(rs.next())
+               {
+                    requestNum  = rs.getInt(1);
+                    motoristUsername = rs.getString(2);
+                    nearestAddress = rs.getString(3);
+                    details  = rs.getString(4);
+                    isComplete     = rs.getBoolean(5);
+                    mechanicUsername = rs.getString(6);
+                    request = new Requests(requestNum, nearestAddress,motoristUsername, details,isComplete, mechanicUsername);
+                    requests.add(request);
+               }
+                database.close();
+           }
+        }
+        catch (SQLException e){e.printStackTrace();}
+        
+        return requests;
+    }
+    
     public Requests getRequest(String rNum){
         Requests request =null;
         int requestNum=0;
-        String nearestAddress="",motoristUsername="",details="";
+        String nearestAddress="",motoristUsername="",details="", mechanicUsername = "";
         boolean isComplete=false;
 
         ResultSet rs = null;
@@ -426,10 +463,11 @@ public class DBQueryProcessor
                     nearestAddress = rs.getString(3);
                     details  = rs.getString(4);
                     isComplete     = rs.getBoolean(5);
+                    mechanicUsername = rs.getString(6);
                     
                }
                 database.close();
-                request = new Requests(requestNum, nearestAddress,motoristUsername, details,isComplete);
+                request = new Requests(requestNum, nearestAddress,motoristUsername, details,isComplete, mechanicUsername);
            }
         }
         catch (SQLException e){e.printStackTrace();}
@@ -525,5 +563,19 @@ public class DBQueryProcessor
             e.printStackTrace();
         }
         return false;
+    }
+    
+    public void deleteService(String requestNum) {
+        try {
+            if( !database.open() ) {
+                throw new SQLException("Error deleting service request from database");
+            } else {
+                //int req = Integer.parseInt(requestNum);
+                String whereClause = "requestNum = " + requestNum;
+                database.deleteData(MijdasDB.Tables.SERVICE_REQUESTS, whereClause);
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

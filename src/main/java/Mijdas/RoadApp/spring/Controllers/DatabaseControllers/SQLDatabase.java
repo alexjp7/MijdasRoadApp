@@ -143,6 +143,19 @@ public class SQLDatabase
         stmt = connection.createStatement();
         stmt.executeUpdate(sqlString);
     }
+    
+    public void deleteData(MijdasDB.Tables table, String whereClause) throws SQLException {
+        String query = "";
+        
+        if(whereClause.isEmpty()) return;
+        
+        query = "DELETE FROM " + table.getTableName() + " WHERE " + whereClause;
+        
+        System.out.println(query);
+        
+        stmt = connection.createStatement();
+        stmt.executeUpdate(query);
+    }
 
     /******************************************************
      * @param fields - SQL table fields
