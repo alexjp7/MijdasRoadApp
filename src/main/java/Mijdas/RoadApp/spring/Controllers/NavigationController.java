@@ -18,7 +18,7 @@ import java.util.ArrayList;
  *  Provides the sites Navigation links
  *  to the views of the system
  */
-public class NavigationController
+public class NavigationController implements abstractController
 {
    //Singleton controller
     private static class ControllerInstance
