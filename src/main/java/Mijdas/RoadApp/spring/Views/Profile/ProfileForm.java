@@ -58,8 +58,8 @@ class ProfileForm extends Div
     {
         profileController = new ProfileController();
         regoController = new RegoController();
-        vehicle = new Vehicle("", "", "", "");
-        vehicle = new Vehicle("", "", "", "");
+        vehicle = new Vehicle("", "", "" ,"");
+        vehicle = regoController.getRego(loggedInUser.getLicenseNum().toString());
         setFieldProperties();
         setSizeFull();
         setFormLayout();
@@ -170,6 +170,7 @@ class ProfileForm extends Div
         manufacturer.setValue(vehicle.getManufacterer());
         model.setValue(vehicle.getModel());
         color.setValue(vehicle.getColor());
+        fillFieldProperties();
     }
     
     private void setFieldProperties()
@@ -199,20 +200,34 @@ class ProfileForm extends Div
             getUI().ifPresent(ui-> ui.getPage().executeJavaScript("window.location.href = 'login' "));
             return;
         }
-        
+        else
+        {
         //Personal Fill
         usernameText.setValue(loggedInUser.getUsername());
         firstNameText.setValue(loggedInUser.getFirstName());
         lastNameText.setValue(loggedInUser.getLastName());
         emailText.setValue(loggedInUser.getEmail());
         licenseText.setValue(loggedInUser.getLicenseNum().toString());
+        }
         
+        if(vehicle == null)
+        {
+            licenseNumber.setValue(loggedInUser.getLicenseNum().toString());    
+            registrationNumber.setValue("");
+            manufacturer.setValue("");
+            model.setValue("");
+            color.setValue("");
+        }
+        else
+        {
         //Vehicle Fill
-        licenseNumber.setValue(loggedInUser.getLicenseNum().toString());
-        registrationNumber.setValue(vehicle.getRegistration());
-        manufacturer.setValue(vehicle.getManufacterer());
-        model.setValue(vehicle.getModel());
-        color.setValue(vehicle.getColor());
+            vehicle = regoController.getRego(loggedInUser.getLicenseNum().toString());
+            licenseNumber.setValue(loggedInUser.getLicenseNum().toString());
+            registrationNumber.setValue(vehicle.getRegistration());
+            manufacturer.setValue(vehicle.getManufacterer());
+            model.setValue(vehicle.getModel());
+            color.setValue(vehicle.getColor());
+        }
     }
     
     private void setEventListeners()

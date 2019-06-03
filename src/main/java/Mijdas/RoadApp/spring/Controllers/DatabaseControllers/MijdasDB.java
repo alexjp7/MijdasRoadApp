@@ -72,7 +72,7 @@ public class MijdasDB
        USERNAME("username",true),
        HASMEMBERSHIP("hasMembership",false),
        PAYMENTOPTION("paymentOption",true),
-       LICENSE("license",false);
+       LICENSE("lNum",false);
 
        private final String value;
        private final boolean isLiteral;

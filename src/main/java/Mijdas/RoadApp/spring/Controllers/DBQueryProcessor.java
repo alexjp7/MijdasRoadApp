@@ -371,7 +371,7 @@ public class DBQueryProcessor
            else
            {
                rs = database.executeProcedure(MijdasDB.Procedure.GET_VEHICLE, lNum);
-
+               
                while(rs.next())
                {
                     license = rs.getInt(1);
@@ -385,6 +385,7 @@ public class DBQueryProcessor
            }
         }
         catch (SQLException e){e.printStackTrace();}
+        System.out.println(vehicle.toString());
         return vehicle;
     }
 
