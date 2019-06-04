@@ -72,3 +72,14 @@ CREATE TABLE MESSAGE
     CONSTRAINT fk1_message FOREIGN KEY (motoristUsername) REFERENCES MOTORIST(username)  ON UPDATE CASCADE,
     CONSTRAINT fk2_message FOREIGN KEY (mechanicUsername) REFERENCES MECHANIC(username)  ON UPDATE CASCADE
 );
+
+CREATE TABLE REVIEWS
+(
+	id 			BIGINT NOT NULL AUTO_INCREMENT,
+	mechanicUsername	VARCHAR (20) NOT NULL,
+	messageText		VARCHAR (280), /*new tweet length */
+	starRating		INT(1) NOT NULL,
+	
+	CONSTRAINT pk1_reviews PRIMARY KEY (id),
+	CONSTRAINT fk2_reviews FOREIGN KEY (mechanicUsername) REFERENCES MECHANIC(username)  ON UPDATE CASCADE
+);
