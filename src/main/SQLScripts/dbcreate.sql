@@ -37,7 +37,7 @@ CREATE TABLE VEHICLE
 (
     license         INT(8) NOT NULL,
     regPlate        VARCHAR(6) NOT NULL,
-    manufacturer    VARCHAR(10) NOT NULL,
+    manufacturer    VARCHAR(20) NOT NULL,
     model           VARCHAR(50) NOT NULL,
     color           VARCHAR(20) NOT NULL,
     hasMemberShip   BOOLEAN NOT NULL,   
