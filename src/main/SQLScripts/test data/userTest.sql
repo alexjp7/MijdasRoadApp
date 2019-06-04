@@ -13,8 +13,8 @@ INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("stevejp",false,5225);
 INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("doliverasf",false,1432);
 INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("testmechanic",false,1433);
 
-INSERT INTO REGO VALUES(5225, "ST3VEJ", "Subaru", "2002 WRX Impreza", "Blue");
-INSERT INTO REGO VALUES(1433, "TESTMK", "Nissan", "1994 R32 Skyline", "Black");
+INSERT INTO VEHICLE VALUES(5225, "ST3VEJ", "Subaru", "2002 WRX Impreza", "Blue");
+INSERT INTO VEHICLE VALUES(1433, "TESTMK", "Nissan", "1994 R32 Skyline", "Black");
 
 
 insert into USER (username, password, fName, lName, email) values ('rtomblin0', 'lxgpitnNnY', 'Rockie', 'Tomblin', 'rtomblin0@mtv.com');
