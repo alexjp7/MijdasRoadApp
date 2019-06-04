@@ -1,6 +1,10 @@
 package Mijdas.RoadApp.spring.Views.Membership;
 
 import Mijdas.RoadApp.spring.Controllers.MembershipController;
+import Mijdas.RoadApp.spring.Controllers.RegoController;
+import Mijdas.RoadApp.spring.Controllers.SessionController;
+import Mijdas.RoadApp.spring.Models.UserModels.User;
+import Mijdas.RoadApp.spring.Models.UserModels.Vehicle;
 import Mijdas.RoadApp.spring.Views.MainLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
@@ -10,17 +14,19 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @StyleSheet("frontend://styles/MembershipForm.css")
 class MemberForm extends FormLayout
 {
+    private RegoController regoController;
+    private Vehicle vehicle;
     private MembershipController membershipController;
-
-    private TextField registrationNumber = new TextField("Vehicle Registration");
+    private User loggedInUser = SessionController.getInstance().getUser();
+    private Select<String> vehicleType = new Select<>("");
     private TextField licenseNumber = new TextField("License Number");
-    private TextField manufacturer = new TextField("Manufacturer");
-    private TextField model = new TextField("Model");
-    private TextField color = new TextField("Color");
     private Select<String> creditCardType = new Select<>("VISA","MASTERCARD");
     private TextField creditCardName = new TextField("Name On Card");
     private TextField creditCardNumber = new TextField("Card Number");
@@ -30,6 +36,9 @@ class MemberForm extends FormLayout
 
     public MemberForm()
     {
+        regoController = new RegoController();
+        vehicle = new Vehicle("", "", "", "");
+        vehicle = regoController.getRego(loggedInUser.getLicenseNum().toString());
         membershipController = new MembershipController();
         setFieldProperties();
         setEventListeners();
@@ -38,13 +47,10 @@ class MemberForm extends FormLayout
 
     private void setFieldProperties()
     {
-        registrationNumber.setPlaceholder("xxxxxx");
-        licenseNumber.setPlaceholder("xxxxxxxx");
-        manufacturer.setPlaceholder("Subaru");
-        model.setPlaceholder("2002 WRX Impreza");
-        color.setPlaceholder("Subaru Blue");
+        vehicleType.setLabel("Choose A Vehicle");
+        vehicleType.setPlaceholder("Vehicle...");
         creditCardType.setLabel("Card Type");
-        creditCardType.setPlaceholder("VISA");
+        creditCardType.setPlaceholder("Card Type...");
         creditCardName.setSizeFull();
         creditCardName.setPlaceholder("John Smith");
         creditCardNumber.setSizeFull();
@@ -53,11 +59,11 @@ class MemberForm extends FormLayout
         submitPayment.setId("formButton");
         clear.setId("formButton");
 
-        registrationNumber.setRequired(true);
-        licenseNumber.setRequired(true);
+        licenseNumber.setEnabled(false);
         creditCardName.setRequired(true);
         creditCardNumber.setRequired(true);
         creditCardCVV.setRequired(true);
+        licenseNumber.setValue(loggedInUser.getLicenseNum().toString());
     }
 
     private void setEventListeners()
@@ -68,24 +74,29 @@ class MemberForm extends FormLayout
 
     private void setFormLayout()
     {
+       /* ArrayList<Vehicle> vehicles = regoController.getRegoList(lNum);
+        for (Vehicle vehicle1 : vehicles) 
+        {
+            System.out.println(vehicles);
+        }    */
+
+        vehicleType.setItems("");
         VerticalLayout formLayout = new VerticalLayout();
-        HorizontalLayout layerOne = new HorizontalLayout(registrationNumber, licenseNumber);
-        HorizontalLayout layerTwo = new HorizontalLayout(manufacturer, model);   
-        HorizontalLayout layerThree = new HorizontalLayout(color);
-        HorizontalLayout layerFour = new HorizontalLayout(creditCardName, creditCardNumber);
-        HorizontalLayout layerFive = new HorizontalLayout(creditCardCVV, creditCardType);
+        HorizontalLayout layerOne = new HorizontalLayout(vehicleType, licenseNumber);
+        HorizontalLayout layerTwo = new HorizontalLayout(creditCardName, creditCardNumber);
+        HorizontalLayout layerThree = new HorizontalLayout(creditCardCVV, creditCardType);
         HorizontalLayout buttonGroup = new HorizontalLayout(submitPayment, clear);
 
         buttonGroup.setJustifyContentMode(FlexComponent.JustifyContentMode.START);
         buttonGroup.setWidthFull();
 
-        formLayout.add(layerOne, layerTwo, layerThree, layerFour, layerFive, buttonGroup);
+        formLayout.add(layerOne, layerTwo, layerThree, buttonGroup);
         add(formLayout);
     }
 
     public void submitForm()
     {
-        /*if(membershipController.submitMemberShipPayment(registrationNumber.getValue(), licenseNumber.getValue(), manufacturer.getValue(), model.getValue(), color.getValue(), creditCardType.getValue(), creditCardName.getValue(), creditCardNumber.getValue(), creditCardCVV.getValue()))
+        /*if(membershipController.submitMemberShipPayment(vehicleType.getValue(), creditCardType.getValue(), creditCardName.getValue(), creditCardNumber.getValue(), creditCardCVV.getValue()))
         {
             getUI().ifPresent(ui-> ui.getPage().executeJavaScript("window.location.href = '' "));
         }
@@ -101,7 +112,6 @@ class MemberForm extends FormLayout
 
     public void clearForm()
     {
-        registrationNumber.clear();
         licenseNumber.clear();
         creditCardName.clear();
         creditCardNumber.clear();
