@@ -477,6 +477,31 @@ public class DBQueryProcessor
         return membership;
     }
     
+    public boolean getVehicleMembership(String username) {
+        ResultSet rs = null;
+        int lNum = 0;
+        boolean hasMembership = false;
+        try {
+            if(!database.open()) {
+                throw new SQLException("Error fetching vehicle membership data");
+            }
+            System.out.println("Username: " + username);
+            rs = database.executeProcedure(MijdasDB.Procedure.GET_MOTORIST, "'" + username + "'");
+            while(rs.next()) {
+                lNum = rs.getInt(9);
+            }
+            System.out.println("lNum: " + lNum);
+            rs = database.executeProcedure(MijdasDB.Procedure.GET_VEHICLE, "'" + lNum + "'");
+            while(rs.next()) {
+                hasMembership = rs.getBoolean(6);
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("M: " + hasMembership);
+        return hasMembership;
+    }
+    
     public Vehicle getVehicle(String lNum)
     {
         Vehicle vehicle = null;

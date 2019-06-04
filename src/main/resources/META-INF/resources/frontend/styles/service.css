@@ -1,0 +1,13 @@
+.content-center {
+    width: 100vw !important;
+    padding-top: 20px;
+}
+
+.form-center > * {
+    margin: auto;
+}
+
+.label {
+    font-size: 24px;
+    font-weight: 700;
+}
