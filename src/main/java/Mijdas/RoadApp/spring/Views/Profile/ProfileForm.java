@@ -14,7 +14,9 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
+import java.util.ArrayList;
 
 //basic CSS form for now
 @StyleSheet("frontend://styles/Profile.css")
@@ -41,7 +43,8 @@ class ProfileForm extends Div
     private TextField color = new TextField("Color");
     
     //Fields for Membership
-    private TextField memberRego = new TextField("Current Membership Active on:");
+    //private TextField memberRego = new TextField("Current Membership Active on:");
+    private Select<String> vehicleType = new Select<>("\"Current Membership Active on:\"");
     
     //Accordion
     private Accordion accordion = new Accordion();
@@ -146,27 +149,38 @@ class ProfileForm extends Div
         
         vehicleComponents.setSizeFull();
         accordion.add("Vehicles", vehicleComponents);
+        ////////////////////////////////////////////////////////////////////////////////////////////////
+        ArrayList<Vehicle> vehicles = regoController.getRegoList(loggedInUser.getLicenseNum().toString());
+        ArrayList<String> stringList = new ArrayList<String>();
+        for (Vehicle vehicle1 : vehicles) 
+        {
+           stringList.add(vehicle1.toString());
+        }    
+
+        vehicleType.setItems(stringList);
         
         Div memberShipComponents = new Div();
         VerticalLayout formLayout1 = new VerticalLayout();
         
-        HorizontalLayout layerOneMember = new HorizontalLayout(memberRego);
+        HorizontalLayout layerOneMember = new HorizontalLayout(vehicleType);
+        HorizontalLayout layerTwoMember = new HorizontalLayout(membershipStatusText);
         HorizontalLayout buttonRowMember = new HorizontalLayout(cancelMembership);
         
         formLayout1.addClassNames("w3-display-container", "w3-animate-opacity", "w3-center");
         layerOneMember.addClassNames("w3-large", "w3-animate-top");
+        layerTwoMember.addClassNames("w3-large", "w3-animate-top");
         buttonRowMember.addClassNames("w3-large", "w3-animate-top");
         cancelMembership.addClassNames("w3-button", "w3-dark-grey");
         
         buttonRow.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
         buttonRow.setWidthFull();
-        formLayout1.add(layerOneMember, buttonRowMember);
+        formLayout1.add(layerOneMember, layerTwoMember, buttonRowMember);
         memberShipComponents.add(formLayout1);
         memberShipComponents.setSizeFull();
         
         accordion.add("Membership", memberShipComponents);
         formLayout.add(layerOne, layerTwo, layerThree, buttonRow);
-        
+        ////////////////////////////////////////////////////////////////////////////////////////////////
         Div paymentComponents = new Div();
         accordion.add("Billing", paymentComponents);
     }
@@ -224,6 +238,7 @@ class ProfileForm extends Div
         licenseNumber.setEnabled(false);
         
         //Membership
+        membershipStatusText.setRequired(true);
         
     }
     
@@ -265,7 +280,9 @@ class ProfileForm extends Div
             model.setValue(vehicle.getModel());
             color.setValue(vehicle.getColor());
             
-         //Membership
+        //Membership
+        
+      
         }
     }
     
