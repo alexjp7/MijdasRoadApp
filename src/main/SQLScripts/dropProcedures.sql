@@ -4,6 +4,7 @@ DROP PROCEDURE getMechanic;
 DROP PROCEDURE getMotorist;
 DROP PROCEDURE getRequest;
 DROP PROCEDURE getAllRequest;
+DROP PROCEDURE getAllMechanicNames;
 DROP PROCEDURE getMessage;
 DROP PROCEDURE getReview;
 DROP PROCEDURE getAvgRating;

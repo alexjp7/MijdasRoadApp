@@ -437,6 +437,29 @@ public class DBQueryProcessor
         return mechanic;
     }
     
+    public ArrayList<String> getMechanicNames(){
+        String username = "";
+
+        ResultSet rs = null;
+        ArrayList<String> mechanics = new ArrayList<String>();
+        try
+        {
+           if(!database.open()){return null;}
+           else
+           {
+               rs = database.executeProcedure(MijdasDB.Procedure.GET_ALL_MECHANIC_NAMES, "");
+               while(rs.next())
+               {
+                    username  = rs.getString(1);
+                    mechanics.add(username);
+               }
+                database.close();
+           }
+        }
+        catch (SQLException e){e.printStackTrace();}
+        return mechanics;
+    }
+    
     public ArrayList<Requests> getRequest(){
         Requests request =null;
         int requestNum=0;

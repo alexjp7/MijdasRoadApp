@@ -263,6 +263,7 @@ public class MijdasDB
         GET_VEHICLE("getVehicle"),
         GET_REQUEST("getRequest"),
         GET_ALL_REQUEST("getAllRequest"),
+        GET_ALL_MECHANIC_NAMES("getAllMechanicNames"),
         GET_MESSAGE("getMessage"),
         GET_REVIEW("getReview"),
         GET_AVGRATING("getAvgRating"),

@@ -5,6 +5,7 @@
  */
 package Mijdas.RoadApp.spring.Views.Feedback;
 
+import Mijdas.RoadApp.spring.Controllers.FeedbackController;
 import Mijdas.RoadApp.spring.Controllers.ProfileController;
 import Mijdas.RoadApp.spring.Controllers.SessionController;
 import Mijdas.RoadApp.spring.Controllers.UserType;
@@ -17,6 +18,7 @@ import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
@@ -30,6 +32,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.renderer.IconRenderer;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.ComboBox;
+import java.util.ArrayList;
 
 /**
  *
@@ -39,12 +42,11 @@ import com.vaadin.ui.ComboBox;
 @StyleSheet("frontend://styles/Feedback.css")
 class FeedbackForm extends Div{
     
-//    private ProfileController profileController;
-//    private User loggedInUser = SessionController.getInstance().getUser();
+    private FeedbackController feedbackController = new FeedbackController();
     
     //Used Fields+Buttons
     private RadioButtonGroup<String> ratingButtons = new RadioButtonGroup<>();
-    private ComboBox<Mechanic> mechanicList = new ComboBox<>("Mechanic Name");
+    private ComboBox<String> mechanicList = new ComboBox<>("Mechanic Name");
     private TextArea feedbackMsgField = new TextArea("Leave some feedback here!");
     private Button submitButton = new Button("Submit");
     
@@ -86,7 +88,7 @@ class FeedbackForm extends Div{
         }));
         
         //Mechanic List
-//        mechanicList.setItems();
+        mechanicList.setItems(feedbackController.getMechanicNames());
         
         //Set BottomLayout
         bottomLayout.setOrientation(Orientation.VERTICAL);
@@ -98,7 +100,7 @@ class FeedbackForm extends Div{
 //        bottomLayout.setSecondaryStyle("maxHeight", "45px");
         
         
-        //Set BottomLayout
+        //Set MiddleLayout
         middleLayout.setOrientation(Orientation.VERTICAL);
         middleLayout.addToPrimary(ratingButtons);
         middleLayout.addToSecondary(bottomLayout);
@@ -110,7 +112,8 @@ class FeedbackForm extends Div{
         
         //Set TopLayout
         topLayout.setOrientation(Orientation.VERTICAL);
-        topLayout.addToPrimary(ratingButtons);
+//        topLayout.addToPrimary(mechanicList);
+        topLayout.addToPrimary(new Label("Mechanic Combo List Should Be Here."));
         topLayout.addToSecondary(middleLayout);
 //        topLayout.setPrimaryStyle("minHeight", "40px");
 //        topLayout.setPrimaryStyle("maxHeight", "40px");
