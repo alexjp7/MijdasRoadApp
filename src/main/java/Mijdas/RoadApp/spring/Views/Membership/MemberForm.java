@@ -34,7 +34,7 @@ class MemberForm extends FormLayout
     public MemberForm()
     {
         regoController = new RegoController();
-        vehicle = new Vehicle("", "", "", "");
+        vehicle = new Vehicle("", "", "", "", "");
         vehicle = regoController.getRego(loggedInUser.getLicenseNum().toString());
         membershipController = new MembershipController();
         setFieldProperties();
@@ -72,7 +72,6 @@ class MemberForm extends FormLayout
     private void setFormLayout()
     {
         ArrayList<Vehicle> vehicles = regoController.getRegoList(loggedInUser.getLicenseNum().toString());
-        
         ArrayList<String> stringList = new ArrayList<String>();
         for (Vehicle vehicle1 : vehicles) 
         {
@@ -95,14 +94,10 @@ class MemberForm extends FormLayout
 
     public void submitForm()
     {
-        /*if(membershipController.submitMemberShipPayment(vehicleType.getValue(), creditCardType.getValue(), creditCardName.getValue(), creditCardNumber.getValue(), creditCardCVV.getValue()))
-        {
-            getUI().ifPresent(ui-> ui.getPage().executeJavaScript("window.location.href = '' "));
-        }
-        else
-        {
-            MainLayout.displayInformationPrompt("Fields are empty!");
-        }*/
+        boolean member = true;
+        membershipController.submitMemberShipPayment(vehicleType.getValue(), licenseNumber.getValue(), member);
+        //getUI().ifPresent(ui-> ui.getPage().executeJavaScript("window.location.href = '' "));
+        //MainLayout.displayInformationPrompt("Fields are empty!");
         //membershipController.membershipForm(registrationNumber.getValue(), licenseNumber.getValue(), creditCardType.getValue(), creditCardName.getValue(), creditCardNumber.getValue(), creditCardCVV.getValue());
         //membershipController.vehicleForm(licenseNumber.getValue(), manufacturer.getValue(), model.getValue(), color.getValue());
 

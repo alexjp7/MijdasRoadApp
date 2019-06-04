@@ -64,7 +64,7 @@ class ProfileForm extends Div
     {
         profileController = new ProfileController();
         regoController = new RegoController();
-        vehicle = new Vehicle("", "", "", "");
+        vehicle = new Vehicle("", "", "", "", "");
         vehicle = regoController.getRego(loggedInUser.getLicenseNum().toString());
         setFieldProperties();
         setSizeFull();
@@ -222,6 +222,9 @@ class ProfileForm extends Div
         model.setRequired(true);
         color.setRequired(true);
         licenseNumber.setEnabled(false);
+        
+        //Membership
+        
     }
     
     private void fillFieldProperties() 
@@ -261,6 +264,8 @@ class ProfileForm extends Div
             manufacturer.setValue(vehicle.getManufacterer());
             model.setValue(vehicle.getModel());
             color.setValue(vehicle.getColor());
+            
+         //Membership
         }
     }
     

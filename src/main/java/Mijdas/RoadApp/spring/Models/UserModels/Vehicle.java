@@ -6,13 +6,17 @@ public class Vehicle
     private String manufacturer;
     private String model;
     private String color;
-
-    public Vehicle(String registration, String manufacturer, String model, String color)
+    private Membership membership;
+    
+    
+    public Vehicle(String registration, String manufacturer, String model, String color, String hasMembership)
     {
         this.registration = registration;
         this.manufacturer = manufacturer;
         this.model = model;
         this.color = color;
+        membership = null;
+        hasMembership = "false";
     }
 
     /******************SETTERS***********************/
@@ -35,6 +39,11 @@ public class Vehicle
     {
         this.color = color;
     }
+    
+    public void setMembership(Membership membership)
+    {
+        this.membership = membership;
+    }
     /******************GETTERS***********************/
     public String getRegistration()
     {
@@ -54,6 +63,11 @@ public class Vehicle
     public String getColor()
     {
         return color;
+    }
+    
+    public Membership getMembership()
+    {
+        return membership;
     }
 
     @Override

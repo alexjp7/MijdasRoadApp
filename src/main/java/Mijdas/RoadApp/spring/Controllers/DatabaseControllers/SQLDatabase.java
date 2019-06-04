@@ -138,11 +138,35 @@ public class SQLDatabase
         sqlString  += " SET "+field.getValue();
         sqlString  += "=" + value+" WHERE "+ whereClause;
 
-//        System.out.println(sqlString);
+        System.out.println(sqlString);
         
         stmt = connection.createStatement();
         stmt.executeUpdate(sqlString);
     }
+    
+    /*public void updateDataBool(MijdasDB.Tables table,String whereClause, Insertable field, boolean value) throws SQLException
+    {
+        String test = "";
+        if (value == true)
+        {
+            test = "1";
+        }
+        else 
+        {
+            test = "0";
+        }
+        String sqlString = null;
+        //Check if value is to be inserted as a string literal/
+        //value = field.isLiteral() ? "'" + value + "'" : value;
+        //Build update query
+        sqlString  ="UPDATE ";
+        sqlString  += table.getTableName();
+        sqlString  += " SET " + field.getValue();
+        sqlString  += "=" + test + " WHERE " + whereClause;
+        System.out.println(sqlString);
+        stmt = connection.createStatement();
+        stmt.executeUpdate(sqlString);
+    }*/
     
     public void deleteData(MijdasDB.Tables table, String whereClause) throws SQLException {
         String query = "";

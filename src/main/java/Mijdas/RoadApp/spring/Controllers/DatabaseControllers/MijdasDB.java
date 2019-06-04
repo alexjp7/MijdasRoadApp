@@ -187,8 +187,8 @@ public class MijdasDB
 	REGPLATE("regPlate",true),
 	MANUFACTURER("manufacturer",true),
 	MODEL("model",true),
-	COLOR("color",true);
-        //ASMEMBERSHIP("hasMembership",false);
+	COLOR("color",true),
+        HASMEMBERSHIP("hasMembership",false);
         
         private final String value;
         private final boolean isLiteral;

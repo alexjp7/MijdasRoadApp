@@ -205,6 +205,30 @@ public class DBQueryProcessor
         return false;
     }
     
+    public boolean writeVehicleMembership(String vehicleType, String lNum, boolean member)
+    {
+        String profileWhereClause = "regPlate = '" + vehicleType + "';";
+        try
+        {
+            if(!database.open()){return false;}
+            else
+            {
+                if(member == true)
+                {
+                    database.updateData(MijdasDB.Tables.VEHICLE, profileWhereClause, MijdasDB.Vehicle.HASMEMBERSHIP, "1");
+                }
+                else if(member == false)
+                {
+                    database.updateData(MijdasDB.Tables.VEHICLE, profileWhereClause, MijdasDB.Vehicle.HASMEMBERSHIP, "0");
+                }
+                database.close();
+                return true;
+            }
+         }
+        catch(SQLException e){e.printStackTrace();}
+        return false;   
+    }
+    
     public boolean writeVehicleUpdate(String licenseNumber, String registrationNumber, String manufacturer, String model, String color)
     {
         String profileWhereClause = "license = '" + licenseNumber + "';";
@@ -218,7 +242,7 @@ public class DBQueryProcessor
                 database.updateData(MijdasDB.Tables.VEHICLE, profileWhereClause, MijdasDB.Vehicle.MANUFACTURER, manufacturer);
                 database.updateData(MijdasDB.Tables.VEHICLE, profileWhereClause, MijdasDB.Vehicle.MODEL, model);
                 database.updateData(MijdasDB.Tables.VEHICLE, profileWhereClause, MijdasDB.Vehicle.COLOR, color);
-                
+                database.updateData(MijdasDB.Tables.VEHICLE, profileWhereClause, MijdasDB.Vehicle.HASMEMBERSHIP, "false");
                 //Close database session
                 database.close();
                 return true;
@@ -230,7 +254,6 @@ public class DBQueryProcessor
     
     public boolean writeVehicleInsert(String licenseNumber, String registrationNumber, String manufacturer, String model, String color)
     {
-        System.out.println("G'day dickhead");
         Insertable fields[];
         try
         {
@@ -238,8 +261,8 @@ public class DBQueryProcessor
             else
             {
                 //Insert User information to User SQL table.
-                fields = new MijdasDB.Vehicle[]{MijdasDB.Vehicle.LICENSE, MijdasDB.Vehicle.REGPLATE, MijdasDB.Vehicle.MANUFACTURER, MijdasDB.Vehicle.MODEL, MijdasDB.Vehicle.COLOR};
-                database.writeToStorage(MijdasDB.Tables.VEHICLE, fields, licenseNumber, registrationNumber, manufacturer, model, color);
+                fields = new MijdasDB.Vehicle[]{MijdasDB.Vehicle.LICENSE, MijdasDB.Vehicle.REGPLATE, MijdasDB.Vehicle.MANUFACTURER, MijdasDB.Vehicle.MODEL, MijdasDB.Vehicle.COLOR, MijdasDB.Vehicle.HASMEMBERSHIP};
+                database.writeToStorage(MijdasDB.Tables.VEHICLE, fields, licenseNumber, registrationNumber, manufacturer, model, color, "false");
                 //Close database session
                 database.close();
                 return true;
@@ -380,6 +403,7 @@ public class DBQueryProcessor
         String manufacturer = "";
         String model = "";
         String color = "";
+        String hasMembership = "false";
         
         ResultSet rs = null;
         try
@@ -396,13 +420,13 @@ public class DBQueryProcessor
                     manufacturer = rs.getString(3);
                     model = rs.getString(4);
                     color = rs.getString(5);
+                    hasMembership = rs.getString(6);
                }
                 database.close();
-                vehicle = new Vehicle(registration, manufacturer, model, color);
+                vehicle = new Vehicle(registration, manufacturer, model, color, hasMembership);
            }
         }
         catch (SQLException e){e.printStackTrace();}
-        System.out.println(vehicle.toString());
         return vehicle;
     }
 
@@ -414,6 +438,7 @@ public class DBQueryProcessor
         String manufacturer = "";
         String model = "";
         String color = "";
+        String hasMembership = "";
         
         ResultSet rs = null;
         ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
@@ -430,11 +455,10 @@ public class DBQueryProcessor
                     manufacturer = rs.getString(3);
                     model = rs.getString(4);
                     color = rs.getString(5);
-                    vehicle = new Vehicle(registration, manufacturer, model, color);
+                    hasMembership = rs.getString(6);
+                    vehicle = new Vehicle(registration, manufacturer, model, color, hasMembership);
                     vehicles.add(vehicle);
-                    System.out.println(rs);
                 }
-                System.out.println(rs);
                 database.close();
             }
         }
@@ -565,15 +589,13 @@ public class DBQueryProcessor
                     motoristUsername = rs.getString(2);
                     mechanicUsername = rs.getString(3);
                     userText  = rs.getString(4);
-                    isComplete     = rs.getBoolean(5);
-                    
+                    isComplete     = rs.getBoolean(5); 
                }
                 database.close();
                 message = new Message(messageNum, mechanicUsername,motoristUsername, userText,isComplete);
            }
         }
         catch (SQLException e){e.printStackTrace();}
-        
         return message;
     }
     
@@ -587,12 +609,8 @@ public class DBQueryProcessor
             else
             {
                 rs = database.executeProcedure(MijdasDB.Procedure.COUNT_REQUESTS," ");
-                
                 rs.next();
-
-                
                 reqCount = rs.getInt(1);
-                
                 database.close();
             }
         }
@@ -610,12 +628,8 @@ public class DBQueryProcessor
             else
             {
                 rs = database.executeProcedure(MijdasDB.Procedure.COUNT_MESSAGE," ");
-                
                 rs.next();
-
-                
                 mesCount = rs.getInt(1);
-                
                 database.close();
             }
         }
