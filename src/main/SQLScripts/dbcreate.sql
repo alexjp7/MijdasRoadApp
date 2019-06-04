@@ -52,9 +52,9 @@ CREATE TABLE SERVICE_REQUEST
 	motoristUsername 	VARCHAR (20) NOT NULL,
 	nearestAddress		NVARCHAR(100) NOT NULL,
 	details				VARCHAR(140) NOT NULL,  /*Tweet length description too small?*/
-	isComplete			BOOLEAN NOT NULL,
+	isComplete			BOOLEAN NOT NULL DEFAULT 0,
         mechanicUsername                VARCHAR(20) NULL,
-        isAccepted                      BOOLEAN NOT NULL,
+        isAccepted                      BOOLEAN NOT NULL DEFAULT 0,
 
     CONSTRAINT pk1_service_requests PRIMARY KEY (requestNum),
     CONSTRAINT fk1_service_requests FOREIGN KEY (motoristUsername) REFERENCES MOTORIST(username)  ON UPDATE CASCADE

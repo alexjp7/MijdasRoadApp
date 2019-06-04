@@ -154,11 +154,10 @@ public class MijdasDB
 	USERNAME("motoristUsername",true),
 	ADDRESS("nearestAddress",true),
 	DETAILS("details",true),
-	LATITUDE("latitude",false),
-	LONGITUDE("longitude",false),
+        ISCOMPLETE("isComplete", false),
         MECHANICUSERNAME("mechanicUsername", false),
-        ISACCEPTED("isAccepted", false),
-        ISCOMPLETE("isComplete", false);
+        ISACCEPTED("isAccepted", false);
+
 
         private final String value;
         private final boolean isLiteral;

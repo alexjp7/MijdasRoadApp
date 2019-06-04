@@ -18,7 +18,9 @@ import com.vaadin.flow.router.Route;
 public class ServiceView extends Div {
     
     public ServiceView() {
+        setSizeFull();
         ServiceForm form = new ServiceForm();
+        form.setWidth("100%");
         form.setId("registerForm");
         add(form);
     }
