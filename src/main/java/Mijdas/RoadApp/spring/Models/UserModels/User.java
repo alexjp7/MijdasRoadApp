@@ -1,4 +1,3 @@
-
 package Mijdas.RoadApp.spring.Models.UserModels;
 
 public abstract class User
@@ -63,7 +62,6 @@ public abstract class User
     
     public abstract Integer getLicenseNum();
     
-
     @Override
     public String toString()
     {

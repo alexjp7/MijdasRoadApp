@@ -1,4 +1,3 @@
-
 package Mijdas.RoadApp.spring.Controllers;
 
 import Mijdas.RoadApp.spring.Controllers.DatabaseControllers.Insertable;
@@ -13,7 +12,6 @@ import Mijdas.RoadApp.spring.Models.UserModels.Vehicle;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.util.ArrayList;
 
 /**********************************************************************8
@@ -72,7 +70,6 @@ public class DBQueryProcessor
      ********************************************************/
     public String [] makeLoginRequest(String username, String password)
     {
-
         ResultSet rs = null;
         String [] loginInfo = new String[2];
 
@@ -102,7 +99,6 @@ public class DBQueryProcessor
             database.close();
         }
         catch(SQLException e){e.printStackTrace();}
-
         return loginInfo;
     }
 
@@ -111,7 +107,6 @@ public class DBQueryProcessor
         ResultSet rs = null;
         String queryReturn = null;
         String whereClase = "username = '" + username +"';";
-
         try
         {
             if(!database.open())
@@ -211,6 +206,76 @@ public class DBQueryProcessor
         return false;
     }
     
+
+    public boolean writeVehicleMembership(String vehicleType, String lNum, boolean member)
+    {
+        String profileWhereClause = "regPlate = '" + vehicleType + "';";
+        try
+        {
+            if(!database.open()){return false;}
+            else
+            {
+                if(member == true)
+                {
+                    database.updateData(MijdasDB.Tables.VEHICLE, profileWhereClause, MijdasDB.Vehicle.HASMEMBERSHIP, "1");
+                }
+                else if(member == false)
+                {
+                    database.updateData(MijdasDB.Tables.VEHICLE, profileWhereClause, MijdasDB.Vehicle.HASMEMBERSHIP, "0");
+                }
+                database.close();
+                return true;
+            }
+         }
+        catch(SQLException e){e.printStackTrace();}
+        return false;   
+    }
+    
+    public boolean writeVehicleUpdate(String licenseNumber, String registrationNumber, String manufacturer, String model, String color)
+    {
+        String profileWhereClause = "license = '" + licenseNumber + "';";
+        try
+        {
+            if(!database.open()){return false;}
+            else
+            {
+                //Update User information to User SQL table.
+                database.updateData(MijdasDB.Tables.VEHICLE, profileWhereClause, MijdasDB.Vehicle.REGPLATE, registrationNumber);    
+                database.updateData(MijdasDB.Tables.VEHICLE, profileWhereClause, MijdasDB.Vehicle.MANUFACTURER, manufacturer);
+                database.updateData(MijdasDB.Tables.VEHICLE, profileWhereClause, MijdasDB.Vehicle.MODEL, model);
+                database.updateData(MijdasDB.Tables.VEHICLE, profileWhereClause, MijdasDB.Vehicle.COLOR, color);
+                database.updateData(MijdasDB.Tables.VEHICLE, profileWhereClause, MijdasDB.Vehicle.HASMEMBERSHIP, "false");
+                //Close database session
+                database.close();
+                return true;
+            }
+        }
+        catch(SQLException e){e.printStackTrace();}
+        return false;
+    }
+    
+    public boolean writeVehicleInsert(String licenseNumber, String registrationNumber, String manufacturer, String model, String color)
+    {
+        Insertable fields[];
+        try
+        {
+            if(!database.open()){return false;}
+            else
+            {
+                //Insert User information to User SQL table.
+                fields = new MijdasDB.Vehicle[]{MijdasDB.Vehicle.LICENSE, MijdasDB.Vehicle.REGPLATE, MijdasDB.Vehicle.MANUFACTURER, MijdasDB.Vehicle.MODEL, MijdasDB.Vehicle.COLOR, MijdasDB.Vehicle.HASMEMBERSHIP};
+                database.writeToStorage(MijdasDB.Tables.VEHICLE, fields, licenseNumber, registrationNumber, manufacturer, model, color, "false");
+                //Close database session
+                database.close();
+                return true;
+            }
+        }
+        catch(SQLException e){e.printStackTrace();}
+        return false;
+    }
+    
+    //args = (username, firstname, lastname, email, lnumber)
+
     public boolean writeMessage(String motorist, String mechanic, String messageTxt)
     {   //Insertable interface to enable a polymorphic behaviour for the table enums
 //        String profileWhereClause = "username = '" + username + "';";
@@ -242,6 +307,7 @@ public class DBQueryProcessor
         return false;
     }
     
+
     //method for writing review to sql database
     public boolean writeReview(String mechanic, String messageTxt, int starRating)
     {   //Insertable interface to enable a polymorphic behaviour for the table enums
@@ -296,6 +362,7 @@ public class DBQueryProcessor
     
     
 
+
     /*******************************************************************
      * @param username - the username entered into login screen
      * @return - whether the user has data entered into motorist table
@@ -304,7 +371,6 @@ public class DBQueryProcessor
     {
         ResultSet rs;
         boolean userIsMotorist = false;
-
         try
         {
             if(!database.open()){return false;}
@@ -323,7 +389,6 @@ public class DBQueryProcessor
             }
         }
         catch (SQLException ex) {ex.printStackTrace(); }
-
         return userIsMotorist;
     }
     /*******************************************************************
@@ -364,7 +429,6 @@ public class DBQueryProcessor
         String email = "";
         Integer quality = null;
         Integer lNum = null;
-
         ResultSet rs = null;
         try
         {
@@ -385,10 +449,32 @@ public class DBQueryProcessor
                 database.close();
                 mechanic = new Mechanic(username, firstName, lastName, email, quality, lNum);
            }
-
         }
         catch (SQLException e){e.printStackTrace();}
         return mechanic;
+    }
+    
+    public String getVehicleRead(String regNum)
+    {
+        String profileWhereClause = "regPlate = '" + regNum + "';";
+        String membership = "";
+        Insertable[] storageFieldsClause = new  MijdasDB.Vehicle[]{MijdasDB.Vehicle.HASMEMBERSHIP};
+        ResultSet rs = null;
+        try
+        {
+            if(!database.open()){return null;}
+            else
+            {
+                rs = database.readData(MijdasDB.Tables.VEHICLE, profileWhereClause, storageFieldsClause);
+                while(rs.next())
+                {
+                    membership = rs.getString(1);
+                }
+                database.close();
+            }
+        }
+        catch (SQLException e){e.printStackTrace();}
+        return membership;
     }
     
     public Vehicle getVehicle(String lNum)
@@ -399,8 +485,8 @@ public class DBQueryProcessor
         String manufacturer = "";
         String model = "";
         String color = "";
+        String hasMembership = "false";
         
-
         ResultSet rs = null;
         try
         {
@@ -408,7 +494,7 @@ public class DBQueryProcessor
            else
            {
                rs = database.executeProcedure(MijdasDB.Procedure.GET_VEHICLE, lNum);
-
+               
                while(rs.next())
                {
                     license = rs.getInt(1);
@@ -416,16 +502,52 @@ public class DBQueryProcessor
                     manufacturer = rs.getString(3);
                     model = rs.getString(4);
                     color = rs.getString(5);
+                    hasMembership = rs.getString(6);
                }
                 database.close();
-                vehicle = new Vehicle(registration, manufacturer, model, color);
+                vehicle = new Vehicle(registration, manufacturer, model, color, hasMembership);
            }
-
         }
         catch (SQLException e){e.printStackTrace();}
         return vehicle;
     }
 
+    public ArrayList<Vehicle> getVehicleList(String lNum)
+    {
+        Vehicle vehicle = null;
+        int license = 0;
+        String registration = "";
+        String manufacturer = "";
+        String model = "";
+        String color = "";
+        String hasMembership = "";
+        
+        ResultSet rs = null;
+        ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
+        try
+        {
+            if(!database.open()){return null;}
+            else
+            {
+                rs = database.executeProcedure(MijdasDB.Procedure.GET_VEHICLE, lNum);
+                while(rs.next())
+                {
+                    license = rs.getInt(1);
+                    registration = rs.getString(2);
+                    manufacturer = rs.getString(3);
+                    model = rs.getString(4);
+                    color = rs.getString(5);
+                    hasMembership = rs.getString(6);
+                    vehicle = new Vehicle(registration, manufacturer, model, color, hasMembership);
+                    vehicles.add(vehicle);
+                }
+                database.close();
+            }
+        }
+        catch (SQLException e){e.printStackTrace();}
+        return vehicles;
+    }
+    
     public Motorist getMotorist(String user)
     {
         Motorist mechanic = null;
@@ -550,7 +672,9 @@ public class DBQueryProcessor
         
         return request;
     }
-    public Message getMessage(String mNum){
+    
+    public Message getMessage(String mNum)
+    {
         Message message =null;
         int messageNum=0;
         String mechanicUsername="",motoristUsername="",userText="";
@@ -570,18 +694,17 @@ public class DBQueryProcessor
                     motoristUsername = rs.getString(2);
                     mechanicUsername = rs.getString(3);
                     userText  = rs.getString(4);
-                    isComplete     = rs.getBoolean(5);
-                    
+                    isComplete     = rs.getBoolean(5); 
                }
                 database.close();
                 message = new Message(messageNum, mechanicUsername,motoristUsername, userText,isComplete);
            }
         }
         catch (SQLException e){e.printStackTrace();}
-        
         return message;
     }
     
+
     public MechanicReview getReview(String rNum){
         MechanicReview review = null;
         int reviewNum = 0, starRating = 0;
@@ -630,6 +753,7 @@ public class DBQueryProcessor
         catch (SQLException ex) {ex.printStackTrace(); }
         return rAvg;
     }
+
     public int countRequest()
     {
         ResultSet rs;
@@ -640,18 +764,15 @@ public class DBQueryProcessor
             else
             {
                 rs = database.executeProcedure(MijdasDB.Procedure.COUNT_REQUESTS," ");
-                
                 rs.next();
-
-                
                 reqCount = rs.getInt(1);
-                
                 database.close();
             }
         }
         catch (SQLException ex) {ex.printStackTrace(); }
         return reqCount;
     }
+    
     public int countMessage()
     {
         ResultSet rs;
@@ -662,18 +783,15 @@ public class DBQueryProcessor
             else
             {
                 rs = database.executeProcedure(MijdasDB.Procedure.COUNT_MESSAGE," ");
-                
                 rs.next();
-
-                
                 mesCount = rs.getInt(1);
-                
                 database.close();
             }
         }
         catch (SQLException ex) {ex.printStackTrace(); }
         return mesCount;
     }
+    
     public boolean writeService(String...formData) {
         Insertable[] fields;
         try {

@@ -1,6 +1,4 @@
-
 package Mijdas.RoadApp.spring.Models.UserModels;
-
 
 public class Vehicle
 {
@@ -8,13 +6,17 @@ public class Vehicle
     private String manufacturer;
     private String model;
     private String color;
-
-    public Vehicle(String registration, String manufacturer, String model, String color)
+    private String membership;
+    //private Membership membership;
+    
+    public Vehicle(String registration, String manufacturer, String model, String color, String hasMembership)
     {
         this.registration = registration;
         this.manufacturer = manufacturer;
         this.model = model;
         this.color = color;
+        this.membership = hasMembership;
+        
     }
 
     /******************SETTERS***********************/
@@ -37,6 +39,11 @@ public class Vehicle
     {
         this.color = color;
     }
+    
+    public void setMembership(String hasMembership)
+    {
+        this.membership = hasMembership;
+    }
     /******************GETTERS***********************/
     public String getRegistration()
     {
@@ -58,4 +65,13 @@ public class Vehicle
         return color;
     }
     
+    public String getMembership()
+    {
+        return membership;
+    }
+
+    @Override
+    public String toString() {
+        return registration;
+    }
 }

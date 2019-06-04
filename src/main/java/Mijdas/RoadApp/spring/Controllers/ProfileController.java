@@ -7,8 +7,8 @@ import Mijdas.RoadApp.spring.Models.UserModels.Motorist;
  *
  * @author Mitch
  */
-public class ProfileController implements abstractController {
-    
+public class ProfileController 
+{
     public ProfileController()
     {
 
@@ -23,5 +23,4 @@ public class ProfileController implements abstractController {
     {  
         return DBQueryProcessor.getInstance().getMotorist(user);
     }
-    
 }

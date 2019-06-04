@@ -21,7 +21,6 @@ public class MijdasDB
         VEHICLE("VEHICLE",vehicleFields),
         REVIEWS("REVIEWS",reviewFields);
 
-
         private final String name;
         private boolean[] isFieldLiteral;
         private Tables(String name, boolean[] isFieldLiteral)
@@ -74,7 +73,7 @@ public class MijdasDB
        USERNAME("username",true),
        HASMEMBERSHIP("hasMembership",false),
        PAYMENTOPTION("paymentOption",true),
-       LICENSE("license",false);
+       LICENSE("lNum",false);
 
        private final String value;
        private final boolean isLiteral;
@@ -216,8 +215,9 @@ public class MijdasDB
 	REGPLATE("regPlate",true),
 	MANUFACTURER("manufacturer",true),
 	MODEL("model",true),
-	COLOR("color",true);
-
+	COLOR("color",true),
+        HASMEMBERSHIP("hasMembership",false);
+        
         private final String value;
         private final boolean isLiteral;
         private Vehicle(String value, boolean isLiteral)
@@ -238,7 +238,7 @@ public class MijdasDB
            return isLiteral;
         }
     }
-
+    
     public enum Function
     {
         CHECK_MOTORIST("checkMotorist"),

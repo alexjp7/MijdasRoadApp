@@ -12,9 +12,9 @@ INSERT INTO MECHANIC(username, qualityInStars, license) VALUES("testuser",1,1123
 INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("doliverasf",false,1432);
 INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("testmechanic",false,1433);
 
-
-INSERT INTO REGO VALUES(5225, "ST3VEJ", "Subaru", "2002 WRX Impreza", "Blue");
-INSERT INTO REGO VALUES(1433, "TESTMK", "Nissan", "1994 R32 Skyline", "Black");
+INSERT INTO VEHICLE VALUES(5225, "ST3VEJ", "Subaru", "2002 WRX Impreza", "Blue", true);
+INSERT INTO VEHICLE VALUES(3297, "ST3VES", "Toyota", "1994 Supra", "Orange", false);
+INSERT INTO VEHICLE VALUES(1433, "TESTMK", "Nissan", "1994 R32 Skyline", "Black", false);
 
 SELECT * FROM USER JOIN MECHANIC WHERE USER.USERNAME= "alex";
 
@@ -30,6 +30,5 @@ INSERT INTO SERVICE_REQUEST VALUES("4","stevejp","123 fake st","cars all fixed n
 INSERT INTO SERVICE_REQUEST VALUES("5","testmechanic","456 meme rd","pls help",false, NULL, false);
 INSERT INTO SERVICE_REQUEST VALUES("6","testmechanic","456 meme rd","engine smoking",false, NULL, false);
 INSERT INTO SERVICE_REQUEST VALUES("7","testmechanic","456 meme rd","all fixed",true, NULL, false);
-
 
 SELECT * FROM SERVICE_REQUEST;
