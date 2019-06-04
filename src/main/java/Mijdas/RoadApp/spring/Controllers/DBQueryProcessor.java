@@ -395,6 +395,30 @@ public class DBQueryProcessor
         return mechanic;
     }
     
+    public String getVehicleRead(String regNum)
+    {
+        String profileWhereClause = "regPlate = '" + regNum + "';";
+        String membership = "";
+        Insertable[] storageFieldsClause = new  MijdasDB.Vehicle[]{MijdasDB.Vehicle.HASMEMBERSHIP};
+        ResultSet rs = null;
+        try
+        {
+            if(!database.open()){return null;}
+            else
+            {
+                rs = database.readData(MijdasDB.Tables.VEHICLE, profileWhereClause, storageFieldsClause);
+                System.out.println("BEFORE THE WHILE" + rs);
+                while(rs.next())
+                {
+                    membership = rs.getString(1);
+                }
+                database.close();
+            }
+        }
+        catch (SQLException e){e.printStackTrace();}
+        return membership;
+    }
+    
     public Vehicle getVehicle(String lNum)
     {
         Vehicle vehicle = null;

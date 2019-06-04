@@ -100,7 +100,6 @@ class MemberForm extends FormLayout
         //MainLayout.displayInformationPrompt("Fields are empty!");
         //membershipController.membershipForm(registrationNumber.getValue(), licenseNumber.getValue(), creditCardType.getValue(), creditCardName.getValue(), creditCardNumber.getValue(), creditCardCVV.getValue());
         //membershipController.vehicleForm(licenseNumber.getValue(), manufacturer.getValue(), model.getValue(), color.getValue());
-
         getUI().ifPresent(ui-> ui.getPage().executeJavaScript("window.location.href = '' "));
     }
 
