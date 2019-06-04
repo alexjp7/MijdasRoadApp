@@ -407,7 +407,6 @@ public class DBQueryProcessor
             else
             {
                 rs = database.readData(MijdasDB.Tables.VEHICLE, profileWhereClause, storageFieldsClause);
-                System.out.println("BEFORE THE WHILE" + rs);
                 while(rs.next())
                 {
                     membership = rs.getString(1);
