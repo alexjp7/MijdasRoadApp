@@ -209,21 +209,21 @@ class ProfileForm extends Div
     public void submitVehicleForm()
     {
         regoController.saveVehicleUpdates(licenseNumber.getValue(), registrationNumber.getValue(), manufacturer.getValue(), model.getValue(), color.getValue());
-        registrationNumber.setValue(vehicle.getRegistration());
-        manufacturer.setValue(vehicle.getManufacterer());
-        model.setValue(vehicle.getModel());
-        color.setValue(vehicle.getColor());
+        //registrationNumber.setValue(vehicle.getRegistration());
+        //manufacturer.setValue(vehicle.getManufacterer());
+        //model.setValue(vehicle.getModel());
+        //color.setValue(vehicle.getColor());
         fillFieldProperties();
     }
     
     public void addVehicleForm()
     {
         regoController.saveVehicleInsert(licenseNumber.getValue(), registrationNumber.getValue(), manufacturer.getValue(), model.getValue(), color.getValue());
-        registrationNumber.setValue(vehicle.getRegistration());
-        manufacturer.setValue(vehicle.getManufacterer());
-        model.setValue(vehicle.getModel());
-        color.setValue(vehicle.getColor());
-        fillFieldProperties();
+        //registrationNumber.setValue(vehicle.getRegistration());
+        //manufacturer.setValue(vehicle.getManufacterer());
+        //model.setValue(vehicle.getModel());
+        //color.setValue(vehicle.getColor());
+        //fillFieldProperties();
     }
     
     private void setFieldProperties()
