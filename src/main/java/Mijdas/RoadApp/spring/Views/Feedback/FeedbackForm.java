@@ -132,15 +132,6 @@ class FeedbackForm extends Div{
         add(mainLayout);
     }
     
-    private void setFieldProperties()
-    {
-//        firstNameText.setRequired(true);
-//        lastNameText.setRequired(true);
-//        emailText.setRequired(true);
-//        licenseText.setRequired(true);
-//        usernameText.setEnabled(false);
-    }
-    
     private void setEventListeners()
     {
         submitButton.addClickListener(e->submitFeedback());
