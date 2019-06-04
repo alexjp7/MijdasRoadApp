@@ -1,16 +1,4 @@
 
--- 
--- DELIMITER $$
--- CREATE TRIGGER updateRatings
--- AFTER INSERT ON REVIEWS FOR EACH ROW
--- BEGIN
---     DECLARE uName VARCHAR(20);
---     SELECT NEW.mechanicUsername INTO uName;
---     
--- 	UPDATE MECHANIC
--- 		SET qualityInStars = ROUND((SELECT AVG(starRating) FROM REVIEWS WHERE username = uName));
--- END$$
-
 DELIMITER $$
 CREATE FUNCTION checkMotorist(uName VARCHAR(20))returns VARCHAR(20)
 BEGIN

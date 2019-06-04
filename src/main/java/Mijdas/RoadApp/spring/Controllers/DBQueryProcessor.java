@@ -535,6 +535,7 @@ public class DBQueryProcessor
         
         return message;
     }
+    
     public MechanicReview getReview(String rNum){
         MechanicReview review = null;
         int reviewNum = 0, starRating = 0;
