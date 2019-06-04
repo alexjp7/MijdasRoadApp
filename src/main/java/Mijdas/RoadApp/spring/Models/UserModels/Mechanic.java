@@ -75,6 +75,10 @@ public class Mechanic extends User
         calcQuality();
         return quality;
     }
+    public Integer getStars()
+    {   //ensure any request of quality is up-to date
+        return quality;
+    }
 
     @Override
     public Integer getLicenseNum()
