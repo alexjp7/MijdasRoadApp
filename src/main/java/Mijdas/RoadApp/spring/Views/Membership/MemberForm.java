@@ -5,6 +5,7 @@ import Mijdas.RoadApp.spring.Controllers.RegoController;
 import Mijdas.RoadApp.spring.Controllers.SessionController;
 import Mijdas.RoadApp.spring.Models.UserModels.User;
 import Mijdas.RoadApp.spring.Models.UserModels.Vehicle;
+import Mijdas.RoadApp.spring.Views.MainLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -100,7 +101,7 @@ class MemberForm extends FormLayout
         //MainLayout.displayInformationPrompt("Fields are empty!");
         //membershipController.membershipForm(registrationNumber.getValue(), licenseNumber.getValue(), creditCardType.getValue(), creditCardName.getValue(), creditCardNumber.getValue(), creditCardCVV.getValue());
         //membershipController.vehicleForm(licenseNumber.getValue(), manufacturer.getValue(), model.getValue(), color.getValue());
-        getUI().ifPresent(ui-> ui.getPage().executeJavaScript("window.location.href = '' "));
+        MainLayout.displayInformationPrompt("Membership successful, you have 1 year license.");
     }
 
     public void clearForm()

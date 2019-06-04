@@ -60,7 +60,7 @@ class ProfileForm extends Div
     //Buttons
     private Button savePersonalButton = new Button("Save");
     private Button updateVehicleButton = new Button("Update");
-    private Button addVehicleButton = new Button("Add");
+    //private Button addVehicleButton = new Button("Add");
     private Button refreshButton = new Button("Refresh");
     private Button cancelMembership = new Button("Cancel");
     
@@ -133,7 +133,7 @@ class ProfileForm extends Div
         HorizontalLayout layerOne = new HorizontalLayout(registrationNumber, licenseNumber);
         HorizontalLayout layerTwo = new HorizontalLayout(manufacturer, model);   
         HorizontalLayout layerThree = new HorizontalLayout(color);
-        HorizontalLayout buttonRow = new HorizontalLayout(addVehicleButton, updateVehicleButton);
+        HorizontalLayout buttonRow = new HorizontalLayout(updateVehicleButton);
         
         formLayout.addClassNames("w3-display-container", "w3-animate-opacity", "w3-center");
         layerOne.addClassNames("w3-large", "w3-animate-top");
@@ -143,7 +143,7 @@ class ProfileForm extends Div
         
         //Styling the fields
         updateVehicleButton.addClassNames("w3-button", "w3-dark-grey");
-        addVehicleButton.addClassNames("w3-button", "w3-dark-grey");
+        //addVehicleButton.addClassNames("w3-button", "w3-dark-grey");
         buttonRow.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
         buttonRow.setWidthFull();
 
@@ -216,7 +216,7 @@ class ProfileForm extends Div
         fillFieldProperties();
     }
     
-    public void addVehicleForm()
+    /*public void addVehicleForm()
     {
         regoController.saveVehicleInsert(licenseNumber.getValue(), registrationNumber.getValue(), manufacturer.getValue(), model.getValue(), color.getValue());
         //registrationNumber.setValue(vehicle.getRegistration());
@@ -224,7 +224,7 @@ class ProfileForm extends Div
         //model.setValue(vehicle.getModel());
         //color.setValue(vehicle.getColor());
         //fillFieldProperties();
-    }
+    }*/
     
     private void setFieldProperties()
     {
@@ -294,7 +294,7 @@ class ProfileForm extends Div
     {
         savePersonalButton.addClickListener(e->submitPersonalForm());
         updateVehicleButton.addClickListener(e->submitVehicleForm());
-        addVehicleButton.addClickListener(e->addVehicleForm());
+        //addVehicleButton.addClickListener(e->addVehicleForm());
         cancelMembership.addClickListener(e->cancelMembership());
         refreshButton.addClickListener(e->refreshMembership());
     }
@@ -309,6 +309,6 @@ class ProfileForm extends Div
     
     public void refreshMembership()
     {
-        membershipStatusText.setValue(regoController.getRegoRefresh(vehicleType.getValue())); 
+        membershipStatusText.setValue(regoController.getRegoRefresh(vehicleType.getValue()));
     }
 }

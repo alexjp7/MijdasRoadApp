@@ -1,6 +1,7 @@
 
 package Mijdas.RoadApp.spring.Controllers;
 //Local Imports
+import Mijdas.RoadApp.spring.Views.Feedback.FeedbackView;
 import Mijdas.RoadApp.spring.Views.Home.HomeView;
 import Mijdas.RoadApp.spring.Views.Login.LoginView;
 import Mijdas.RoadApp.spring.Views.Register.RegisterView;
@@ -83,6 +84,7 @@ public class NavigationController implements abstractController
                 links.add(new RouterLink(null, MessagingView.class));
                 links.add(new RouterLink(null, MemberView.class));
                 links.add(new RouterLink(null, ServiceView.class));
+                links.add(new RouterLink(null, FeedbackView.class));
             }
             else if(SessionController.getInstance().getUserType() == UserType.MECHANIC)
             {

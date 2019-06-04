@@ -13,7 +13,7 @@ INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("doliverasf",false,143
 INSERT INTO MOTORIST(username,hasMembership,lNum) VALUES ("testmechanic",false,1433);
 
 INSERT INTO VEHICLE VALUES(5225, "ST3VEJ", "Subaru", "2002 WRX Impreza", "Blue", true);
-INSERT INTO VEHICLE VALUES(5225, "ST3VES", "Toyota", "1994 Supra", "Orange", false);
+INSERT INTO VEHICLE VALUES(3297, "ST3VES", "Toyota", "1994 Supra", "Orange", false);
 INSERT INTO VEHICLE VALUES(1433, "TESTMK", "Nissan", "1994 R32 Skyline", "Black", false);
 
 SELECT * FROM USER JOIN MECHANIC WHERE USER.USERNAME= "alex";

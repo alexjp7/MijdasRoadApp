@@ -5,6 +5,7 @@ import Mijdas.RoadApp.spring.Controllers.DatabaseControllers.MijdasDB;
 import Mijdas.RoadApp.spring.Controllers.DatabaseControllers.SQLDatabase;
 import Mijdas.RoadApp.spring.Models.MessageModels.Message;
 import Mijdas.RoadApp.spring.Models.RequestModels.Requests;
+import Mijdas.RoadApp.spring.Models.ReviewModels.MechanicReview;
 import Mijdas.RoadApp.spring.Models.UserModels.Mechanic;
 import Mijdas.RoadApp.spring.Models.UserModels.Motorist;
 import Mijdas.RoadApp.spring.Models.UserModels.Vehicle;
@@ -205,6 +206,7 @@ public class DBQueryProcessor
         return false;
     }
     
+
     public boolean writeVehicleMembership(String vehicleType, String lNum, boolean member)
     {
         String profileWhereClause = "regPlate = '" + vehicleType + "';";
@@ -273,6 +275,7 @@ public class DBQueryProcessor
     }
     
     //args = (username, firstname, lastname, email, lnumber)
+
     public boolean writeMessage(String motorist, String mechanic, String messageTxt)
     {   //Insertable interface to enable a polymorphic behaviour for the table enums
 //        String profileWhereClause = "username = '" + username + "';";
@@ -304,6 +307,62 @@ public class DBQueryProcessor
         return false;
     }
     
+
+    //method for writing review to sql database
+    public boolean writeReview(String mechanic, String messageTxt, int starRating)
+    {   //Insertable interface to enable a polymorphic behaviour for the table enums
+        Insertable[] storageFieldsClause = new  MijdasDB.Reviews[]{MijdasDB.Reviews.MECHANICUSERNAME, MijdasDB.Reviews.MESSAGETEXT, MijdasDB.Reviews.STARRATING};
+        String[] storageValuesClause = {mechanic, messageTxt, Integer.toString(starRating)};
+        try
+        {
+            if(!database.open()){return false;}
+            else
+            {
+                //Update User information to User SQL table.
+//                System.out.println("Fields: "+storageFieldsClause);
+//                System.out.println("Values: "+storageValuesClause);
+                database.writeToStorage(MijdasDB.Tables.REVIEWS, storageFieldsClause, storageValuesClause);
+                
+                //Close database session
+                database.close();
+                return true;
+            }
+        }
+        catch(SQLException e){e.printStackTrace();}
+        return false;
+    }
+    
+    public boolean updateMechanicStars(String mechanic)
+    {   //Insertable interface to enable a polymorphic behaviour for the table enums
+        try
+        {
+            //update mechanics new average stars
+            int avgStars = getAvgRatings(mechanic);
+            
+            if(!database.open()){return false;}
+            else
+            {
+                //Update User information to User SQL table.
+                //if avg returned correctly
+                if(avgStars != -1){
+                    System.out.println(mechanic+"= "+avgStars+"*");
+                    database.updateData(MijdasDB.Tables.MECHANICS, ("username = '"+mechanic+"';"), MijdasDB.Mechanic.STARS, Integer.toString(avgStars));
+                }
+                
+                //Close database session
+                database.close();
+                return true;
+            }
+        }
+        catch(SQLException e){e.printStackTrace();}
+        return false;
+    }
+    
+    
+    
+    
+
+
     /*******************************************************************
      * @param username - the username entered into login screen
      * @return - whether the user has data entered into motorist table
@@ -407,7 +466,6 @@ public class DBQueryProcessor
             else
             {
                 rs = database.readData(MijdasDB.Tables.VEHICLE, profileWhereClause, storageFieldsClause);
-                System.out.println("BEFORE THE WHILE" + rs);
                 while(rs.next())
                 {
                     membership = rs.getString(1);
@@ -442,36 +500,6 @@ public class DBQueryProcessor
         }
         System.out.println("M: " + hasMembership);
         return hasMembership;
-//        Requests request =null;
-//        int requestNum=0;
-//        String nearestAddress="",motoristUsername="",details="", mechanicUsername = "";
-//        boolean isComplete=false, isAccepted = false;
-//
-//        ResultSet rs = null;
-//        try
-//        {
-//           if(!database.open()){return null;}
-//           else
-//           {
-//               rs = database.executeProcedure(MijdasDB.Procedure.GET_REQUEST, rNum);
-//
-//               while(rs.next())
-//               {
-//                    requestNum  = rs.getInt(1);
-//                    motoristUsername = rs.getString(2);
-//                    nearestAddress = rs.getString(3);
-//                    details  = rs.getString(4);
-//                    isComplete     = rs.getBoolean(5);
-//                    mechanicUsername = rs.getString(6);
-//                    isAccepted = rs.getBoolean(7);
-//               }
-//                database.close();
-//                request = new Requests(requestNum, nearestAddress,motoristUsername, details,isComplete, mechanicUsername, isAccepted);
-//           }
-//        }
-//        catch (SQLException e){e.printStackTrace();}
-//        
-//        return request;
     }
     
     public Vehicle getVehicle(String lNum)
@@ -579,6 +607,29 @@ public class DBQueryProcessor
         return mechanic;
     }
     
+    public ArrayList<String> getMechanicNames(){
+        String username = "";
+
+        ResultSet rs = null;
+        ArrayList<String> mechanics = new ArrayList<String>();
+        try
+        {
+           if(!database.open()){return null;}
+           else
+           {
+               rs = database.executeProcedure(MijdasDB.Procedure.GET_ALL_MECHANIC_NAMES, "");
+               while(rs.next())
+               {
+                    username  = rs.getString(1);
+                    mechanics.add(username);
+               }
+                database.close();
+           }
+        }
+        catch (SQLException e){e.printStackTrace();}
+        return mechanics;
+    }
+    
     public ArrayList<Requests> getRequest(){
         Requests request =null;
         int requestNum=0;
@@ -678,6 +729,56 @@ public class DBQueryProcessor
         return message;
     }
     
+
+    public MechanicReview getReview(String rNum){
+        MechanicReview review = null;
+        int reviewNum = 0, starRating = 0;
+        String mechanicUsername = "", userText = "";
+
+        ResultSet rs = null;
+        try
+        {
+           if(!database.open()){return null;}
+           else
+           {
+               rs = database.executeProcedure(MijdasDB.Procedure.GET_REVIEW, rNum);
+
+               while(rs.next())
+               {
+                    reviewNum = rs.getInt(1);
+                    mechanicUsername = rs.getString(2);
+                    userText = rs.getString(3);
+                    starRating = rs.getInt(4);
+                    
+               }
+                database.close();
+                review = new MechanicReview(reviewNum, mechanicUsername, userText, starRating);
+           }
+        }
+        catch (SQLException e){e.printStackTrace();}
+        
+        return review;
+    }
+    public int getAvgRatings(String mName)
+    {
+        ResultSet rs;
+        int rAvg = -1;
+        try
+        {
+            if(!database.open()){return 0;}
+            else
+            {
+                rs = database.executeProcedure(MijdasDB.Procedure.GET_AVGRATING, "'"+mName+"'");
+                rs.next();
+                rAvg = rs.getInt(1);
+                
+                database.close();
+            }
+        }
+        catch (SQLException ex) {ex.printStackTrace(); }
+        return rAvg;
+    }
+
     public int countRequest()
     {
         ResultSet rs;
