@@ -24,6 +24,11 @@ public class FeedbackController implements abstractController {
         return DBQueryProcessor.getInstance().updateMechanicStars(text);
     }
     
+    public int getMechanicRating(String username)
+    {  
+        return DBQueryProcessor.getInstance().getMechanic(username).getStars();
+    }
+    
     public ArrayList<String> getMechanicNames()
     {  
         return DBQueryProcessor.getInstance().getMechanicNames();

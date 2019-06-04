@@ -1,5 +1,6 @@
 package Mijdas.RoadApp.spring.Views.Profile;
 
+import Mijdas.RoadApp.spring.Controllers.FeedbackController;
 import Mijdas.RoadApp.spring.Controllers.MembershipController;
 import Mijdas.RoadApp.spring.Controllers.ProfileController;
 import Mijdas.RoadApp.spring.Controllers.RegoController;
@@ -26,6 +27,7 @@ class ProfileForm extends Div
     private ProfileController profileController;
     private MembershipController membershipController;
     private RegoController regoController;
+    private FeedbackController feedbackController;
     private Vehicle vehicle;
     private User loggedInUser = SessionController.getInstance().getUser();
     
@@ -43,6 +45,10 @@ class ProfileForm extends Div
     private TextField manufacturer = new TextField("Manufacturer");
     private TextField model = new TextField("Model");
     private TextField color = new TextField("Color");
+    
+    //Fields for Mechanic
+    private TextField starRatingText = new TextField("Star Rating");
+    private Button updateRatingButton = new Button("Refresh Rating");
     
     //Fields for Membership
     //private TextField memberRego = new TextField("Current Membership Active on:");
@@ -71,6 +77,7 @@ class ProfileForm extends Div
         membershipController = new MembershipController();
         profileController = new ProfileController();
         regoController = new RegoController();
+        feedbackController = new FeedbackController();
         vehicle = new Vehicle("", "", "", "", "");
         vehicle = regoController.getRego(loggedInUser.getLicenseNum().toString());
         setFieldProperties();
@@ -192,6 +199,31 @@ class ProfileForm extends Div
 
     private void setMechanicProfile()
     {
+        Div ratingComponents = new Div();
+        accordion.add("Rating", ratingComponents);
+        
+//        Div vehicleComponents = new Div();
+        VerticalLayout ratingLayout = new VerticalLayout();
+        
+        HorizontalLayout layerOneRating = new HorizontalLayout(starRatingText);
+        HorizontalLayout buttonRowRating = new HorizontalLayout(updateRatingButton);
+        
+        ratingLayout.addClassNames("w3-display-container", "w3-animate-opacity", "w3-center");
+        layerOneRating.addClassNames("w3-large", "w3-animate-top");
+        buttonRowRating.addClassNames("w3-large", "w3-center", "w3-animate-top");
+        
+        //Styling the fields
+        updateVehicleButton.addClassNames("w3-button", "w3-dark-grey");
+        //addVehicleButton.addClassNames("w3-button", "w3-dark-grey");
+        buttonRowRating.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
+        buttonRowRating.setWidthFull();
+
+        //Component ordering
+        ratingLayout.add(layerOneRating, buttonRowRating);
+        ratingComponents.add(ratingLayout);
+        ratingComponents.setSizeFull();
+        
+        
         Div qualificationsComponents = new Div();
         accordion.add("Certificates", qualificationsComponents);
     }
@@ -242,6 +274,9 @@ class ProfileForm extends Div
         color.setRequired(true);
         licenseNumber.setRequired(true);
         
+        //Vehicle
+        starRatingText.setEnabled(false);
+        
         //Membership
         membershipStatusText.setEnabled(true);
         vehicleType.setLabel("Choose A Vehicle");
@@ -268,6 +303,7 @@ class ProfileForm extends Div
         licenseText.setValue(loggedInUser.getLicenseNum().toString());
         }
         
+        //for mechanics
         if(vehicle == null)
         {
             licenseNumber.setValue(loggedInUser.getLicenseNum().toString());    
@@ -297,6 +333,7 @@ class ProfileForm extends Div
         addVehicleButton.addClickListener(e->addVehicleForm());
         cancelMembership.addClickListener(e->cancelMembership());
         refreshButton.addClickListener(e->refreshMembership());
+        updateRatingButton.addClickListener(e->refreshStarRating());
     }
     
     public void cancelMembership()
@@ -310,5 +347,9 @@ class ProfileForm extends Div
     public void refreshMembership()
     {
         membershipStatusText.setValue(regoController.getRegoRefresh(vehicleType.getValue()));
+    }
+    public void refreshStarRating()
+    {
+        starRatingText.setValue(Integer.toString(feedbackController.getMechanicRating(loggedInUser.getUsername())));
     }
 }

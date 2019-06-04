@@ -149,6 +149,7 @@ class FeedbackForm extends Div{
         } else {
             feedbackController.submitFeedback(mechanicList.getValue(), feedbackMsgField.getValue(), Integer.parseInt(ratingButtons.getValue()));
             feedbackController.updateMechanicStars(mechanicList.getValue());
+            MainLayout.displayInformationPrompt("Review Submitted! Thanks For Your feedback!");
         }
     }
 }
