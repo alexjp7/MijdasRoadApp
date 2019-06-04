@@ -1,5 +1,6 @@
 package Mijdas.RoadApp.spring.Views.Profile;
 
+import Mijdas.RoadApp.spring.Controllers.MembershipController;
 import Mijdas.RoadApp.spring.Controllers.ProfileController;
 import Mijdas.RoadApp.spring.Controllers.RegoController;
 import Mijdas.RoadApp.spring.Controllers.SessionController;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 class ProfileForm extends Div
 {
     private ProfileController profileController;
+    private MembershipController membershipController;
     private RegoController regoController;
     private Vehicle vehicle;
     private User loggedInUser = SessionController.getInstance().getUser();
@@ -59,12 +61,14 @@ class ProfileForm extends Div
     private Button savePersonalButton = new Button("Save");
     private Button updateVehicleButton = new Button("Update");
     private Button addVehicleButton = new Button("Add");
+    private Button refreshButton = new Button("Refresh");
     private Button cancelMembership = new Button("Cancel");
     
 //  private Button revertButton = new Button ("Revert");
     
     public ProfileForm()
     {
+        membershipController = new MembershipController();
         profileController = new ProfileController();
         regoController = new RegoController();
         vehicle = new Vehicle("", "", "", "", "");
@@ -164,13 +168,14 @@ class ProfileForm extends Div
         
         HorizontalLayout layerOneMember = new HorizontalLayout(vehicleType);
         HorizontalLayout layerTwoMember = new HorizontalLayout(membershipStatusText);
-        HorizontalLayout buttonRowMember = new HorizontalLayout(cancelMembership);
+        HorizontalLayout buttonRowMember = new HorizontalLayout(refreshButton, cancelMembership);
         
         formLayout1.addClassNames("w3-display-container", "w3-animate-opacity", "w3-center");
         layerOneMember.addClassNames("w3-large", "w3-animate-top");
         layerTwoMember.addClassNames("w3-large", "w3-animate-top");
         buttonRowMember.addClassNames("w3-large", "w3-animate-top");
         cancelMembership.addClassNames("w3-button", "w3-dark-grey");
+        refreshButton.addClassNames("w3-button", "w3-dark-grey");
         
         buttonRow.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
         buttonRow.setWidthFull();
@@ -238,8 +243,9 @@ class ProfileForm extends Div
         licenseNumber.setEnabled(false);
         
         //Membership
-        membershipStatusText.setRequired(true);
-        
+        membershipStatusText.setEnabled(true);
+        vehicleType.setLabel("Choose A Vehicle");
+        vehicleType.setPlaceholder("Vehicle...");
     }
     
     private void fillFieldProperties() 
@@ -279,11 +285,9 @@ class ProfileForm extends Div
             manufacturer.setValue(vehicle.getManufacterer());
             model.setValue(vehicle.getModel());
             color.setValue(vehicle.getColor());
-            
+        }   
         //Membership
-        
-      
-        }
+        membershipStatusText.setValue(vehicle.getMembership());
     }
     
     private void setEventListeners()
@@ -291,5 +295,20 @@ class ProfileForm extends Div
         savePersonalButton.addClickListener(e->submitPersonalForm());
         updateVehicleButton.addClickListener(e->submitVehicleForm());
         addVehicleButton.addClickListener(e->addVehicleForm());
+        cancelMembership.addClickListener(e->cancelMembership());
+        refreshButton.addClickListener(e->refreshMembership());
+    }
+    
+    public void cancelMembership()
+    {
+        boolean member = false;
+        membershipController.submitMemberShipPayment(vehicleType.getValue(), loggedInUser.getLicenseNum().toString(), member);
+        membershipStatusText.setValue(regoController.getRegoRefresh(vehicleType.getValue()));
+        MainLayout.displayInformationPrompt("Membership will not renew after expiration.");
+    }
+    
+    public void refreshMembership()
+    {
+        membershipStatusText.setValue(regoController.getRegoRefresh(vehicleType.getValue())); 
     }
 }
