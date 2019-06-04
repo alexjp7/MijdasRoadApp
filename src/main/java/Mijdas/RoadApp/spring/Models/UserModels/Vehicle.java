@@ -55,4 +55,9 @@ public class Vehicle
     {
         return color;
     }
+
+    @Override
+    public String toString() {
+        return registration;
+    }
 }
