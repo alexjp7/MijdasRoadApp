@@ -1,4 +1,15 @@
 
+-- 
+-- DELIMITER $$
+-- CREATE TRIGGER updateRatings
+-- AFTER INSERT ON REVIEWS FOR EACH ROW
+-- BEGIN
+--     DECLARE uName VARCHAR(20);
+--     SELECT NEW.mechanicUsername INTO uName;
+--     
+-- 	UPDATE MECHANIC
+-- 		SET qualityInStars = ROUND((SELECT AVG(starRating) FROM REVIEWS WHERE username = uName));
+-- END$$
 
 DELIMITER $$
 CREATE FUNCTION checkMotorist(uName VARCHAR(20))returns VARCHAR(20)
@@ -62,6 +73,24 @@ CREATE PROCEDURE getRequest(rNum VARCHAR(20))
 
 BEGIN
 	SELECT * FROM SERVICE_REQUEST WHERE requestNum = rNum;
+
+
+END$$
+
+DELIMITER $$
+CREATE PROCEDURE getReview(rNum VARCHAR(20)) 
+
+BEGIN
+	SELECT * FROM REVIEWS WHERE id = rNum;
+
+
+END$$
+
+DELIMITER $$
+CREATE PROCEDURE getAvgRating(mName VARCHAR(20)) 
+
+BEGIN
+	SELECT ROUND(AVG(starRating)) FROM REVIEWS WHERE mechanicUsername = mName;
 
 
 END$$

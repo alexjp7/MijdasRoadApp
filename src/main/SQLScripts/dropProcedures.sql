@@ -1,3 +1,4 @@
+-- DROP TRIGGER updateRatings;
 DROP FUNCTION checkMotorist;
 DROP FUNCTION checkMechanic;
 DROP PROCEDURE getMechanic;
@@ -5,6 +6,8 @@ DROP PROCEDURE getMotorist;
 DROP PROCEDURE getRequest;
 DROP PROCEDURE getAllRequest;
 DROP PROCEDURE getMessage;
+DROP PROCEDURE getReview;
+DROP PROCEDURE getAvgRating;
 DROP PROCEDURE countRequests;
 DROP PROCEDURE countMessage;
 DROP PROCEDURE getVehicle;

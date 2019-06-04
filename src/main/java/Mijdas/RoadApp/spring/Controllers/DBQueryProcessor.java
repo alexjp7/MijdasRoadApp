@@ -6,6 +6,7 @@ import Mijdas.RoadApp.spring.Controllers.DatabaseControllers.MijdasDB;
 import Mijdas.RoadApp.spring.Controllers.DatabaseControllers.SQLDatabase;
 import Mijdas.RoadApp.spring.Models.MessageModels.Message;
 import Mijdas.RoadApp.spring.Models.RequestModels.Requests;
+import Mijdas.RoadApp.spring.Models.ReviewModels.MechanicReview;
 import Mijdas.RoadApp.spring.Models.UserModels.Mechanic;
 import Mijdas.RoadApp.spring.Models.UserModels.Motorist;
 import Mijdas.RoadApp.spring.Models.UserModels.Vehicle;
@@ -210,7 +211,6 @@ public class DBQueryProcessor
         return false;
     }
     
-    //args = (username, firstname, lastname, email, lnumber)
     public boolean writeMessage(String motorist, String mechanic, String messageTxt)
     {   //Insertable interface to enable a polymorphic behaviour for the table enums
 //        String profileWhereClause = "username = '" + username + "';";
@@ -233,6 +233,35 @@ public class DBQueryProcessor
                     database.writeToStorage(MijdasDB.Tables.MESSAGE, storageFieldsClause, storageValuesClause);
                 }
 
+                //Close database session
+                database.close();
+                return true;
+            }
+        }
+        catch(SQLException e){e.printStackTrace();}
+        return false;
+    }
+    
+    //method for writing review to sql database
+    public boolean writeReview(String mechanic, String messageTxt, int starRating)
+    {   //Insertable interface to enable a polymorphic behaviour for the table enums
+        Insertable[] storageFieldsClause = new  MijdasDB.Reviews[]{MijdasDB.Reviews.MECHANICUSERNAME, MijdasDB.Reviews.MESSAGETEXT, MijdasDB.Reviews.STARRATING};
+        String[] storageValuesClause = {mechanic, messageTxt, Integer.toString(starRating)};
+        try
+        {
+            if(!database.open()){return false;}
+            else
+            {
+                //Update User information to User SQL table.
+                database.writeToStorage(MijdasDB.Tables.REVIEWS, storageFieldsClause, storageValuesClause);
+                //update mechanics new average stars
+                int avgStars = getAvgRatings(mechanic);
+                //if avg returned correctly
+                if(avgStars != -1){
+                    System.out.println(mechanic+"= "+avgStars+"*");
+                    database.updateData(MijdasDB.Tables.MECHANICS, ("username = '"+mechanic+"';"), MijdasDB.Mechanic.STARS, Integer.toString(avgStars));
+                }
+                
                 //Close database session
                 database.close();
                 return true;
@@ -505,6 +534,54 @@ public class DBQueryProcessor
         catch (SQLException e){e.printStackTrace();}
         
         return message;
+    }
+    public MechanicReview getReview(String rNum){
+        MechanicReview review = null;
+        int reviewNum = 0, starRating = 0;
+        String mechanicUsername = "", userText = "";
+
+        ResultSet rs = null;
+        try
+        {
+           if(!database.open()){return null;}
+           else
+           {
+               rs = database.executeProcedure(MijdasDB.Procedure.GET_REVIEW, rNum);
+
+               while(rs.next())
+               {
+                    reviewNum = rs.getInt(1);
+                    mechanicUsername = rs.getString(2);
+                    userText = rs.getString(3);
+                    starRating = rs.getInt(4);
+                    
+               }
+                database.close();
+                review = new MechanicReview(reviewNum, mechanicUsername, userText, starRating);
+           }
+        }
+        catch (SQLException e){e.printStackTrace();}
+        
+        return review;
+    }
+    public int getAvgRatings(String rName)
+    {
+        ResultSet rs;
+        int rAvg = -1;
+        try
+        {
+            if(!database.open()){return 0;}
+            else
+            {
+                rs = database.executeProcedure(MijdasDB.Procedure.GET_AVGRATING, rName);
+                rs.next();
+                rAvg = rs.getInt(1);
+                
+                database.close();
+            }
+        }
+        catch (SQLException ex) {ex.printStackTrace(); }
+        return rAvg;
     }
     public int countRequest()
     {

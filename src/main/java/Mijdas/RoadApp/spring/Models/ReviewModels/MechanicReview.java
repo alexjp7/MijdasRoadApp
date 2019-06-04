@@ -5,31 +5,48 @@ import Mijdas.RoadApp.spring.Models.TransactionModels.TransactionHistory;
 
 public class MechanicReview
 {
-    private int mechanicID;
-    private String review;
-    private int rating;
-    private TransactionHistory transactionHistory;
+    private int reviewID, starRating;
+    private String mechanicUsername, messageText;
 
-    public MechanicReview(int mechanicID, String review, int rating)
+    public MechanicReview(int reviewID, String mechanicUsername, String messageText, int starRating)
     {
-        this.mechanicID = mechanicID;
-        this.review = review;
-        this.rating = rating;
-        transactionHistory = new TransactionHistory();
+        this.reviewID = reviewID;
+        this.mechanicUsername = mechanicUsername;
+        this.messageText = messageText;
+        this.starRating = starRating;
     }
 
-    public int getRating()
-    {
-        return rating;
+    //Getters + Setters
+    public void setReviewID(int reviewID) {
+        this.reviewID = reviewID;
     }
 
-    public String getReview()
-    {
-        return review;
+    public void setStarRating(int starRating) {
+        this.starRating = starRating;
     }
 
-    public int getMechanicID()
-    {
-        return mechanicID;
+    public void setMechanicUsername(String mechanicUsername) {
+        this.mechanicUsername = mechanicUsername;
     }
+
+    public void setMessageText(String messageText) {
+        this.messageText = messageText;
+    }
+
+    public int getReviewID() {
+        return reviewID;
+    }
+
+    public int getStarRating() {
+        return starRating;
+    }
+
+    public String getMechanicUsername() {
+        return mechanicUsername;
+    }
+
+    public String getMessageText() {
+        return messageText;
+    }
+
 }
