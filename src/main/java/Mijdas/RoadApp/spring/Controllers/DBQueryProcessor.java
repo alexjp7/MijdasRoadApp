@@ -253,9 +253,30 @@ public class DBQueryProcessor
             else
             {
                 //Update User information to User SQL table.
+//                System.out.println("Fields: "+storageFieldsClause);
+//                System.out.println("Values: "+storageValuesClause);
                 database.writeToStorage(MijdasDB.Tables.REVIEWS, storageFieldsClause, storageValuesClause);
-                //update mechanics new average stars
-                int avgStars = getAvgRatings(mechanic);
+                
+                //Close database session
+                database.close();
+                return true;
+            }
+        }
+        catch(SQLException e){e.printStackTrace();}
+        return false;
+    }
+    
+    public boolean updateMechanicStars(String mechanic)
+    {   //Insertable interface to enable a polymorphic behaviour for the table enums
+        try
+        {
+            //update mechanics new average stars
+            int avgStars = getAvgRatings(mechanic);
+            
+            if(!database.open()){return false;}
+            else
+            {
+                //Update User information to User SQL table.
                 //if avg returned correctly
                 if(avgStars != -1){
                     System.out.println(mechanic+"= "+avgStars+"*");
@@ -270,6 +291,8 @@ public class DBQueryProcessor
         catch(SQLException e){e.printStackTrace();}
         return false;
     }
+    
+    
     
     
 
@@ -588,7 +611,7 @@ public class DBQueryProcessor
         
         return review;
     }
-    public int getAvgRatings(String rName)
+    public int getAvgRatings(String mName)
     {
         ResultSet rs;
         int rAvg = -1;
@@ -597,7 +620,7 @@ public class DBQueryProcessor
             if(!database.open()){return 0;}
             else
             {
-                rs = database.executeProcedure(MijdasDB.Procedure.GET_AVGRATING, rName);
+                rs = database.executeProcedure(MijdasDB.Procedure.GET_AVGRATING, "'"+mName+"'");
                 rs.next();
                 rAvg = rs.getInt(1);
                 

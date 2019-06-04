@@ -14,10 +14,15 @@ public class FeedbackController implements abstractController {
 
     }
     
-//    public boolean saveProfileUpdates(String username, String fName, String lName, String email, String lnum)
-//    {  
-//        return DBQueryProcessor.getInstance().writeProfileUpdate(username, fName, lName, email, lnum);
-//    }
+    public boolean submitFeedback(String username, String text, int rating)
+    {  
+        return DBQueryProcessor.getInstance().writeReview(username, text, rating);
+    }
+    
+    public boolean updateMechanicStars(String text)
+    {  
+        return DBQueryProcessor.getInstance().updateMechanicStars(text);
+    }
     
     public ArrayList<String> getMechanicNames()
     {  
