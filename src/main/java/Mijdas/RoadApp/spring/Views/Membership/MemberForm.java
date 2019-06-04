@@ -5,7 +5,6 @@ import Mijdas.RoadApp.spring.Controllers.RegoController;
 import Mijdas.RoadApp.spring.Controllers.SessionController;
 import Mijdas.RoadApp.spring.Models.UserModels.User;
 import Mijdas.RoadApp.spring.Models.UserModels.Vehicle;
-import Mijdas.RoadApp.spring.Views.MainLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -15,8 +14,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @StyleSheet("frontend://styles/MembershipForm.css")
 class MemberForm extends FormLayout
@@ -74,13 +71,15 @@ class MemberForm extends FormLayout
 
     private void setFormLayout()
     {
-       /* ArrayList<Vehicle> vehicles = regoController.getRegoList(lNum);
+        ArrayList<Vehicle> vehicles = regoController.getRegoList(loggedInUser.getLicenseNum().toString());
+        
+        ArrayList<String> stringList = new ArrayList<String>();
         for (Vehicle vehicle1 : vehicles) 
         {
-            System.out.println(vehicles);
-        }    */
+            stringList.add(vehicle1.toString());
+        }    
 
-        vehicleType.setItems(vehicle.getRegistration());
+        vehicleType.setItems(stringList);
         VerticalLayout formLayout = new VerticalLayout();
         HorizontalLayout layerOne = new HorizontalLayout(vehicleType, licenseNumber);
         HorizontalLayout layerTwo = new HorizontalLayout(creditCardName, creditCardNumber);
