@@ -132,7 +132,6 @@ public class ServiceForm extends FormLayout {
         cardNumber.clear();
         cardExpiry.clear();
         cardCVV.clear();
-        radios.
     }
     
     public void setPaymentFormAdded(boolean value) {
