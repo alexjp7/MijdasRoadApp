@@ -72,6 +72,7 @@ public class SQLDatabase
     public void writeToStorage(MijdasDB.Tables table, String...values) throws SQLException
     {
         String sqlValues = SQLValuesToString(values, table);
+        System.out.println("sql: " + sqlValues);
         stmt = connection.createStatement();
         stmt.executeUpdate("INSERT INTO "+ table.getTableName() + " VALUES ("+sqlValues+")");
     }
@@ -86,13 +87,12 @@ public class SQLDatabase
         String sqlString = null;
         String sqlValues = SQLValuesToString(fields,values);
         String sqlFields = SQLFieldsToString(fields);
-
         //Build String
         sqlString = "INSERT INTO ";
         sqlString += table.getTableName();
         sqlString +="("+sqlFields+") ";
         sqlString +="VALUES (" + sqlValues +")";
-//        System.out.println("SQLSTRING: "+sqlString);
+        System.out.println("SQLSTRING: "+sqlString);
         stmt = connection.createStatement();
         stmt.executeUpdate(sqlString);
     }

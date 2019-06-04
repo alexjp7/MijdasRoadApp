@@ -11,7 +11,6 @@ import Mijdas.RoadApp.spring.Models.UserModels.Vehicle;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.util.ArrayList;
 
 /**********************************************************************8
@@ -229,6 +228,27 @@ public class DBQueryProcessor
         return false;
     }
     
+    public boolean writeVehicleInsert(String licenseNumber, String registrationNumber, String manufacturer, String model, String color)
+    {
+        System.out.println("G'day dickhead");
+        Insertable fields[];
+        try
+        {
+            if(!database.open()){return false;}
+            else
+            {
+                //Insert User information to User SQL table.
+                fields = new MijdasDB.Vehicle[]{MijdasDB.Vehicle.LICENSE, MijdasDB.Vehicle.REGPLATE, MijdasDB.Vehicle.MANUFACTURER, MijdasDB.Vehicle.MODEL, MijdasDB.Vehicle.COLOR};
+                database.writeToStorage(MijdasDB.Tables.VEHICLE, fields, licenseNumber, registrationNumber, manufacturer, model, color);
+                //Close database session
+                database.close();
+                return true;
+            }
+        }
+        catch(SQLException e){e.printStackTrace();}
+        return false;
+    }
+    
     //args = (username, firstname, lastname, email, lnumber)
     public boolean writeMessage(String motorist, String mechanic, String messageTxt)
     {   //Insertable interface to enable a polymorphic behaviour for the table enums
@@ -386,6 +406,42 @@ public class DBQueryProcessor
         return vehicle;
     }
 
+    public ArrayList<Vehicle> getVehicleList(String lNum)
+    {
+        Vehicle vehicle = null;
+        int license = 0;
+        String registration = "";
+        String manufacturer = "";
+        String model = "";
+        String color = "";
+        
+        ResultSet rs = null;
+        ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
+        try
+        {
+            if(!database.open()){return null;}
+            else
+            {
+                rs = database.executeProcedure(MijdasDB.Procedure.GET_VEHICLE, lNum);
+                while(rs.next())
+                {
+                    license = rs.getInt(1);
+                    registration = rs.getString(2);
+                    manufacturer = rs.getString(3);
+                    model = rs.getString(4);
+                    color = rs.getString(5);
+                    vehicle = new Vehicle(registration, manufacturer, model, color);
+                    vehicles.add(vehicle);
+                    System.out.println(rs);
+                }
+                System.out.println(rs);
+                database.close();
+            }
+        }
+        catch (SQLException e){e.printStackTrace();}
+        return vehicles;
+    }
+    
     public Motorist getMotorist(String user)
     {
         Motorist mechanic = null;

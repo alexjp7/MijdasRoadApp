@@ -12,12 +12,12 @@ public class MembershipController implements abstractController
     }
 
     // Finish this off soon so that it goes into a database.
-    /*public boolean submitMemberShipPayment(String registrationNumber, String licenseNumber, String manufacturer, String model, String color, String creditCardType, String creditCardName, String creditCardNumber, String creditCardCVV)
+    /*public boolean submitMemberShipPayment(String vehicleType, String creditCardType, String creditCardName, String creditCardNumber, String creditCardCVV)
     {
-        return DBQueryProcessor.getInstance().writeRegistration(registrationNumber, licenseNumber, manufacturer, model, color, creditCardType, creditCardName, creditCardNumber, creditCardCVV);
+       //return DBQueryProcessor.getInstance().writeRegistration(vehicleType, creditCardType, creditCardName, creditCardNumber, creditCardCVV);
     }*/
 
-    public void membershipForm(String registrationNumber, String licenseNumber, String creditCardType, String creditCardName, String creditCardNumber, String creditCardCVV)
+    public void membershipForm(String licenseNumber, String creditCardType, String creditCardName, String creditCardNumber, String creditCardCVV)
     {
         //membership.Membership(registrationNumber, licenseNumber, creditCardType, creditCardName, creditCardNumber, creditCardCVV);
     }

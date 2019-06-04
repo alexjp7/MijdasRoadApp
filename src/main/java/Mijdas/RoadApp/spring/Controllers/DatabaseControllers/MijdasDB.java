@@ -188,7 +188,8 @@ public class MijdasDB
 	MANUFACTURER("manufacturer",true),
 	MODEL("model",true),
 	COLOR("color",true);
-
+        //ASMEMBERSHIP("hasMembership",false);
+        
         private final String value;
         private final boolean isLiteral;
         private Vehicle(String value, boolean isLiteral)

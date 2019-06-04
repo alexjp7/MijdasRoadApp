@@ -40,6 +40,7 @@ CREATE TABLE VEHICLE
     manufacturer    VARCHAR(10) NOT NULL,
     model           VARCHAR(50) NOT NULL,
     color           VARCHAR(20) NOT NULL,
+    hasMemberShip   BOOLEAN NOT NULL,   
         
     CONSTRAINT fk1_vehicle FOREIGN KEY (license) REFERENCES MOTORIST(lNum) ON UPDATE CASCADE,
     CONSTRAINT pk1_vehicle PRIMARY KEY (regPlate) 
