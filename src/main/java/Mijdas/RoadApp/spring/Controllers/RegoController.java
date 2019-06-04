@@ -8,7 +8,7 @@ public class RegoController
     private Vehicle vehicle;
     public RegoController()
     {
-
+        
     }
     
     public boolean saveVehicleUpdates(String licenseNumber, String registrationNumber, String manufacturer, String model, String color)
@@ -24,6 +24,11 @@ public class RegoController
     public Vehicle getRego(String lNum)
     {  
         return DBQueryProcessor.getInstance().getVehicle(lNum);
+    }
+    
+    public String getRegoRefresh(String regoNum)
+    {  
+        return DBQueryProcessor.getInstance().getVehicleRead(regoNum);
     }
     
     public ArrayList<Vehicle> getRegoList(String lNum)
