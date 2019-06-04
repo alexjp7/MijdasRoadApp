@@ -93,7 +93,7 @@ public class SQLDatabase
         sqlString += table.getTableName();
         sqlString +="("+sqlFields+") ";
         sqlString +="VALUES (" + sqlValues +")";
-        System.out.println("SQLSTRING: "+sqlString);
+//        System.out.println("SQLSTRING: "+sqlString);
         stmt = connection.createStatement();
         stmt.executeUpdate(sqlString);
     }
@@ -116,7 +116,7 @@ public class SQLDatabase
         String sqlString;
         sqlString = "CALL " + procedure.getProcedureName() + "(" + value + ")";
         
-        System.out.println("SQLSTRING: "+sqlString);
+//        System.out.println("SQLSTRING: "+sqlString);
         
         stmt = connection.createStatement();
         rs = stmt.executeQuery(sqlString);
@@ -143,7 +143,7 @@ public class SQLDatabase
         sqlString  += "=" + value+" WHERE "+ whereClause;
 
 
-        System.out.println("SQLSTRING: "+sqlString);
+//        System.out.println("SQLSTRING: "+sqlString);
 
         
         stmt = connection.createStatement();

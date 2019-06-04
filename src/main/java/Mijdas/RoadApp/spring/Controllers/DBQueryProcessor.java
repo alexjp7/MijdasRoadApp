@@ -345,7 +345,7 @@ public class DBQueryProcessor
                 //Update User information to User SQL table.
                 //if avg returned correctly
                 if(avgStars != -1){
-                    System.out.println(mechanic+"= "+avgStars+"*");
+//                    System.out.println(mechanic+"= "+avgStars+"*");
                     database.updateData(MijdasDB.Tables.MECHANICS, ("username = '"+mechanic+"';"), MijdasDB.Mechanic.STARS, Integer.toString(avgStars));
                 }
                 
