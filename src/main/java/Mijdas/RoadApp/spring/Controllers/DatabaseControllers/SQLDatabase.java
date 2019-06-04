@@ -114,6 +114,9 @@ public class SQLDatabase
         ResultSet rs = null;
         String sqlString;
         sqlString = "CALL " + procedure.getProcedureName() + "(" + value + ")";
+        
+        System.out.println("SQLSTRING: "+sqlString);
+        
         stmt = connection.createStatement();
         rs = stmt.executeQuery(sqlString);
       
@@ -138,7 +141,7 @@ public class SQLDatabase
         sqlString  += " SET "+field.getValue();
         sqlString  += "=" + value+" WHERE "+ whereClause;
 
-//        System.out.println(sqlString);
+        System.out.println("SQLSTRING: "+sqlString);
         
         stmt = connection.createStatement();
         stmt.executeUpdate(sqlString);

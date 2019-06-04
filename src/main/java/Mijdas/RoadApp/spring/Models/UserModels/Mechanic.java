@@ -64,7 +64,7 @@ public class Mechanic extends User
 
         for(MechanicReview r: reviews)
         {
-            totalStars += r.getRating();
+            totalStars += r.getStarRating();
         }
         quality = totalStars/ reviews.size();
     }

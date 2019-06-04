@@ -18,7 +18,8 @@ public class MijdasDB
         SERVICE_REQUESTS("SERVICE_REQUEST",serviceRequestFields),
         TRANSACTIONS("TRANSACTIONS",transactionFields),
         MESSAGE("MESSAGE",messageFields),
-        VEHICLE("VEHICLE",vehicleFields);
+        VEHICLE("VEHICLE",vehicleFields),
+        REVIEWS("REVIEWS",reviewFields);
 
 
         private final String name;
@@ -149,6 +150,33 @@ public class MijdasDB
            return isLiteral;
         }
     }
+    public enum Reviews implements Insertable
+    {
+        ID("id",false),
+	MECHANICUSERNAME("mechanicUsername",true),
+	MESSAGETEXT("messageText",true),
+	STARRATING("starRating",false);
+
+        private final String value;
+        private final boolean isLiteral;
+        private Reviews(String value, boolean isLiteral)
+        {
+            this.value = value;
+            this.isLiteral = isLiteral;
+        }
+
+        @Override
+        public String getValue()
+        {
+            return value;
+        }
+
+        @Override
+        public boolean isLiteral()
+        {
+           return isLiteral;
+        }
+    }
     public enum Service_Requests implements Insertable
     {
         REQUESTNUM("requestNum",false),
@@ -235,7 +263,10 @@ public class MijdasDB
         GET_VEHICLE("getVehicle"),
         GET_REQUEST("getRequest"),
         GET_ALL_REQUEST("getAllRequest"),
+        GET_ALL_MECHANIC_NAMES("getAllMechanicNames"),
         GET_MESSAGE("getMessage"),
+        GET_REVIEW("getReview"),
+        GET_AVGRATING("getAvgRating"),
         COUNT_REQUESTS("countRequests"),
         COUNT_MESSAGE("countMessage");
             
@@ -258,6 +289,7 @@ public class MijdasDB
     private static final boolean[] serviceRequestFields  = new boolean[]{false,true,true,true,false};
     private static final boolean[] messageFields      = new boolean[]{false,true,true,true,false};
     private static final boolean[] vehicleFields     = new boolean[]{false,true,true,true,true};
+    private static final boolean[] reviewFields     = new boolean[]{false,true,true,false};
     //Not yet implemented.
     private static  boolean[] transactionFields;
 }
