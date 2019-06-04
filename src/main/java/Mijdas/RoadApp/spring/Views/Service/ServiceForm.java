@@ -50,9 +50,11 @@ public class ServiceForm extends FormLayout {
     private HorizontalLayout hSix = new HorizontalLayout();
     private VerticalLayout payment = new VerticalLayout();
     private Span error = new Span();
+    private String user;
     
     public ServiceForm() {
-        hasMembership = true;
+        user = SessionController.getInstance().getUser().getUsername();
+        hasMembership = db.getVehicleMembership(user);
         paymentFormAdded = false;
         setFormLayout();
         setEventListeners();
@@ -61,7 +63,6 @@ public class ServiceForm extends FormLayout {
         details.setMaxLength(120);
         
         try {
-            String user = SessionController.getInstance().getUser().getUsername();
             username.setValue(user);
             username.setEnabled(false);
         } catch(Exception e) { }

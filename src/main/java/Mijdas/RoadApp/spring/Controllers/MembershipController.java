@@ -1,6 +1,6 @@
 package Mijdas.RoadApp.spring.Controllers;
 
-public class MembershipController implements abstractController
+public class MembershipController
 {
     //private Membership membership;
     //private Vehicle vehicle;

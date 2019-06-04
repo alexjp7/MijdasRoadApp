@@ -419,6 +419,61 @@ public class DBQueryProcessor
         return membership;
     }
     
+    public boolean getVehicleMembership(String username) {
+        ResultSet rs = null;
+        int lNum = 0;
+        boolean hasMembership = false;
+        try {
+            if(!database.open()) {
+                throw new SQLException("Error fetching vehicle membership data");
+            }
+            System.out.println("Username: " + username);
+            rs = database.executeProcedure(MijdasDB.Procedure.GET_MOTORIST, "'" + username + "'");
+            while(rs.next()) {
+                lNum = rs.getInt(9);
+            }
+            System.out.println("lNum: " + lNum);
+            rs = database.executeProcedure(MijdasDB.Procedure.GET_VEHICLE, "'" + lNum + "'");
+            while(rs.next()) {
+                hasMembership = rs.getBoolean(6);
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("M: " + hasMembership);
+        return hasMembership;
+//        Requests request =null;
+//        int requestNum=0;
+//        String nearestAddress="",motoristUsername="",details="", mechanicUsername = "";
+//        boolean isComplete=false, isAccepted = false;
+//
+//        ResultSet rs = null;
+//        try
+//        {
+//           if(!database.open()){return null;}
+//           else
+//           {
+//               rs = database.executeProcedure(MijdasDB.Procedure.GET_REQUEST, rNum);
+//
+//               while(rs.next())
+//               {
+//                    requestNum  = rs.getInt(1);
+//                    motoristUsername = rs.getString(2);
+//                    nearestAddress = rs.getString(3);
+//                    details  = rs.getString(4);
+//                    isComplete     = rs.getBoolean(5);
+//                    mechanicUsername = rs.getString(6);
+//                    isAccepted = rs.getBoolean(7);
+//               }
+//                database.close();
+//                request = new Requests(requestNum, nearestAddress,motoristUsername, details,isComplete, mechanicUsername, isAccepted);
+//           }
+//        }
+//        catch (SQLException e){e.printStackTrace();}
+//        
+//        return request;
+    }
+    
     public Vehicle getVehicle(String lNum)
     {
         Vehicle vehicle = null;
