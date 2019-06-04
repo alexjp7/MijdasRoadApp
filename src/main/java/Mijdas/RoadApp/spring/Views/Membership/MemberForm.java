@@ -80,7 +80,7 @@ class MemberForm extends FormLayout
             System.out.println(vehicles);
         }    */
 
-        vehicleType.setItems("");
+        vehicleType.setItems(vehicle.getRegistration());
         VerticalLayout formLayout = new VerticalLayout();
         HorizontalLayout layerOne = new HorizontalLayout(vehicleType, licenseNumber);
         HorizontalLayout layerTwo = new HorizontalLayout(creditCardName, creditCardNumber);
